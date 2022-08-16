@@ -63,7 +63,4 @@ public abstract class Usuario {
 		this.fecha = fecha;
 	}
 	
-	
-	
-	
 }

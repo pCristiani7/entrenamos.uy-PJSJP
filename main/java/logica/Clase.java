@@ -75,7 +75,6 @@ public class Clase {
 		this.actividadDeportiva = actividadDeportiva;
 	}
 
-
 	public Profesor getProfesor() {
 		return profesor;
 	}
