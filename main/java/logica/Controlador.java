@@ -14,20 +14,37 @@ public class Controlador implements IControlador{
 		
 	}
 
+	public boolean existeMail(String email) {
+		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
+		ManejadorSocio ms = ManejadorSocio.getInstancia();
+		return (mp.existeEmail(email) || ms.existeEmail(email));
+	}
+	
+	public boolean existeNickname(String nickname) {
+		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
+		ManejadorSocio ms = ManejadorSocio.getInstancia();
+		return (mp.existeNickname(nickname) || ms.existeNickname(nickname));
+	}
+	
 	@Override
 	public void AltaUsuario(DtUsuario dtUser) {
 		// TODO Auto-generated method stub
-		
-		if(dtUser instanceof DtProfesor){
-			List<Clase> clases = new ArrayList<>();
-			DtProfesor dtProf = (DtProfesor) dtUser;
-			Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,dtProf.getInstitucionDeportiva() ); //AGREGAR LOS DATOS PARA EL CONTRUCTOR
-			//Agregar al manejador profesor
-		}else if(dtUser instanceof DtSocio){
-			List<Registro> registros = new ArrayList<>();
-			DtSocio dtSocio = (DtSocio) dtUser;
-			Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),registros);//AGREGAR LOS DATOS PARA EL CONTRUCTOR
-			//Agregar al manejador socio
+		if(!existeMail(dtUser.getEmail()) || !existeNickname(dtUser.getNickname())) {
+			if(dtUser instanceof DtProfesor){
+				List<Clase> clases = new ArrayList<>();
+				DtProfesor dtProf = (DtProfesor) dtUser;
+				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,dtProf.getInstitucionDeportiva() ); 
+				ManejadorProfesor mp = ManejadorProfesor.getInstancia();
+				mp.addProfesor(prof);
+			}else if(dtUser instanceof DtSocio){
+				List<Registro> registros = new ArrayList<>();
+				DtSocio dtSocio = (DtSocio) dtUser;
+				Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),registros);
+				ManejadorSocio ms = ManejadorSocio.getInstancia();
+				ms.addSocio(socio);
+			}
+		} else {
+			//printear mensaje.
 		}
 	}
 
