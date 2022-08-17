@@ -1,6 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtUsuario;
@@ -10,16 +11,15 @@ public class Profesor extends Usuario {
 	private String biografia;
 	private String sitioWeb;
 	private List<Clase> clases = new ArrayList<>();
-	private InstitucionDeportiva institucionDeportiva;
+	private String institucionDeportiva;
 	
 	
 	public Profesor() {
 		super();
 	}
 
-	public Profesor(String descripcion, String biografia, String sitioWeb, List<Clase> clases,
-			InstitucionDeportiva institucionDeportiva) {
-		super();
+	public Profesor(String nickname, String nombre, String apellido, String email, Date fecha, String descripcion, String biografia, String sitioWeb, List<Clase> clases,String institucionDeportiva) {
+		super(nickname, nombre, apellido, email, fecha);
 		this.descripcion = descripcion;
 		this.biografia = biografia;
 		this.sitioWeb = sitioWeb;
@@ -61,11 +61,11 @@ public class Profesor extends Usuario {
 		this.clases = clases;
 	}
 
-	public InstitucionDeportiva getInstitucionDeportiva() {
+	public String getInstitucionDeportiva() {
 		return institucionDeportiva;
 	}
 
-	public void setInstitucionDeportiva(InstitucionDeportiva institucionDeportiva) {
+	public void setInstitucionDeportiva(String institucionDeportiva) {
 		this.institucionDeportiva = institucionDeportiva;
 	}
 

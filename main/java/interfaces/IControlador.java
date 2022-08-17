@@ -1,8 +1,10 @@
 package interfaces;
 
+import datatypes.DtUsuario;
+
 public interface IControlador {
 	
-	public void AltaUsuario();
+	public void AltaUsuario(DtUsuario dtUser);
 	public void ConsultaUsuario();
 	public void AltaActividadDeportiva();
 	public void ConsultaActividadDeportiva();
