@@ -3,6 +3,8 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+import datatypes.DtUsuario;
+
 public class Profesor extends Usuario {
 	private String descripcion;
 	private String biografia;
@@ -66,11 +68,14 @@ public class Profesor extends Usuario {
 	public void setInstitucionDeportiva(InstitucionDeportiva institucionDeportiva) {
 		this.institucionDeportiva = institucionDeportiva;
 	}
-	
+
+	@Override
+	public DtUsuario altaDeUsuario() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
-	
-	
 	
 	
 	
