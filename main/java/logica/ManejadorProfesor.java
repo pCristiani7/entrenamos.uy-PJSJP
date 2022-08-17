@@ -19,6 +19,10 @@ public class ManejadorProfesor {
 		profesores.add(prof);
 	}
 	
+	public void removeProfesor(Profesor prof){
+		profesores.remove(prof);
+	}
+	
 	public boolean existeEmail(String email) {
 		boolean encontre = false;
 		for(Profesor p: profesores) {

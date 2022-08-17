@@ -19,6 +19,10 @@ public class ManejadorSocio {
 		socios.add(socio);
 	}
 	
+	public void removeSocio(Socio socio){
+		socios.remove(socio);
+	}
+	
 	public boolean existeEmail(String email) {
 		boolean encontre = false;
 		for(Socio s: socios) {
