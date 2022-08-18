@@ -1,5 +1,5 @@
 # entrenamos.uy-PJSJP
-# Programacion de Aplicaciones - Tecnologo en Informatica 2022.
+# Programación de Aplicaciones - Tecnólogo en Informática 2022.
 
 Tareas realizadas por:
  *      Pablo Cristiani - pact1602@gmail.com
