@@ -11,14 +11,14 @@ public class Profesor extends Usuario {
 	private String biografia;
 	private String sitioWeb;
 	private List<Clase> clases = new ArrayList<>();
-	private String institucionDeportiva;
+	private InstitucionDeportiva institucionDeportiva;
 	
 	
 	public Profesor() {
 		super();
 	}
 
-	public Profesor(String nickname, String nombre, String apellido, String email, Date fecha, String descripcion, String biografia, String sitioWeb, List<Clase> clases,String institucionDeportiva) {
+	public Profesor(String nickname, String nombre, String apellido, String email, Date fecha, String descripcion, String biografia, String sitioWeb, List<Clase> clases,InstitucionDeportiva institucionDeportiva) {
 		super(nickname, nombre, apellido, email, fecha);
 		this.descripcion = descripcion;
 		this.biografia = biografia;
@@ -61,11 +61,11 @@ public class Profesor extends Usuario {
 		this.clases = clases;
 	}
 
-	public String getInstitucionDeportiva() {
+	public InstitucionDeportiva getInstitucionDeportiva() {
 		return institucionDeportiva;
 	}
 
-	public void setInstitucionDeportiva(String institucionDeportiva) {
+	public void setInstitucionDeportiva(InstitucionDeportiva institucionDeportiva) {
 		this.institucionDeportiva = institucionDeportiva;
 	}
 

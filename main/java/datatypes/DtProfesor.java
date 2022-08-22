@@ -7,10 +7,10 @@ public class DtProfesor extends DtUsuario {
 	private String descripcion;
 	private String biografia;
 	private String sitioweb;
-	private String institucionDeportiva;
+	private DtInstitucionDeportiva institucionDeportiva;
 	
 	
-	public DtProfesor(String nickname, String nombre, String apellido, String email, Date fechaNac, String descripcion, String biografia, String sitioweb, String institucionDeportiva) {
+	public DtProfesor(String nickname, String nombre, String apellido, String email, Date fechaNac, String descripcion, String biografia, String sitioweb, DtInstitucionDeportiva institucionDeportiva) {
 		super(nickname, nombre, apellido, email, fechaNac);
 		this.descripcion = descripcion;
 		this.biografia = biografia;
@@ -20,7 +20,7 @@ public class DtProfesor extends DtUsuario {
 
 
 	
-	public String getInstitucionDeportiva() {
+	public DtInstitucionDeportiva getInstitucionDeportiva() {
 		return institucionDeportiva;
 	}
 
