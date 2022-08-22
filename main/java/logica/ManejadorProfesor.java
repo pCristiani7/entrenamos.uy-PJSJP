@@ -41,4 +41,12 @@ public class ManejadorProfesor {
 		return encontre;
 	}
 	
+	public Profesor buscarProfesor(String nickname) {
+		Profesor x = null;
+		for(Profesor p: profesores) {
+			if(p.getNickname().equals(nickname))
+				return p;
+		}
+		return x;
+	}
 }

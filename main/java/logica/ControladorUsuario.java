@@ -44,14 +44,20 @@ public class ControladorUsuario implements IControladorUsuario{
 				ms.addSocio(socio);
 			}
 		} else {
-			//printear mensaje.
+			//THROW INVALIDUSER
 		}
 	}
 
 	@Override
-	public void ConsultaUsuario() {
-		// TODO Auto-generated method stub
-		
+	public void ConsultaUsuario(String user) {
+		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
+		ManejadorSocio ms = ManejadorSocio.getInstancia();
+		if(mp.existeNickname(user)) {
+			
+		}else if(ms.existeNickname(user)) {
+			
+		}
+			
 	}
 
 	@Override

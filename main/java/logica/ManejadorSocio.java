@@ -41,4 +41,12 @@ public class ManejadorSocio {
 		return encontre;
 	}
 	
+	public Socio buscarSocio(String nickname) {
+		Socio x = null;
+		for(Socio s: socios) {
+			if(s.getNickname().equals(nickname))
+				return s;
+		}
+		return x;
+	}
 }
