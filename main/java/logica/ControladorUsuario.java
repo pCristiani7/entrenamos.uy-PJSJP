@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtProfesor;
+import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 
@@ -49,15 +50,26 @@ public class ControladorUsuario implements IControladorUsuario{
 	}
 
 	@Override
-	public void ConsultaUsuario(String user) {
+	public DtUsuario ConsultaUsuario(String user) {
 		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 		ManejadorSocio ms = ManejadorSocio.getInstancia();
+		DtUsuario dtUser = null;
 		if(mp.existeNickname(user)) {
-			
+			Profesor prof = mp.buscarProfesor(user);
+			DtProfesor dtProf = new DtProfesor(prof.getNickname(), prof.getNombre(),prof.getApellido(), prof.getEmail(),prof.getFecha(), prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), prof.getInstitucionDeportiva());
+			dtUser = (DtUsuario) dtProf;
 		}else if(ms.existeNickname(user)) {
-			
+			Socio soc = ms.buscarSocio(user);
+			List<Registro> registros = soc.getRegistros();
+			ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
+			for(Registro r: registros) {
+				DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+				dtRegistros.add(dtReg);
+			}
+			DtSocio dtSocio = new DtSocio(soc.getNickname(), soc.getNombre(),soc.getApellido(), soc.getEmail(),soc.getFecha(), dtRegistros);	
+			dtUser = (DtUsuario) dtSocio;
 		}
-			
+		return dtUser;	
 	}
 
 	@Override
