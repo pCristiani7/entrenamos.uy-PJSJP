@@ -1,9 +1,6 @@
 package interfaces;
 
-import logica.ControladorActividadDeportiva;
-import logica.ControladorClase;
-import logica.ControladorInstitucionDeportiva;
-import logica.ControladorUsuario;
+import logica.Controlador;
 
 public class Fabrica {
 	private static Fabrica instancia = null;
@@ -16,8 +13,8 @@ public class Fabrica {
 		return instancia;	
 	}
 	
-	public IControladorUsuario getIControladorActividadDeportiva() {
-		return new ControladorUsuario();
+	public IControlador getIControladorActividadDeportiva() {
+		return new Controlador();
 	}
 	public IControladorActividadDeportiva getIControladorUsuario() {
 		return new ControladorActividadDeportiva();
