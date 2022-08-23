@@ -15,11 +15,11 @@ public class ManejadorInstitucionDeportiva {
 		return instancia;
 	}
 	
-	public void addProfesor(InstitucionDeportiva instDep) {
+	public void addIntitucionDeportiva(InstitucionDeportiva instDep) {
 		institucionesDeportivas.add(instDep);
 	}
 	
-	public void removeProfesor(InstitucionDeportiva instDep){
+	public void removeInstitucionDeportiva (InstitucionDeportiva instDep){
 		institucionesDeportivas.remove(instDep);
 	}
 	
