@@ -34,7 +34,7 @@ public class ControladorUsuario implements IControladorUsuario{
 			if(dtUser instanceof DtProfesor){
 				List<Clase> clases = new ArrayList<>();
 				DtProfesor dtProf = (DtProfesor) dtUser;
-				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,dtProf.getInstitucionDeportiva() ); 
+				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,dtProf.getInstitucionDeportiva()); 
 				ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 				mp.addProfesor(prof);
 			}else if(dtUser instanceof DtSocio){
