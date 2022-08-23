@@ -19,8 +19,7 @@ public class Controlador implements IControlador{
 	ManejadorInstitucionDeportiva mid = ManejadorInstitucionDeportiva.getInstancia();
 	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 	ManejadorSocio ms = ManejadorSocio.getInstancia();
-	ManejadorActividadDeportiva mAD = ManejadorActividadDeportiva.getInstancia();
-	ManejadorInstitucionDeportiva mID = ManejadorInstitucionDeportiva.getInstancia();
+	ManejadorActividadDeportiva mad = ManejadorActividadDeportiva.getInstancia();
 	
 	public Controlador() {
 		
@@ -113,14 +112,14 @@ public class Controlador implements IControlador{
 	
 	@Override
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD){
-		if(mAD.existeNombre(dtAD.getNombre())){
+		if(mad.existeNombre(dtAD.getNombre())){
 			//ya existe la actividad deportiva
 		}else {
 			List<Clase> clases = new ArrayList<>();
 			DtInstitucionDeportiva dtID = dtAD.getInstitucionDeportiva();
-			InstitucionDeportiva ID = mID.buscarInstitucionDeportiva(dtID.getNombre());
+			InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtID.getNombre());
 			ActividadDeportiva aD = new ActividadDeportiva(dtAD.getNombre(),dtAD.getDescripcion(),dtAD.getDuracion(),dtAD.getCosto(),dtAD.getFecha(),clases,ID);
-			mAD.addActividadDeportiva(aD);
+			mad.addActividadDeportiva(aD);
 		}
 	}
 	
