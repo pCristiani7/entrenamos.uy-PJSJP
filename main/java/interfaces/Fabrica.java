@@ -16,14 +16,5 @@ public class Fabrica {
 	public IControlador getIControladorActividadDeportiva() {
 		return new Controlador();
 	}
-	public IControladorActividadDeportiva getIControladorUsuario() {
-		return new ControladorActividadDeportiva();
-	}
-    public IControladorClase getIControladorDictadoClase(){
-    	return new ControladorClase();
-     }
-    public IControladorInstitucionDeportiva getIControladorInstitucionDeportiva() {
-    	return new ControladorInstitucionDeportiva();
-    }
 }
 

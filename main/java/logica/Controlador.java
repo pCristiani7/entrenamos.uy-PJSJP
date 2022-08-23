@@ -3,6 +3,9 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+import datatypes.DtActividadDeportiva;
+import datatypes.DtClase;
+import datatypes.DtInstitucionDeportiva;
 import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
@@ -15,6 +18,8 @@ public class Controlador implements IControlador{
 	ManejadorInstitucionDeportiva mid = ManejadorInstitucionDeportiva.getInstancia();
 	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 	ManejadorSocio ms = ManejadorSocio.getInstancia();
+	ManejadorActividadDeportiva mAD = ManejadorActividadDeportiva.getInstancia();
+	ManejadorInstitucionDeportiva mID = ManejadorInstitucionDeportiva.getInstancia();
 	
 	public Controlador() {
 		
@@ -75,6 +80,7 @@ public class Controlador implements IControlador{
 	}
 
 	@Override
+	//Opcional
 	public void ModificarDatosUsuario() {
 		// TODO Auto-generated method stub
 		
@@ -86,6 +92,7 @@ public class Controlador implements IControlador{
 		
 	}
 	
+	//Opcional
 	public void ModificarInstitucionDeportiva() {
 		
 	}
@@ -93,8 +100,16 @@ public class Controlador implements IControlador{
 	//-------------------Casos de uso Actividad Deportiva------------------- 
 	
 	@Override
-	public void AltaActividadDeportiva(){
-		
+	public void AltaActividadDeportiva(DtActividadDeportiva dtAD){
+		if(mAD.existeNombre(dtAD.getNombre())){
+			//ya existe la actividad deportiva
+		}else {
+			List<Clase> clases = new ArrayList<>();
+			DtInstitucionDeportiva dtID = dtAD.getInstitucionDeportiva();
+			InstitucionDeportiva ID = mID.buscarInstitucionDeportiva(dtID.getNombre());
+			ActividadDeportiva aD = new ActividadDeportiva(dtAD.getNombre(),dtAD.getDescripcion(),dtAD.getDuracion(),dtAD.getCosto(),dtAD.getFecha(),clases,ID);
+			mAD.addActividadDeportiva(aD);
+		}
 	}
 	
 	@Override

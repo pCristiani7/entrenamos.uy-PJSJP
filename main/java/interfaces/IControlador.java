@@ -1,5 +1,6 @@
 package interfaces;
 
+import datatypes.DtActividadDeportiva;
 import datatypes.DtUsuario;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
@@ -14,7 +15,7 @@ public interface IControlador {
 	public DtUsuario ConsultaUsuario(String user);
 	public void ModificarDatosUsuario();	
 	
-	public void AltaActividadDeportiva();
+	public void AltaActividadDeportiva(DtActividadDeportiva dtAD);
 	public void ConsultaActividadDeportiva();
 	public void ModificarActividadDeportiva();
 	
