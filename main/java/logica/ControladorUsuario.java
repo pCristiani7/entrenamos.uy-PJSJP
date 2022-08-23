@@ -11,8 +11,7 @@ import datatypes.DtUsuario;
 import interfaces.IControladorUsuario;
 
 public class ControladorUsuario implements IControladorUsuario{
-	
-	//instanciar manejadorInstitucionDeportiva
+
 	ManejadorInstitucionDeportiva mid = ManejadorInstitucionDeportiva.getInstancia();
 	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 	ManejadorSocio ms = ManejadorSocio.getInstancia();
@@ -54,13 +53,11 @@ public class ControladorUsuario implements IControladorUsuario{
 
 	@Override
 	public DtUsuario ConsultaUsuario(String user) {
-		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
-		ManejadorSocio ms = ManejadorSocio.getInstancia();
 		DtUsuario dtUser = null;
 		if(mp.existeNickname(user)) {
 			Profesor prof = mp.buscarProfesor(user);
-			String nomInstProf = mp.retornarNombreProfesor(prof.getNickname());
-			DtProfesor dtProf = new DtProfesor(prof.getNickname(), prof.getNombre(),prof.getApellido(), prof.getEmail(),prof.getFecha(), prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), nomInstProf);
+			String nomInstDep = mid.retornarNomInstDep(prof.getNickname());	//arreglar
+			DtProfesor dtProf = new DtProfesor(prof.getNickname(), prof.getNombre(),prof.getApellido(), prof.getEmail(),prof.getFecha(), prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), nomInstDep);
 			dtUser = (DtUsuario) dtProf;
 		}else if(ms.existeNickname(user)) {
 			Socio soc = ms.buscarSocio(user);

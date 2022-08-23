@@ -4,28 +4,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtProfesor;
+import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 
 import interfaces.IControlador;
 
 public class Controlador implements IControlador{
+
+	ManejadorInstitucionDeportiva mid = ManejadorInstitucionDeportiva.getInstancia();
+	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
+	ManejadorSocio ms = ManejadorSocio.getInstancia();
+	
 	public Controlador() {
 		
 	}
 
 	public boolean existeMail(String email) {
-		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
-		ManejadorSocio ms = ManejadorSocio.getInstancia();
 		return (mp.existeEmail(email) || ms.existeEmail(email));
 	}
 	
 	public boolean existeNickname(String nickname) {
-		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
-		ManejadorSocio ms = ManejadorSocio.getInstancia();
 		return (mp.existeNickname(nickname) || ms.existeNickname(nickname));
 	}
 	
+	//-------------------Casos de uso Usuario-------------------
 	@Override
 	public void AltaUsuario(DtUsuario dtUser) {
 		// TODO Auto-generated method stub
@@ -33,7 +36,8 @@ public class Controlador implements IControlador{
 			if(dtUser instanceof DtProfesor){
 				List<Clase> clases = new ArrayList<>();
 				DtProfesor dtProf = (DtProfesor) dtUser;
-				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,dtProf.getInstitucionDeportiva() ); 
+				InstitucionDeportiva id = mid.buscarInstitucionDeportiva(dtProf.getInstitucionDeportiva());
+				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
 				ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 				mp.addProfesor(prof);
 			}else if(dtUser instanceof DtSocio){
@@ -44,44 +48,30 @@ public class Controlador implements IControlador{
 				ms.addSocio(socio);
 			}
 		} else {
-			//printear mensaje.
+			//THROW INVALIDUSER
 		}
 	}
 
 	@Override
-	public void ConsultaUsuario() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void AltaActividadDeportiva() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void ConsultaActividadDeportiva() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void AltaDictadoClase() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void RegistroDictadoClase() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void AltaInstitucionDeportiva() {
-		// TODO Auto-generated method stub
-		
+	public DtUsuario ConsultaUsuario(String user) {
+		DtUsuario dtUser = null;
+		if(mp.existeNickname(user)) {
+			Profesor prof = mp.buscarProfesor(user);
+			String nomInstDep = mid.retornarNomInstDep(prof.getNickname());	//arreglar
+			DtProfesor dtProf = new DtProfesor(prof.getNickname(), prof.getNombre(),prof.getApellido(), prof.getEmail(),prof.getFecha(), prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), nomInstDep);
+			dtUser = (DtUsuario) dtProf;
+		}else if(ms.existeNickname(user)) {
+			Socio soc = ms.buscarSocio(user);
+			List<Registro> registros = soc.getRegistros();
+			ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
+			for(Registro r: registros) {
+				DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+				dtRegistros.add(dtReg);
+			}
+			DtSocio dtSocio = new DtSocio(soc.getNickname(), soc.getNombre(),soc.getApellido(), soc.getEmail(),soc.getFecha(), dtRegistros);	
+			dtUser = (DtUsuario) dtSocio;
+		}
+		return dtUser;	
 	}
 
 	@Override
@@ -89,34 +79,48 @@ public class Controlador implements IControlador{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void ConsultaDictadoClase() {
-		// TODO Auto-generated method stub
+	
+	//-------------------Casos de uso Institucion Deportiva------------------- 
+	
+	public void AltaInsitucionDeportiva() {
 		
 	}
-
-	@Override
-	public void ModificarActividadDeportiva() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
+	
 	public void ModificarInstitucionDeportiva() {
-		// TODO Auto-generated method stub
 		
 	}
-
+	
+	//-------------------Casos de uso Actividad Deportiva------------------- 
+	
 	@Override
-	public void RankingDictadoClases() {
-		// TODO Auto-generated method stub
+	public void AltaActividadDeportiva(){
 		
 	}
-
+	
 	@Override
-	public void RankingActividadDeportiva() {
-		// TODO Auto-generated method stub
+	public void ConsultaActividadDeportiva(){
+		
+	}
+	
+	public void ModificarActividadDeportiva() {
+		
+	}
+	
+	//-------------------Casos de uso Clase------------------- 
+	
+	public void AltaDictadoClase(){
+		
+	}
+	
+	public void RegistroDictadoClase(){
+		
+	}
+	
+	public void ConsultaDictadoClase(){
+		
+	}
+	
+	public void RankingDictadosClases(){
 		
 	}
 }

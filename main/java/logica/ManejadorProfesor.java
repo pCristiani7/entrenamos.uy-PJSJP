@@ -50,12 +50,4 @@ public class ManejadorProfesor {
 		return x;
 	}
 	
-	public String retornarNombreProfesor(String nickname) {
-		String nomProf = null;
-		for(Profesor p: profesores) {
-			if(p.getNickname().equals(nickname))
-				nomProf = p.getNickname();
-		}
-		return nomProf;
-	}
 }

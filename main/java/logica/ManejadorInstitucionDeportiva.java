@@ -40,4 +40,13 @@ public class ManejadorInstitucionDeportiva {
 		}
 		return x;
 	}
+	
+	public String retornarNomInstDep(String nombre) {
+		String nomProf = null;
+		for(InstitucionDeportiva id: institucionesDeportivas) {
+			if(id.getNombre().equals(nombre))
+				nomProf = id.getNombre();
+		}
+		return nomProf;
+	}
 }
