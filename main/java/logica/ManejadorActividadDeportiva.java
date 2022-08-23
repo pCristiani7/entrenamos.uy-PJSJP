@@ -23,6 +23,15 @@ public class ManejadorActividadDeportiva {
 		return x;
 	}
 	
+	public boolean existeNombre(String nombre) {
+		boolean encontre = false;
+		for(ActividadDeportiva a: actividadesDeportivas) {
+			if(a.getNombre().equals(nombre))
+				encontre = true;
+		}
+		return encontre;
+	}
+	
 	public void addActividadDeportiva(ActividadDeportiva actDep) {
 		actividadesDeportivas.add(actDep);
 	}
