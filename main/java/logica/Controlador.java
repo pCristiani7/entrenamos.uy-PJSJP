@@ -7,6 +7,7 @@ import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import datatypes.DtInstitucionDeportiva;
 
 import interfaces.IControlador;
 
@@ -26,6 +27,10 @@ public class Controlador implements IControlador{
 	
 	public boolean existeNickname(String nickname) {
 		return (mp.existeNickname(nickname) || ms.existeNickname(nickname));
+	}
+	
+	public boolean existeNombreInstDep(String nombre) {
+		return mid.existeNickname(nombre);
 	}
 	
 	//-------------------Casos de uso Usuario-------------------
@@ -82,8 +87,15 @@ public class Controlador implements IControlador{
 	
 	//-------------------Casos de uso Institucion Deportiva------------------- 
 	
-	public void AltaInsitucionDeportiva() {
-		
+	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) {
+		if(!existeNombreInstDep(dtInstDep.getNombre())) {
+			List<ActividadDeportiva> actividadesDeportivas = new ArrayList<>();
+			List<Profesor> profesores = new ArrayList<>();
+			InstitucionDeportiva id = new InstitucionDeportiva(dtInstDep.getNombre(),dtInstDep.getDescripcion(),dtInstDep.getUrl(),actividadesDeportivas,profesores);
+			mid.addIntitucionDeportiva(id);
+		}else {
+			//THROW INVALID INSTIT_DEP
+		}
 	}
 	
 	public void ModificarInstitucionDeportiva() {

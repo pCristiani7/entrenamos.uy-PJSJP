@@ -4,6 +4,7 @@ import datatypes.DtUsuario;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
 //import datatypes.DtClase;
+import datatypes.DtInstitucionDeportiva;
 
 public interface IControlador {
 	
@@ -18,7 +19,7 @@ public interface IControlador {
 	public void ConsultaActividadDeportiva();
 	public void ModificarActividadDeportiva();
 	
-	public void AltaInsitucionDeportiva();
+	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep);
 	public void ModificarInstitucionDeportiva();
 	
 	public void AltaDictadoClase();
