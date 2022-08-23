@@ -11,19 +11,21 @@ import datatypes.DtUsuario;
 import interfaces.IControladorUsuario;
 
 public class ControladorUsuario implements IControladorUsuario{
+	
+	//instanciar manejadorInstitucionDeportiva
+	ManejadorInstitucionDeportiva mid = ManejadorInstitucionDeportiva.getInstancia();
+	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
+	ManejadorSocio ms = ManejadorSocio.getInstancia();
+	
 	public ControladorUsuario() {
 		
 	}
 
 	public boolean existeMail(String email) {
-		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
-		ManejadorSocio ms = ManejadorSocio.getInstancia();
 		return (mp.existeEmail(email) || ms.existeEmail(email));
 	}
 	
 	public boolean existeNickname(String nickname) {
-		ManejadorProfesor mp = ManejadorProfesor.getInstancia();
-		ManejadorSocio ms = ManejadorSocio.getInstancia();
 		return (mp.existeNickname(nickname) || ms.existeNickname(nickname));
 	}
 	
@@ -34,7 +36,8 @@ public class ControladorUsuario implements IControladorUsuario{
 			if(dtUser instanceof DtProfesor){
 				List<Clase> clases = new ArrayList<>();
 				DtProfesor dtProf = (DtProfesor) dtUser;
-				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,dtProf.getInstitucionDeportiva()); 
+				InstitucionDeportiva id = mid.buscarInstitucionDeportiva(dtProf.getInstitucionDeportiva());
+				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
 				ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 				mp.addProfesor(prof);
 			}else if(dtUser instanceof DtSocio){
@@ -56,7 +59,8 @@ public class ControladorUsuario implements IControladorUsuario{
 		DtUsuario dtUser = null;
 		if(mp.existeNickname(user)) {
 			Profesor prof = mp.buscarProfesor(user);
-			DtProfesor dtProf = new DtProfesor(prof.getNickname(), prof.getNombre(),prof.getApellido(), prof.getEmail(),prof.getFecha(), prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), prof.getInstitucionDeportiva());
+			String nomInstProf = mp.retornarNombreProfesor(prof.getNickname());
+			DtProfesor dtProf = new DtProfesor(prof.getNickname(), prof.getNombre(),prof.getApellido(), prof.getEmail(),prof.getFecha(), prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), nomInstProf);
 			dtUser = (DtUsuario) dtProf;
 		}else if(ms.existeNickname(user)) {
 			Socio soc = ms.buscarSocio(user);

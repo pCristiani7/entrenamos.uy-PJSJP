@@ -42,8 +42,4 @@ public abstract class DtUsuario {
 		return fechaNac;
 	}
 	
-
-	
-	
-	
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import datatypes.DtUsuario;
-
 public class Socio extends Usuario {
 	private List<Registro> registros = new ArrayList<>();
 
@@ -26,12 +24,5 @@ public class Socio extends Usuario {
 		this.registros = registros;
 	}
 
-	@Override
-	public DtUsuario altaDeUsuario() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
 }
 

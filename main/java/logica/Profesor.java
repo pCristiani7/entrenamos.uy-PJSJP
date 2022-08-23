@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import datatypes.DtUsuario;
-
 public class Profesor extends Usuario {
 	private String descripcion;
 	private String biografia;
@@ -26,8 +24,6 @@ public class Profesor extends Usuario {
 		this.clases = clases;
 		this.institucionDeportiva = institucionDeportiva;
 	}
-
-
 
 	public String getDescripcion() {
 		return descripcion;
@@ -69,14 +65,5 @@ public class Profesor extends Usuario {
 		this.institucionDeportiva = institucionDeportiva;
 	}
 
-	@Override
-	public DtUsuario altaDeUsuario() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
-	
-	
 	
 }

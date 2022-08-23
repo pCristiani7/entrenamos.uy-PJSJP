@@ -2,8 +2,6 @@ package logica;
 
 import java.util.Date;
 
-import datatypes.DtUsuario;
-
 public abstract class Usuario {
 	private String nickname;
 	private String nombre;
@@ -64,7 +62,5 @@ public abstract class Usuario {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	
-	public abstract DtUsuario altaDeUsuario ();
 	
 }	
