@@ -13,7 +13,7 @@ public class Fabrica {
 		return instancia;	
 	}
 	
-	public IControlador getIControladorActividadDeportiva() {
+	public IControlador getIControlador() {
 		return new Controlador();
 	}
 }

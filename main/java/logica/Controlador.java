@@ -3,14 +3,10 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
-import datatypes.DtActividadDeportiva;
-import datatypes.DtClase;
-import datatypes.DtInstitucionDeportiva;
 import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
-import datatypes.DtInstitucionDeportiva;
 
 import interfaces.IControlador;
 
@@ -31,10 +27,6 @@ public class Controlador implements IControlador{
 	
 	public boolean existeNickname(String nickname) {
 		return (mp.existeNickname(nickname) || ms.existeNickname(nickname));
-	}
-	
-	public boolean existeNombreInstDep(String nombre) {
-		return mid.existeNickname(nombre);
 	}
 	
 	//-------------------Casos de uso Usuario-------------------
@@ -84,7 +76,6 @@ public class Controlador implements IControlador{
 	}
 
 	@Override
-	//Opcional
 	public void ModificarDatosUsuario() {
 		// TODO Auto-generated method stub
 		
@@ -92,18 +83,10 @@ public class Controlador implements IControlador{
 	
 	//-------------------Casos de uso Institucion Deportiva------------------- 
 	
-	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) {
-		if(!existeNombreInstDep(dtInstDep.getNombre())) {
-			List<ActividadDeportiva> actividadesDeportivas = new ArrayList<>();
-			List<Profesor> profesores = new ArrayList<>();
-			InstitucionDeportiva id = new InstitucionDeportiva(dtInstDep.getNombre(),dtInstDep.getDescripcion(),dtInstDep.getUrl(),actividadesDeportivas,profesores);
-			mid.addIntitucionDeportiva(id);
-		}else {
-			//THROW INVALID INSTIT_DEP
-		}
+	public void AltaInsitucionDeportiva() {
+		
 	}
 	
-	//Opcional
 	public void ModificarInstitucionDeportiva() {
 		
 	}
@@ -111,6 +94,7 @@ public class Controlador implements IControlador{
 	//-------------------Casos de uso Actividad Deportiva------------------- 
 	
 	@Override
+
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD){
 		if(mad.existeNombre(dtAD.getNombre())){
 			//ya existe la actividad deportiva
@@ -122,7 +106,7 @@ public class Controlador implements IControlador{
 			mad.addActividadDeportiva(aD);
 		}
 	}
-	
+
 	@Override
 	public void ConsultaActividadDeportiva(){
 		
