@@ -15,12 +15,14 @@ import datatypes.DtSocio;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControlador;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.JComboBox;
 
 public class AltaUsuario extends JInternalFrame {
 
@@ -32,12 +34,12 @@ public class AltaUsuario extends JInternalFrame {
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
 	private JTextField textFieldEmail;
-	private JTextField textFieldInstitucionDeportiva;
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldBiografia;
 	private JTextField textFieldURL;
 	private JRadioButton rdbtnSocio;
 	private JRadioButton rdbtnProfesor;
+	private JComboBox<String> comboBoxInstitucionDeportiva;
 	private JCalendar calendar;
 	private IControlador iCon;
 
@@ -116,11 +118,6 @@ public class AltaUsuario extends JInternalFrame {
 		lblNewLabel_1_1_1_2.setBounds(42, 373, 259, 34);
 		getContentPane().add(lblNewLabel_1_1_1_2);
 		
-		textFieldInstitucionDeportiva = new JTextField();
-		textFieldInstitucionDeportiva.setColumns(10);
-		textFieldInstitucionDeportiva.setBounds(309, 373, 198, 34);
-		getContentPane().add(textFieldInstitucionDeportiva);
-		
 		JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Descripcion");
 		lblNewLabel_1_1_1_2_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
 		lblNewLabel_1_1_1_2_1.setBounds(42, 418, 259, 34);
@@ -190,7 +187,7 @@ public class AltaUsuario extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnSocio.setSelected(true);
 				rdbtnProfesor.setSelected(false);
-				textFieldInstitucionDeportiva.setEnabled(false);
+				comboBoxInstitucionDeportiva.setEnabled(false);
 				textFieldDescripcion.setEnabled(false);
 				textFieldBiografia.setEnabled(false);
 				textFieldURL.setEnabled(false);
@@ -202,7 +199,7 @@ public class AltaUsuario extends JInternalFrame {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnSocio.setSelected(false);
 				rdbtnProfesor.setSelected(true);
-				textFieldInstitucionDeportiva.setEnabled(true);
+				comboBoxInstitucionDeportiva.setEnabled(true);
 				textFieldDescripcion.setEnabled(true);
 				textFieldBiografia.setEnabled(true);
 				textFieldURL.setEnabled(true);
@@ -212,7 +209,16 @@ public class AltaUsuario extends JInternalFrame {
 		panel.add(rdbtnProfesor);
 		panel.add(rdbtnSocio);
 		
+		comboBoxInstitucionDeportiva = new JComboBox<String>();
+		comboBoxInstitucionDeportiva.setBounds(309, 373, 198, 34);
+		getContentPane().add(comboBoxInstitucionDeportiva);
 		
+		
+	}
+	
+	public void inicializarComboBoxes() {
+		DefaultComboBoxModel<String> modelInstituciones = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
+		comboBoxInstitucionDeportiva.setModel(modelInstituciones);
 	}
 	
 	protected void altaUsuarioAceptarActionPerformed(ActionEvent arg0) {
@@ -221,7 +227,7 @@ public class AltaUsuario extends JInternalFrame {
         String apellido = this.textFieldApellido.getText();
         String email = this.textFieldEmail.getText();
         Date fechaNac = this.calendar.getDate();
-        String institucionDeportiva = this.textFieldInstitucionDeportiva.getText();
+        String institucionDeportiva = this.comboBoxInstitucionDeportiva.getName();
         String descripcion = this.textFieldDescripcion.getText();
         String biografia = this.textFieldBiografia.getText();
         String url = this.textFieldURL.getText();
@@ -257,7 +263,7 @@ public class AltaUsuario extends JInternalFrame {
         String nombre = this.textFieldNombre.getText();
         String apellido = this.textFieldApellido.getText();
         String email = this.textFieldEmail.getText();
-        String institucionDeportiva = this.textFieldInstitucionDeportiva.getText();
+        String institucionDeportiva = this.comboBoxInstitucionDeportiva.getName();
         String descripcion = this.textFieldDescripcion.getText();
         if(rdbtnSocio.isSelected()) {
 	        if (nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty()) {
@@ -280,7 +286,6 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldNombre.setText("");
 		textFieldApellido.setText("");
 		textFieldEmail.setText("");
-		textFieldInstitucionDeportiva.setText("");
 		textFieldDescripcion.setText("");
 		textFieldNickname.setText("");
 		textFieldBiografia.setText("");

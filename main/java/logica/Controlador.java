@@ -147,4 +147,17 @@ public class Controlador implements IControlador{
 	public void RankingDictadosClases(){
 		
 	}
+	
+	public String[] listarInstituciones() {
+		ArrayList<String> instituciones;
+		ManejadorInstitucionDeportiva mID = ManejadorInstitucionDeportiva.getInstancia();
+		instituciones = mID.obtenerInstituciones();
+		String[] instituciones_ret = new String[instituciones.size()];
+        int i=0;
+        for(String s:instituciones) {
+        	instituciones_ret[i]=s;
+        	i++;
+        }
+        return instituciones_ret;
+	}
 }

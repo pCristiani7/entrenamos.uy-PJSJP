@@ -29,4 +29,6 @@ public interface IControlador {
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
 	
+	public String[] listarInstituciones();
+	
 }

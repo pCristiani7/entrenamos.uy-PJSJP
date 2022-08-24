@@ -49,4 +49,12 @@ public class ManejadorInstitucionDeportiva {
 		}
 		return nomProf;
 	}
+	
+	public ArrayList<String> obtenerInstituciones(){
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(InstitucionDeportiva ip: institucionesDeportivas) {
+			aRetornar.add(ip.getNombre());
+		}
+		return aRetornar;
+	}
 }

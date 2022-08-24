@@ -92,6 +92,7 @@ public class PrincipalPage {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Alta");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				altaUsuarioInternalFrame.inicializarComboBoxes();
 				altaUsuarioInternalFrame.setVisible(true);
 			}
 		});
