@@ -2,6 +2,7 @@ package interfaces;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtUsuario;
+import excepciones.UsuarioRepetidoExcepcion;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
 //import datatypes.DtClase;
@@ -12,7 +13,7 @@ public interface IControlador {
 	public boolean existeMail(String email);
 	public boolean existeNickname(String nickname);
 	
-	public void AltaUsuario(DtUsuario dtUser);
+	public void AltaUsuario(DtUsuario dtUser) throws UsuarioRepetidoExcepcion;
 	public DtUsuario ConsultaUsuario(String user);
 	public void ModificarDatosUsuario();	
 	

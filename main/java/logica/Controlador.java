@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
-import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
-import datatypes.DtInstitucionDeportiva;
-
+import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControlador;
 
 public class Controlador implements IControlador{
@@ -39,7 +37,7 @@ public class Controlador implements IControlador{
 	
 	//-------------------Casos de uso Usuario-------------------
 	@Override
-	public void AltaUsuario(DtUsuario dtUser) {
+	public void AltaUsuario(DtUsuario dtUser) throws UsuarioRepetidoExcepcion {
 		// TODO Auto-generated method stub
 		if(!existeMail(dtUser.getEmail()) || !existeNickname(dtUser.getNickname())) {
 			if(dtUser instanceof DtProfesor){
@@ -57,7 +55,7 @@ public class Controlador implements IControlador{
 				ms.addSocio(socio);
 			}
 		} else {
-			//THROW INVALIDUSER
+			throw new UsuarioRepetidoExcepcion("El usuario " + dtUser.getNickname() + " ya esta registrado!");
 		}
 	}
 
