@@ -8,9 +8,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JTextField;
-import com.toedter.calendar.JCalendar;
 
 import datatypes.DtProfesor;
+import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControlador;
@@ -18,11 +18,13 @@ import interfaces.IControlador;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+import com.toedter.calendar.JDateChooser;
 
 public class AltaUsuario extends JInternalFrame {
 
@@ -39,8 +41,8 @@ public class AltaUsuario extends JInternalFrame {
 	private JTextField textFieldURL;
 	private JRadioButton rdbtnSocio;
 	private JRadioButton rdbtnProfesor;
+	private JDateChooser dateChooser;
 	private JComboBox<String> comboBoxInstitucionDeportiva;
-	private JCalendar calendar;
 	private IControlador iCon;
 
 	/**
@@ -69,96 +71,99 @@ public class AltaUsuario extends JInternalFrame {
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Nickname");
-		lblNewLabel.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel.setBounds(42, 29, 174, 34);
+		lblNewLabel.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel.setBounds(42, 49, 174, 34);
 		getContentPane().add(lblNewLabel);
 		
 		textFieldNickname = new JTextField();
-		textFieldNickname.setBounds(309, 29, 198, 34);
+		textFieldNickname.setBounds(309, 49, 198, 34);
 		getContentPane().add(textFieldNickname);
 		textFieldNickname.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Nombre");
-		lblNewLabel_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1.setBounds(42, 74, 174, 34);
+		lblNewLabel_1.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1.setBounds(42, 94, 174, 34);
 		getContentPane().add(lblNewLabel_1);
 		
 		textFieldNombre = new JTextField();
 		textFieldNombre.setColumns(10);
-		textFieldNombre.setBounds(309, 74, 198, 34);
+		textFieldNombre.setBounds(309, 94, 198, 34);
 		getContentPane().add(textFieldNombre);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Apellido");
-		lblNewLabel_1_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1_1.setBounds(42, 119, 174, 34);
+		lblNewLabel_1_1.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1_1.setBounds(42, 139, 174, 34);
 		getContentPane().add(lblNewLabel_1_1);
 		
 		textFieldApellido = new JTextField();
 		textFieldApellido.setColumns(10);
-		textFieldApellido.setBounds(309, 119, 198, 34);
+		textFieldApellido.setBounds(309, 139, 198, 34);
 		getContentPane().add(textFieldApellido);
 		
 		JLabel lblNewLabel_1_1_1 = new JLabel("Email");
-		lblNewLabel_1_1_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1_1_1.setBounds(42, 164, 174, 34);
+		lblNewLabel_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1_1_1.setBounds(42, 184, 174, 34);
 		getContentPane().add(lblNewLabel_1_1_1);
 		
 		textFieldEmail = new JTextField();
 		textFieldEmail.setColumns(10);
-		textFieldEmail.setBounds(309, 164, 198, 34);
+		textFieldEmail.setBounds(309, 184, 198, 34);
 		getContentPane().add(textFieldEmail);
 		
 		JLabel lblNewLabel_1_1_1_1 = new JLabel("Fecha Nacimiento");
-		lblNewLabel_1_1_1_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1_1_1_1.setBounds(42, 209, 219, 153);
+		lblNewLabel_1_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1_1_1_1.setBounds(42, 229, 219, 34);
 		getContentPane().add(lblNewLabel_1_1_1_1);
 		
 		JLabel lblNewLabel_1_1_1_2 = new JLabel("Institucion Deportiva");
-		lblNewLabel_1_1_1_2.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1_1_1_2.setBounds(42, 373, 259, 34);
+		lblNewLabel_1_1_1_2.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1_1_1_2.setBounds(42, 319, 259, 34);
 		getContentPane().add(lblNewLabel_1_1_1_2);
 		
 		JLabel lblNewLabel_1_1_1_2_1 = new JLabel("Descripcion");
-		lblNewLabel_1_1_1_2_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1_1_1_2_1.setBounds(42, 418, 259, 34);
+		lblNewLabel_1_1_1_2_1.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1_1_1_2_1.setBounds(42, 364, 259, 34);
 		getContentPane().add(lblNewLabel_1_1_1_2_1);
 		
 		textFieldDescripcion = new JTextField();
 		textFieldDescripcion.setColumns(10);
-		textFieldDescripcion.setBounds(309, 418, 198, 34);
+		textFieldDescripcion.setBounds(309, 364, 198, 34);
 		getContentPane().add(textFieldDescripcion);
 		
 		JLabel lblNewLabel_1_1_1_2_1_1 = new JLabel("Biografia (Opcional)");
-		lblNewLabel_1_1_1_2_1_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1_1_1_2_1_1.setBounds(42, 463, 259, 34);
+		lblNewLabel_1_1_1_2_1_1.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1_1_1_2_1_1.setBounds(42, 409, 259, 34);
 		getContentPane().add(lblNewLabel_1_1_1_2_1_1);
 		
 		textFieldBiografia = new JTextField();
 		textFieldBiografia.setColumns(10);
-		textFieldBiografia.setBounds(309, 463, 198, 34);
+		textFieldBiografia.setBounds(309, 409, 198, 34);
 		getContentPane().add(textFieldBiografia);
 		
 		JLabel lblNewLabel_1_1_1_2_1_1_1 = new JLabel("URL (Opcional)");
-		lblNewLabel_1_1_1_2_1_1_1.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabel_1_1_1_2_1_1_1.setBounds(42, 508, 259, 34);
+		lblNewLabel_1_1_1_2_1_1_1.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabel_1_1_1_2_1_1_1.setBounds(42, 454, 259, 34);
 		getContentPane().add(lblNewLabel_1_1_1_2_1_1_1);
 		
 		textFieldURL = new JTextField();
 		textFieldURL.setColumns(10);
-		textFieldURL.setBounds(309, 508, 198, 34);
+		textFieldURL.setBounds(309, 454, 198, 34);
 		getContentPane().add(textFieldURL);
 		
 		JButton btnNewButton = new JButton("Aceptar");
+		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				altaUsuarioAceptarActionPerformed(e);
+				setVisible(false);
 			}
 		});
 		
-		btnNewButton.setBounds(584, 386, 134, 52);
+		btnNewButton.setBounds(583, 196, 134, 52);
 		getContentPane().add(btnNewButton);
 		
 		JButton btnCancelar = new JButton("Cancelar/Salir");
+		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limpiarFormulario();
@@ -166,23 +171,20 @@ public class AltaUsuario extends JInternalFrame {
 			}
 		});
 		
-		btnCancelar.setBounds(584, 473, 134, 52);
+		btnCancelar.setBounds(583, 283, 134, 52);
 		getContentPane().add(btnCancelar);
 		
-		calendar = new JCalendar();
-		calendar.setBounds(309, 209, 198, 153);
-		getContentPane().add(calendar);
-		
 		JPanel panel = new JPanel();
-		panel.setBounds(584, 119, 134, 79);
+		panel.setBounds(309, 274, 198, 34);
 		getContentPane().add(panel);
 		
 		JLabel lblNewLabelTipo = new JLabel("Tipo");
-		lblNewLabelTipo.setFont(new Font("Segoe UI Symbol", Font.PLAIN, 22));
-		lblNewLabelTipo.setBounds(626, 74, 51, 34);
+		lblNewLabelTipo.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNewLabelTipo.setBounds(42, 274, 259, 34);
 		getContentPane().add(lblNewLabelTipo);
 		
 		rdbtnSocio = new JRadioButton("Socio");
+		rdbtnSocio.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 15));
 		rdbtnSocio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnSocio.setSelected(true);
@@ -195,6 +197,7 @@ public class AltaUsuario extends JInternalFrame {
 		});
 		
 		rdbtnProfesor = new JRadioButton("Profesor");
+		rdbtnProfesor.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 15));
 		rdbtnProfesor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				rdbtnSocio.setSelected(false);
@@ -210,8 +213,16 @@ public class AltaUsuario extends JInternalFrame {
 		panel.add(rdbtnSocio);
 		
 		comboBoxInstitucionDeportiva = new JComboBox<String>();
-		comboBoxInstitucionDeportiva.setBounds(309, 373, 198, 34);
+		comboBoxInstitucionDeportiva.setBounds(309, 319, 198, 34);
 		getContentPane().add(comboBoxInstitucionDeportiva);
+		
+		dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		dateChooser.setBounds(309, 229, 198, 34);
+		getContentPane().add(dateChooser);
 		
 		
 	}
@@ -226,19 +237,21 @@ public class AltaUsuario extends JInternalFrame {
         String nombre = this.textFieldNombre.getText();
         String apellido = this.textFieldApellido.getText();
         String email = this.textFieldEmail.getText();
-        Date fechaNac = this.calendar.getDate();
-        String institucionDeportiva = this.comboBoxInstitucionDeportiva.getName();
+        Date fechaNac = this.dateChooser.getDate();
+        String institucionDeportiva = (String) this.comboBoxInstitucionDeportiva.getSelectedItem();
         String descripcion = this.textFieldDescripcion.getText();
         String biografia = this.textFieldBiografia.getText();
         String url = this.textFieldURL.getText();
+        ArrayList<DtRegistro> dtRegistros = null;
         
 	        if(rdbtnSocio.isSelected()) {
 	        	if(checkFormulario()) {
-	        		DtSocio dtSocio = new DtSocio(nickname,nombre,apellido,email,fechaNac,null);
+	        		DtSocio dtSocio = new DtSocio(nickname,nombre,apellido,email,fechaNac,dtRegistros);
 	        		try {
 		        		this.iCon.AltaUsuario(dtSocio);
 		                JOptionPane.showMessageDialog(this, "El Socio se ha creado con éxito", "Alta Usuario",
 		                        JOptionPane.INFORMATION_MESSAGE);
+		                limpiarFormulario();
 	        		}catch (UsuarioRepetidoExcepcion e) {
 	                    JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 	                }
@@ -250,12 +263,12 @@ public class AltaUsuario extends JInternalFrame {
 			        	this.iCon.AltaUsuario(dtProf);
 			        	JOptionPane.showMessageDialog(this, "El Profesor se ha creado con éxito", "Alta Usuario",
 			                    JOptionPane.INFORMATION_MESSAGE);
+			        	limpiarFormulario();
 		        	} catch (UsuarioRepetidoExcepcion e) {
 	                    JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 	                }
 		        }
 	        }
-	        limpiarFormulario();
         } 
 	
 	private boolean checkFormulario() {
@@ -263,16 +276,17 @@ public class AltaUsuario extends JInternalFrame {
         String nombre = this.textFieldNombre.getText();
         String apellido = this.textFieldApellido.getText();
         String email = this.textFieldEmail.getText();
-        String institucionDeportiva = this.comboBoxInstitucionDeportiva.getName();
+        String fechaNac = this.dateChooser.getDateFormatString();
+        String institucionDeportiva = (String) this.comboBoxInstitucionDeportiva.getSelectedItem();
         String descripcion = this.textFieldDescripcion.getText();
         if(rdbtnSocio.isSelected()) {
-	        if (nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty()) {
+	        if (nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || email.isEmpty()|| fechaNac.isEmpty()) {
 	            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta Usuario",
 	                    JOptionPane.ERROR_MESSAGE);
 	            return false;
 	        }
 	    }else if(rdbtnProfesor.isSelected()) {
-	    	if (nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty()|| institucionDeportiva.isEmpty() || descripcion.isEmpty()) {
+	    	if (nickname.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || email.isEmpty()|| fechaNac.isEmpty() || institucionDeportiva.isEmpty() || descripcion.isEmpty()) {
 	            JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta Usuario",
 	                    JOptionPane.ERROR_MESSAGE);
 	            return false;

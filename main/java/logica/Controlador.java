@@ -9,6 +9,8 @@ import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import excepciones.ActividadDeportivaRepetidaExcepcion;
+import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControlador;
 
@@ -46,16 +48,20 @@ public class Controlador implements IControlador{
 				InstitucionDeportiva id = mid.buscarInstitucionDeportiva(dtProf.getInstitucionDeportiva());
 				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
 				ManejadorProfesor mp = ManejadorProfesor.getInstancia();
+				ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 				mp.addProfesor(prof);
+				mu.agregarUsuario(prof);
 			}else if(dtUser instanceof DtSocio){
 				List<Registro> registros = new ArrayList<>();
 				DtSocio dtSocio = (DtSocio) dtUser;
 				Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),registros);
 				ManejadorSocio ms = ManejadorSocio.getInstancia();
+				ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 				ms.addSocio(socio);
+				mu.agregarUsuario(socio);
 			}
 		} else {
-			throw new UsuarioRepetidoExcepcion("El usuario " + dtUser.getNickname() + " ya esta registrado!");
+			throw new UsuarioRepetidoExcepcion("Ya existe un usuario con esas credenciales!");
 		}
 	}
 
@@ -90,14 +96,14 @@ public class Controlador implements IControlador{
 	
 	//-------------------Casos de uso Institucion Deportiva------------------- 
 	
-	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) {
+	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion {
 		if(!existeNombreInstDep(dtInstDep.getNombre())) {
 			List<ActividadDeportiva> actividadesDeportivas = new ArrayList<>();
 			List<Profesor> profesores = new ArrayList<>();
 			InstitucionDeportiva id = new InstitucionDeportiva(dtInstDep.getNombre(),dtInstDep.getDescripcion(),dtInstDep.getUrl(),actividadesDeportivas,profesores);
 			mid.addIntitucionDeportiva(id);
 		}else {
-			//THROW INVALID INSTIT_DEP
+			throw new InstitucionDeportivaRepetidaExcepcion("Ya existe una Institucion con ese nombre!");
 		}
 	}
 	
@@ -109,9 +115,9 @@ public class Controlador implements IControlador{
 	//-------------------Casos de uso Actividad Deportiva------------------- 
 	
 	@Override
-	public void AltaActividadDeportiva(DtActividadDeportiva dtAD){
+	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion{
 		if(mad.existeNombre(dtAD.getNombre())){
-			//ya existe la actividad deportiva
+			throw new ActividadDeportivaRepetidaExcepcion("Ya existe una Actividad con ese nombre!");
 		}else {
 			List<Clase> clases = new ArrayList<>();
 			DtInstitucionDeportiva dtID = dtAD.getInstitucionDeportiva();
@@ -159,5 +165,18 @@ public class Controlador implements IControlador{
         	i++;
         }
         return instituciones_ret;
+	}
+	
+	public String[] listarUsuarios(){
+		ArrayList<String> usuarios;
+		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
+		usuarios = mu.obtenerUsuarios();
+		String[] usuarios_ret = new String[usuarios.size()];
+        int i=0;
+        for(String s:usuarios) {
+        	usuarios_ret[i]=s;
+        	i++;
+        }
+        return usuarios_ret;
 	}
 }

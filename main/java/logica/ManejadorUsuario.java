@@ -18,4 +18,13 @@ public class ManejadorUsuario {
 	public void agregarUsuario (Usuario usuario) {
 		usuarios.add(usuario);
 	}		
+	
+	public ArrayList<String> obtenerUsuarios(){
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(Usuario s: usuarios) {
+			aRetornar.add(s.getNickname());
+		}
+		return aRetornar;
+	}
+	
 }

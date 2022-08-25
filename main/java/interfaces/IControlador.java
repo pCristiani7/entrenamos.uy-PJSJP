@@ -2,6 +2,8 @@ package interfaces;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtUsuario;
+import excepciones.ActividadDeportivaRepetidaExcepcion;
+import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
@@ -17,11 +19,11 @@ public interface IControlador {
 	public DtUsuario ConsultaUsuario(String user);
 	public void ModificarDatosUsuario();	
 	
-	public void AltaActividadDeportiva(DtActividadDeportiva dtAD);
+	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public void ConsultaActividadDeportiva();
 	public void ModificarActividadDeportiva();
 	
-	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep);
+	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;
 	public void ModificarInstitucionDeportiva();
 	
 	public void AltaDictadoClase();
@@ -30,5 +32,6 @@ public interface IControlador {
 	public void RankingDictadosClases();
 	
 	public String[] listarInstituciones();
+	public String[] listarUsuarios();
 	
 }

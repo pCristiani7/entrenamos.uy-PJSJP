@@ -49,4 +49,12 @@ public class ManejadorSocio {
 		}
 		return x;
 	}
+	
+	public ArrayList<String> obtenerSocios(){
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(Socio s: socios) {
+			aRetornar.add(s.getNickname());
+		}
+		return aRetornar;
+	}
 }

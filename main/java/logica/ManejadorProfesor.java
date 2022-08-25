@@ -50,4 +50,12 @@ public class ManejadorProfesor {
 		return x;
 	}
 	
+	public ArrayList<String> obtenerProfesores(){
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(Profesor p: profesores) {
+			aRetornar.add(p.getNickname());
+		}
+		return aRetornar;
+	}
+	
 }
