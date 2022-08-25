@@ -9,6 +9,7 @@ import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import datatypes.DtClase;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
@@ -41,7 +42,7 @@ public class Controlador implements IControlador{
 	@Override
 	public void AltaUsuario(DtUsuario dtUser) throws UsuarioRepetidoExcepcion {
 		// TODO Auto-generated method stub
-		if(!existeMail(dtUser.getEmail()) || !existeNickname(dtUser.getNickname())) {
+		if(!existeMail(dtUser.getEmail()) && !existeNickname(dtUser.getNickname())) {
 			if(dtUser instanceof DtProfesor){
 				List<Clase> clases = new ArrayList<>();
 				DtProfesor dtProf = (DtProfesor) dtUser;
@@ -70,7 +71,7 @@ public class Controlador implements IControlador{
 		DtUsuario dtUser = null;
 		if(mp.existeNickname(user)) {
 			Profesor prof = mp.buscarProfesor(user);
-			String nomInstDep = mid.retornarNomInstDep(prof.getNickname());	//arreglar
+			String nomInstDep = mid.retornarNomInstDep(prof.getNickname());
 			DtProfesor dtProf = new DtProfesor(prof.getNickname(), prof.getNombre(),prof.getApellido(), prof.getEmail(),prof.getFecha(), prof.getDescripcion(), prof.getBiografia(), prof.getSitioWeb(), nomInstDep);
 			dtUser = (DtUsuario) dtProf;
 		}else if(ms.existeNickname(user)) {
@@ -120,16 +121,33 @@ public class Controlador implements IControlador{
 			throw new ActividadDeportivaRepetidaExcepcion("Ya existe una Actividad con ese nombre!");
 		}else {
 			List<Clase> clases = new ArrayList<>();
-			DtInstitucionDeportiva dtID = dtAD.getInstitucionDeportiva();
-			InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtID.getNombre());
+			String dtID = dtAD.getInstitucionDeportiva();
+			InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtID);
 			ActividadDeportiva aD = new ActividadDeportiva(dtAD.getNombre(),dtAD.getDescripcion(),dtAD.getDuracion(),dtAD.getCosto(),dtAD.getFecha(),clases,ID);
 			mad.addActividadDeportiva(aD);
 		}
 	}
 	
-	@Override
-	public void ConsultaActividadDeportiva(){
-		
+	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep){
+		DtActividadDeportiva dtActDep = null;
+		if(mad.existeNombre(actDep)) {
+			ActividadDeportiva ad = mad.buscarActividadDeportiva(actDep);
+			List<Clase> clases = ad.getClases();
+			ArrayList<DtClase> dtClases = new ArrayList<DtClase>();
+			for(Clase c: clases) {
+				List<Registro> registros = c.getRegistros();
+				ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
+				for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
+					DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+					dtRegistros.add(dtReg);
+				}		
+				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFechaReg(), c.getFecha(), c.getHoraInicio(), c.getProfesor().getNickname());
+				dtClases.add(dtclase);
+			}
+			DtActividadDeportiva dtActividadDeportiva = new DtActividadDeportiva(ad.getNombre(), ad.getDescripcion(), ad.getDuracion(), ad.getCosto(), ad.getFecha(), dtClases, ad.getInstitucionDeportiva().getNombre());	
+			dtActDep = (DtActividadDeportiva) dtActividadDeportiva;
+		}
+		return dtActDep;	
 	}
 	
 	public void ModificarActividadDeportiva() {

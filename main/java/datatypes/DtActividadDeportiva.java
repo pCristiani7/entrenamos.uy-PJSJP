@@ -11,14 +11,14 @@ public class DtActividadDeportiva {
 	private float costo;
 	private Date fecha;
 	private List<DtClase> clases = new ArrayList<>();
-	private DtInstitucionDeportiva institucionDeportiva;
+	private String institucionDeportiva;
 	
 	public DtActividadDeportiva() {
 		super();
 	}
 	
 	public DtActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fecha,
-			List<DtClase> clases, DtInstitucionDeportiva institucionDeportiva) {
+			List<DtClase> clases, String institucionDeportiva) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -77,11 +77,11 @@ public class DtActividadDeportiva {
 		this.clases = clases;
 	}
 
-	public DtInstitucionDeportiva getInstitucionDeportiva() {
+	public String getInstitucionDeportiva() {
 		return institucionDeportiva;
 	}
 
-	public void setInstitucionDeportiva(DtInstitucionDeportiva institucionDeportiva) {
+	public void setInstitucionDeportiva(String institucionDeportiva) {
 		this.institucionDeportiva = institucionDeportiva;
 	}
 }

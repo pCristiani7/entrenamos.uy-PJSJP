@@ -18,7 +18,9 @@ public class DtProfesor extends DtUsuario {
 		this.institucionDeportiva = institucionDeportiva;
 	}
 
-
+	public DtProfesor() {
+		super();
+	}
 	
 	public String getInstitucionDeportiva() {
 		return institucionDeportiva;

@@ -20,7 +20,7 @@ public interface IControlador {
 	public void ModificarDatosUsuario();	
 	
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
-	public void ConsultaActividadDeportiva();
+	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
 	public void ModificarActividadDeportiva();
 	
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;

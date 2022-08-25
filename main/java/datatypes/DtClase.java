@@ -9,8 +9,8 @@ public class DtClase {
 	private String nombre;
 	private String url;
 	private List<DtRegistro> registros = new ArrayList<>();
-	private DtActividadDeportiva actividadDeportiva;
-	private DtProfesor profesor;
+	private String actividadDeportiva;
+	private String profesor;
 	private Date fecha;
 	private Date horaInicio;
 	private Date fechaReg;
@@ -19,8 +19,8 @@ public class DtClase {
 		super();
 	}
 
-	public DtClase(String nombre, String url, List<DtRegistro> registros, DtActividadDeportiva actividadDeportiva, Date fecha,
-			Date horaInicio, Date fechaReg, DtProfesor profesor) {
+	public DtClase(String nombre, String url, List<DtRegistro> registros, String actividadDeportiva, Date fecha,
+			Date horaInicio, Date fechaReg, String profesor) {
 		super();
 		this.nombre = nombre;
 		this.url = url;
@@ -68,19 +68,19 @@ public class DtClase {
 	public void setRegistros(List<DtRegistro> registros) {
 		this.registros = registros;
 	}
-	public DtActividadDeportiva getActividadDeportiva() {
+	public String getActividadDeportiva() {
 		return actividadDeportiva;
 	}
 
-	public void setActividadDeportiva(DtActividadDeportiva actividadDeportiva) {
+	public void setActividadDeportiva(String actividadDeportiva) {
 		this.actividadDeportiva = actividadDeportiva;
 	}
 
-	public DtProfesor getProfesor() {
+	public String getProfesor() {
 		return profesor;
 	}
 
-	public void setProfesor(DtProfesor profesor) {
+	public void setProfesor(String profesor) {
 		this.profesor = profesor;
 	}
 }
