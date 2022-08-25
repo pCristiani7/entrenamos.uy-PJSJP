@@ -155,8 +155,29 @@ public class Controlador implements IControlador{
 	}
 	
 	//-------------------Casos de uso Clase------------------- 
-	
-	public void AltaDictadoClase(){
+	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID){
+		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
+		InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtID.getNombre());
+		List<ActividadDeportiva> listAct = ID.getActividadesDeportivas();
+		for(ActividadDeportiva a: listAct) {
+			List<DtClase> listDtClase = new ArrayList<>();
+			List<Clase> listClase = a.getClases();
+			for(Clase c: listClase) {
+				List<Registro> registros = c.getRegistros();
+				ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
+				for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
+					DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+					dtRegistros.add(dtReg);
+				}		
+				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFechaReg(), c.getFecha(), c.getHoraInicio(), c.getProfesor().getNickname());
+				listDtClase.add(dtclase);
+			}
+			DtActividadDeportiva dtAct = new DtActividadDeportiva(a.getNombre(),a.getDescripcion(),a.getDuracion(),a.getCosto(),a.getFecha(),listDtClase,a.getInstitucionDeportiva().getNombre());
+			listDtAct.add(dtAct);
+		}
+		return listDtAct;
+	}
+	public void AltaDictadoClase(DtActividadDeportiva dtAct){
 		
 	}
 	

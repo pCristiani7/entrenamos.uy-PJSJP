@@ -1,10 +1,14 @@
 package interfaces;
 
+import java.util.List;
+
 import datatypes.DtActividadDeportiva;
 import datatypes.DtUsuario;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
+import logica.ActividadDeportiva;
+import logica.InstitucionDeportiva;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
 //import datatypes.DtClase;
@@ -26,7 +30,8 @@ public interface IControlador {
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;
 	public void ModificarInstitucionDeportiva();
 	
-	public void AltaDictadoClase();
+	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
+	public void AltaDictadoClase(DtActividadDeportiva dtAct);
 	public void RegistroDictadoClase();
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
