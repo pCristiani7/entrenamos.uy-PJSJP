@@ -155,11 +155,10 @@ public class AltaUsuario extends JInternalFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				altaUsuarioAceptarActionPerformed(e);
-				setVisible(false);
 			}
 		});
 		
-		btnNewButton.setBounds(583, 196, 134, 52);
+		btnNewButton.setBounds(583, 196, 134, 52); 
 		getContentPane().add(btnNewButton);
 		
 		JButton btnCancelar = new JButton("Cancelar/Salir");
@@ -252,6 +251,7 @@ public class AltaUsuario extends JInternalFrame {
 		                JOptionPane.showMessageDialog(this, "El Socio se ha creado con éxito", "Alta Usuario",
 		                        JOptionPane.INFORMATION_MESSAGE);
 		                limpiarFormulario();
+		                setVisible(false);
 	        		}catch (UsuarioRepetidoExcepcion e) {
 	                    JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 	                }
@@ -264,6 +264,7 @@ public class AltaUsuario extends JInternalFrame {
 			        	JOptionPane.showMessageDialog(this, "El Profesor se ha creado con éxito", "Alta Usuario",
 			                    JOptionPane.INFORMATION_MESSAGE);
 			        	limpiarFormulario();
+			        	setVisible(false);
 		        	} catch (UsuarioRepetidoExcepcion e) {
 	                    JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Usuario", JOptionPane.ERROR_MESSAGE);
 	                }

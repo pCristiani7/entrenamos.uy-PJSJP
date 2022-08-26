@@ -1,7 +1,7 @@
 package logica;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ActividadDeportiva {
@@ -9,7 +9,7 @@ public class ActividadDeportiva {
 	private String descripcion;
 	private int duracion;
 	private float costo;
-	private Date fecha;
+	private LocalDateTime fecha;
 	private List<Clase> clases = new ArrayList<>();
 	private InstitucionDeportiva institucionDeportiva;
 	
@@ -17,7 +17,7 @@ public class ActividadDeportiva {
 		super();
 	}
 	
-	public ActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fecha,
+	public ActividadDeportiva(String nombre, String descripcion, int duracion, float costo, LocalDateTime fecha,
 			List<Clase> clases, InstitucionDeportiva institucionDeportiva) {
 		super();
 		this.nombre = nombre;
@@ -61,11 +61,11 @@ public class ActividadDeportiva {
 		this.costo = costo;
 	}
 
-	public Date getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
 

@@ -7,8 +7,6 @@ import datatypes.DtUsuario;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
-import logica.ActividadDeportiva;
-import logica.InstitucionDeportiva;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
 //import datatypes.DtClase;

@@ -75,11 +75,11 @@ public class ConsultaUsuario extends JInternalFrame {
 		JButton btnConsultar = new JButton("Consultar");
 		btnConsultar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				inicializarInvisibles();
+					inicializarInvisibles();
 			}
 		});
 		btnConsultar.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnConsultar.setBounds(86, 285, 134, 36);
+		btnConsultar.setBounds(86, 285, 134, 52); 
 		getContentPane().add(btnConsultar);
 		
 		lblNewLabelNickname = new JLabel("Nickname");
@@ -178,8 +178,13 @@ public class ConsultaUsuario extends JInternalFrame {
 		this.lblNewLabelFechaNac.setVisible(true);
 	}
 		
-	public void iniciarlizarComboBoxes() {
+	public boolean iniciarlizarComboBoxes() {
 		DefaultComboBoxModel<String> modelUsr = new DefaultComboBoxModel<String>(iCon.listarUsuarios());
-		comboBoxUsuarios.setModel(modelUsr);
+		if(modelUsr.getSize() == 0)
+			return false;
+		else {
+			comboBoxUsuarios.setModel(modelUsr);
+			return true;
+		}
 	}
 }

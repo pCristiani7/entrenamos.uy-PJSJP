@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import interfaces.Fabrica;
 import interfaces.IControlador;
@@ -133,8 +134,12 @@ public class PrincipalPage {
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Alta Actividad Deportiva");
 		mntmNewMenuItem_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				altaActividadDeportivaInternalFrame.iniciarlizarComboBoxes();
-				altaActividadDeportivaInternalFrame.setVisible(true);
+				if(altaActividadDeportivaInternalFrame.iniciarlizarComboBoxes())
+					altaActividadDeportivaInternalFrame.setVisible(true);
+				else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Alta Actividad Deportiva",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		mntmNewMenuItem_3.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -152,8 +157,12 @@ public class PrincipalPage {
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				consultaUsuarioInternalFrame.iniciarlizarComboBoxes();
-				consultaUsuarioInternalFrame.setVisible(true);
+				if(consultaUsuarioInternalFrame.iniciarlizarComboBoxes())
+					consultaUsuarioInternalFrame.setVisible(true);
+				else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Usuarios en el sistema!", "Consulta Usuario",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		mntmNewMenuItem_1.setFont(new Font("Dialog", Font.BOLD, 12));

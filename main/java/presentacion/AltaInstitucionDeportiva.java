@@ -91,10 +91,9 @@ public class AltaInstitucionDeportiva extends JInternalFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				altaInstitucionDeportivaAceptarPerformed(e);
-				setVisible(false);
 			}
 		});
-		btnNewButton.setBounds(176, 337, 187, 34);
+		btnNewButton.setBounds(214, 339, 134, 52);
 		getContentPane().add(btnNewButton);
 		
 		JButton btnCancelarsalir = new JButton("Cancelar/Salir");
@@ -104,7 +103,7 @@ public class AltaInstitucionDeportiva extends JInternalFrame {
 				setVisible(false);
 			}
 		});
-		btnCancelarsalir.setBounds(415, 337, 187, 34);
+		btnCancelarsalir.setBounds(414, 339, 134, 52);
 		getContentPane().add(btnCancelarsalir);
 
 	}
@@ -121,6 +120,7 @@ public class AltaInstitucionDeportiva extends JInternalFrame {
 				JOptionPane.showMessageDialog(this, "Institucion agregada con éxito!", "Alta Institucion Deportiva",
 		                JOptionPane.INFORMATION_MESSAGE);
 				limpiarFormulario();
+				setVisible(false);
 			}catch (InstitucionDeportivaRepetidaExcepcion e) {
 		        JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Institucion Deportiva", JOptionPane.ERROR_MESSAGE);
 		    }
