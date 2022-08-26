@@ -21,6 +21,7 @@ public class Controlador implements IControlador{
 	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 	ManejadorSocio ms = ManejadorSocio.getInstancia();
 	ManejadorActividadDeportiva mad = ManejadorActividadDeportiva.getInstancia();
+	ManejadorClase mc = ManejadorClase.getInstancia();
 	
 	public Controlador() {
 		
@@ -155,6 +156,7 @@ public class Controlador implements IControlador{
 	}
 	
 	//-------------------Casos de uso Clase------------------- 
+	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID){
 		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
 		InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtID.getNombre());
@@ -177,8 +179,16 @@ public class Controlador implements IControlador{
 		}
 		return listDtAct;
 	}
-	public void AltaDictadoClase(DtActividadDeportiva dtAct){
-		
+	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c){
+		if(!mc.existeClase(c.getNombre())) {
+			List<Registro> registros = new ArrayList<>();
+			ActividadDeportiva AD = mad.buscarActividadDeportiva(c.getActividadDeportiva());
+			Profesor prof = mp.buscarProfesor(c.getProfesor());
+			Clase clase = new Clase(c.getNombre(), c.getUrl(), registros, AD, c.getFecha(), c.getHoraInicio(), c.getFechaReg(),prof);
+			mc.addClase(clase);
+		}else {
+			//excepcion de que ya existe una clase con ese nombre
+		}
 	}
 	
 	public void RegistroDictadoClase(){

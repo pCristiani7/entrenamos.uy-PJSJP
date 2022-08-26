@@ -22,6 +22,15 @@ public class ManejadorClase {
 		return x;
 	}
 	
+	public boolean existeClase (String nombre) {
+		boolean existe = false;
+		for(Clase c: clases) {
+			if(c.getNombre().equals(nombre))
+				existe = true;
+		}
+		return existe;
+	}
+	
 	public void addClase(Clase c) {
 		clases.add(c);
 	}
