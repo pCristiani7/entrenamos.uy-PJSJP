@@ -20,6 +20,7 @@ public class Controlador implements IControlador{
 	ManejadorInstitucionDeportiva mid = ManejadorInstitucionDeportiva.getInstancia();
 	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 	ManejadorSocio ms = ManejadorSocio.getInstancia();
+	ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 	ManejadorActividadDeportiva mad = ManejadorActividadDeportiva.getInstancia();
 	ManejadorClase mc = ManejadorClase.getInstancia();
 	
@@ -49,16 +50,12 @@ public class Controlador implements IControlador{
 				DtProfesor dtProf = (DtProfesor) dtUser;
 				InstitucionDeportiva id = mid.buscarInstitucionDeportiva(dtProf.getInstitucionDeportiva());
 				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
-				ManejadorProfesor mp = ManejadorProfesor.getInstancia();
-				ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 				mp.addProfesor(prof);
 				mu.agregarUsuario(prof);
 			}else if(dtUser instanceof DtSocio){
 				List<Registro> registros = new ArrayList<>();
 				DtSocio dtSocio = (DtSocio) dtUser;
 				Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),registros);
-				ManejadorSocio ms = ManejadorSocio.getInstancia();
-				ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 				ms.addSocio(socio);
 				mu.agregarUsuario(socio);
 			}

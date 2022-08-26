@@ -3,6 +3,7 @@ package interfaces;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
+import datatypes.DtClase;
 import datatypes.DtUsuario;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
@@ -29,7 +30,7 @@ public interface IControlador {
 	public void ModificarInstitucionDeportiva();
 	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
-	public void AltaDictadoClase(DtActividadDeportiva dtAct);
+	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c);
 	public void RegistroDictadoClase();
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
