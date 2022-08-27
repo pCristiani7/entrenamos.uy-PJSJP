@@ -160,9 +160,22 @@ public class PrincipalPage {
 		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Alta Dictado de Clase");
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				altaDictadoDeClaseInternalFrame.inicializarComboBoxInstitucionDeportiva();
-				altaDictadoDeClaseInternalFrame.setInvisible();
-				altaDictadoDeClaseInternalFrame.setVisible(true);
+				if(altaDictadoDeClaseInternalFrame.inicializarComboBoxInstitucionDeportiva()) {
+					if(altaDictadoDeClaseInternalFrame.inicializarComboBoxActividadesAsociadas()) {
+						if(altaDictadoDeClaseInternalFrame.inicializarComboBoxProfesores()) {
+							altaDictadoDeClaseInternalFrame.setVisible(true);
+						}else {
+							JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Profesores en el sistema!", "Alta Dictado de Clase",
+				                    JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Alta Dictado de Clase",
+			                    JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Alta Dictado de Clase",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		mntmNewMenuItem_4.setFont(new Font("Dialog", Font.BOLD, 12));

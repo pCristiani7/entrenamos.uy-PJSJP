@@ -64,5 +64,10 @@ public class InstitucionDeportiva {
 		this.profesores = profesores;
 	}
 	
-	
+	public void addActividad(ActividadDeportiva actividad) {
+		this.actividadesDeportivas.add(actividad);
+	}
+	public void addProfesor(Profesor profesor) {
+		this.profesores.add(profesor);
+	}
 }

@@ -1,7 +1,8 @@
 package logica;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Clase {
@@ -10,16 +11,16 @@ public class Clase {
 	private List<Registro> registros = new ArrayList<>();
 	private ActividadDeportiva actividadDeportiva;
 	private Profesor profesor;
-	private Date fecha;
-	private Date horaInicio;
-	private Date fechaReg;
+	private LocalDate   fecha;
+	private LocalTime horaInicio;
+	private LocalDate fechaReg;
 
 	public Clase() {
 		super();
 	}
 
-	public Clase(String nombre, String url, List<Registro> registros, ActividadDeportiva actividadDeportiva, Date fecha,
-			Date horaInicio, Date fechaReg, Profesor profesor) {
+	public Clase(String nombre, String url, List<Registro> registros, ActividadDeportiva actividadDeportiva, LocalDate  fecha,
+			LocalTime horaInicio, LocalDate fechaReg, Profesor profesor) {
 		super();
 		this.nombre = nombre;
 		this.url = url;
@@ -43,22 +44,22 @@ public class Clase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Date getFecha() {
+	public LocalDate  getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate  fecha) {
 		this.fecha = fecha;
 	}
-	public Date getHoraInicio() {
+	public LocalTime getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(LocalTime horaInicio) {
 		this.horaInicio = horaInicio;
 	}
-	public Date getFechaReg() {
+	public LocalDate getFechaReg() {
 		return fechaReg;
 	}
-	public void setFechaReg(Date fechaReg) {
+	public void setFechaReg(LocalDate fechaReg) {
 		this.fechaReg = fechaReg;
 	}
 	public List<Registro> getRegistros() {

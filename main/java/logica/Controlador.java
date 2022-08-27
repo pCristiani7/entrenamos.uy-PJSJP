@@ -52,6 +52,7 @@ public class Controlador implements IControlador{
 				InstitucionDeportiva id = mid.buscarInstitucionDeportiva(dtProf.getInstitucionDeportiva());
 				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
 				mp.addProfesor(prof);
+				id.addProfesor(prof);
 				mu.agregarUsuario(prof);
 			}else if(dtUser instanceof DtSocio){
 				List<Registro> registros = new ArrayList<>();
@@ -124,6 +125,7 @@ public class Controlador implements IControlador{
 			InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtID);
 			ActividadDeportiva aD = new ActividadDeportiva(dtAD.getNombre(),dtAD.getDescripcion(),dtAD.getDuracion(),dtAD.getCosto(),dtAD.getFecha(),clases,ID);
 			mad.addActividadDeportiva(aD);
+			ID.addActividad(aD);
 		}
 	}
 	
@@ -140,7 +142,7 @@ public class Controlador implements IControlador{
 					DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
 					dtRegistros.add(dtReg);
 				}		
-				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFechaReg(), c.getFecha(), c.getHoraInicio(), c.getProfesor().getNickname());
+				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
 				dtClases.add(dtclase);
 			}
 			DtActividadDeportiva dtActividadDeportiva = new DtActividadDeportiva(ad.getNombre(), ad.getDescripcion(), ad.getDuracion(), ad.getCosto(), ad.getFecha(), dtClases, ad.getInstitucionDeportiva().getNombre());	
@@ -169,7 +171,7 @@ public class Controlador implements IControlador{
 					DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
 					dtRegistros.add(dtReg);
 				}		
-				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFechaReg(), c.getFecha(), c.getHoraInicio(), c.getProfesor().getNickname());
+				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
 				listDtClase.add(dtclase);
 			}
 			DtActividadDeportiva dtAct = new DtActividadDeportiva(a.getNombre(),a.getDescripcion(),a.getDuracion(),a.getCosto(),a.getFecha(),listDtClase,a.getInstitucionDeportiva().getNombre());
@@ -245,5 +247,11 @@ public class Controlador implements IControlador{
 		ManejadorInstitucionDeportiva mInst = ManejadorInstitucionDeportiva.getInstancia();
 		InstitucionDeportiva instDep = mInst.buscarInstitucionDeportiva(nombre);
 		return instDep;
+	}
+	
+	public ActividadDeportiva getAct(String nombre){
+		ManejadorActividadDeportiva mAct = ManejadorActividadDeportiva.getInstancia();
+		ActividadDeportiva actDep = mAct.buscarActividadDeportiva(nombre);
+		return actDep;
 	}
 }

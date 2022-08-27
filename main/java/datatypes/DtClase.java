@@ -1,7 +1,8 @@
 package datatypes;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 
@@ -11,16 +12,16 @@ public class DtClase {
 	private List<DtRegistro> registros = new ArrayList<>();
 	private String actividadDeportiva;
 	private String profesor;
-	private Date fecha;
-	private Date horaInicio;
-	private Date fechaReg;
+	private LocalDate fecha;
+	private LocalTime horaInicio;
+	private LocalDate fechaReg;
 
 	public DtClase() {
 		super();
 	}
 
-	public DtClase(String nombre, String url, List<DtRegistro> registros, String actividadDeportiva, Date fecha,
-			Date horaInicio, Date fechaReg, String profesor) {
+	public DtClase(String nombre, String url, List<DtRegistro> registros, String actividadDeportiva, LocalDate fecha,
+			LocalDate fechaReg, LocalTime horaInicio, String profesor) {
 		super();
 		this.nombre = nombre;
 		this.url = url;
@@ -44,22 +45,22 @@ public class DtClase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-	public Date getHoraInicio() {
+	public LocalTime getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(LocalTime horaInicio) {
 		this.horaInicio = horaInicio;
 	}
-	public Date getFechaReg() {
+	public LocalDate getFechaReg() {
 		return fechaReg;
 	}
-	public void setFechaReg(Date fechaReg) {
+	public void setFechaReg(LocalDate fechaReg) {
 		this.fechaReg = fechaReg;
 	}
 	public List<DtRegistro> getRegistros() {

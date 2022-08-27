@@ -9,6 +9,7 @@ import excepciones.ActividadDeportivaRepetidaExcepcion;
 import excepciones.ClaseRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
+import logica.ActividadDeportiva;
 import logica.InstitucionDeportiva;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
@@ -27,6 +28,7 @@ public interface IControlador {
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
 	public void ModificarActividadDeportiva();
+	public ActividadDeportiva getAct(String nombre);
 	
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;
 	public void ModificarInstitucionDeportiva();

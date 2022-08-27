@@ -15,12 +15,11 @@ public class ManejadorActividadDeportiva {
 	}
 	
 	public ActividadDeportiva buscarActividadDeportiva(String nombre) {
-		ActividadDeportiva x = null;
 		for(ActividadDeportiva actDep: actividadesDeportivas) {
 			if(actDep.getNombre().equals(nombre))
 				return actDep;
 		}
-		return x;
+		return null;
 	}
 	
 	public boolean existeNombre(String nombre) {

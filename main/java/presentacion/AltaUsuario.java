@@ -260,7 +260,7 @@ public class AltaUsuario extends JInternalFrame {
 	        	}
 	        }else if(rdbtnProfesor.isSelected()) {
 	        	if(checkFormulario()) {
-		        	DtProfesor dtProf = new DtProfesor(nickname,nombre,apellido,email,fechaNac,institucionDeportiva,descripcion,biografia,url);
+		        	DtProfesor dtProf = new DtProfesor(nickname,nombre,apellido,email,fechaNac,descripcion,biografia,url,institucionDeportiva);
 		        	try {
 			        	this.iCon.AltaUsuario(dtProf);
 			        	JOptionPane.showMessageDialog(this, "El Profesor se ha creado con éxito", "Alta Usuario",
