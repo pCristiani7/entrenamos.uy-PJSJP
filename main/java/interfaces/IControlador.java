@@ -6,8 +6,10 @@ import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import datatypes.DtUsuario;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
+import excepciones.ClaseRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
+import logica.InstitucionDeportiva;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
 //import datatypes.DtClase;
@@ -28,14 +30,16 @@ public interface IControlador {
 	
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;
 	public void ModificarInstitucionDeportiva();
+	public InstitucionDeportiva getInstitucion(String nombre);
 	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
-	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c);
+	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion;
 	public void RegistroDictadoClase();
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
 	
 	public String[] listarInstituciones();
 	public String[] listarUsuarios();
+	public String[] listarProfesores();
 	
 }

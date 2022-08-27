@@ -12,12 +12,15 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 
 import datatypes.DtActividadDeportiva;
+import datatypes.DtClase;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
 public class AltaActividadDeportiva extends JInternalFrame {
@@ -147,7 +150,8 @@ public class AltaActividadDeportiva extends JInternalFrame {
 	        int duracion = Integer.parseInt(this.textFieldDuracion.getText());
 	        float costo = Float.parseFloat(this.textFieldCosto.getText());
 	        LocalDateTime fechaReg = LocalDateTime.now();
-			DtActividadDeportiva dtActDep = new DtActividadDeportiva(nombre,desc,duracion,costo,fechaReg,null,instDep);
+	        List<DtClase> dtClase = new ArrayList<>();
+			DtActividadDeportiva dtActDep = new DtActividadDeportiva(nombre,desc,duracion,costo,fechaReg,dtClase,instDep);
 			try {
 				iCon.AltaActividadDeportiva(dtActDep);
 				JOptionPane.showMessageDialog(this, "Actividad agregada con éxito!", "Alta Actividad Deportiva",

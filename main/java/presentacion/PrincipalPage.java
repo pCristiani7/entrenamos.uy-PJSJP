@@ -26,6 +26,7 @@ public class PrincipalPage {
 	private ConsultaUsuario consultaUsuarioInternalFrame;
 	private AltaInstitucionDeportiva altaInstitucionDeportivaInternalFrame;
 	private AltaActividadDeportiva altaActividadDeportivaInternalFrame;
+	private AltaDictadoDeClase altaDictadoDeClaseInternalFrame;
 	private final JLabel lblNewLabel = new JLabel("");
 
 	/**
@@ -88,6 +89,14 @@ public class PrincipalPage {
 		altaActividadDeportivaInternalFrame.setVisible(false);
 		frmEntrenamosUy.getContentPane().add(altaActividadDeportivaInternalFrame);
 		
+		altaDictadoDeClaseInternalFrame = new AltaDictadoDeClase(iCon);
+		altaDictadoDeClaseInternalFrame.setIconifiable(false);
+		altaDictadoDeClaseInternalFrame.setMaximizable(false);
+		jInternalFrameSize = altaDictadoDeClaseInternalFrame.getSize();
+		altaDictadoDeClaseInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		altaDictadoDeClaseInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(altaDictadoDeClaseInternalFrame);
+		
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Cristiani\\eclipse-workspace\\entrenamos.uy\\entrenamos.uy.png"));
 		lblNewLabel.setBounds(31, 0, 1184, 710);
@@ -148,6 +157,24 @@ public class PrincipalPage {
 		mntmNewMenuItem_2.setFont(new Font("Dialog", Font.BOLD, 12));
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Alta Dictado de Clase");
+		mntmNewMenuItem_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				altaDictadoDeClaseInternalFrame.inicializarComboBoxInstitucionDeportiva();
+				altaDictadoDeClaseInternalFrame.inicializarComboBoxActividadesAsociadas();
+				altaDictadoDeClaseInternalFrame.inicializarComboBoxProfesores();
+				altaDictadoDeClaseInternalFrame.setVisible(true);
+			}
+		});
+		mntmNewMenuItem_4.setFont(new Font("Dialog", Font.BOLD, 12));
+		mntmNewMenuItem_4.setForeground(Color.BLACK);
+		mnNewMenu.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Registrar a Clase");
+		mntmNewMenuItem_6.setFont(new Font("Dialog", Font.BOLD, 12));
+		mntmNewMenuItem_6.setForeground(Color.BLACK);
+		mnNewMenu.add(mntmNewMenuItem_6);
+		
 		JMenu mnNewMenu_1 = new JMenu("Consultas");
 		mnNewMenu_1.setForeground(Color.BLACK);
 		mnNewMenu_1.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -157,7 +184,7 @@ public class PrincipalPage {
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(consultaUsuarioInternalFrame.iniciarlizarComboBoxes())
+				if(consultaUsuarioInternalFrame.inicializarComboBoxes())
 					consultaUsuarioInternalFrame.setVisible(true);
 				else {
 					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Usuarios en el sistema!", "Consulta Usuario",
@@ -167,9 +194,24 @@ public class PrincipalPage {
 		});
 		mntmNewMenuItem_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Consulta Actividad Deportiva");
+		mntmNewMenuItem_5.setFont(new Font("Dialog", Font.BOLD, 12));
+		mntmNewMenuItem_5.setForeground(Color.BLACK);
+		mnNewMenu_1.add(mntmNewMenuItem_5);
+		
 		JMenu mnNewMenu_2 = new JMenu("Modificar");
 		mnNewMenu_2.setForeground(Color.BLACK);
 		mnNewMenu_2.setFont(new Font("Dialog", Font.BOLD, 12));
 		menuBar.add(mnNewMenu_2);
+		
+		JMenu mnNewMenu_3 = new JMenu("Datos");
+		mnNewMenu_3.setForeground(Color.BLACK);
+		mnNewMenu_3.setFont(new Font("Dialog", Font.BOLD, 12));
+		menuBar.add(mnNewMenu_3);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Cargar Pruebas");
+		mntmNewMenuItem_7.setFont(new Font("Dialog", Font.BOLD, 12));
+		mntmNewMenuItem_7.setForeground(Color.BLACK);
+		mnNewMenu_3.add(mntmNewMenuItem_7);
 	}
 }

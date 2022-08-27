@@ -178,7 +178,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		this.lblNewLabelFechaNac.setVisible(true);
 	}
 		
-	public boolean iniciarlizarComboBoxes() {
+	public boolean inicializarComboBoxes() {
 		DefaultComboBoxModel<String> modelUsr = new DefaultComboBoxModel<String>(iCon.listarUsuarios());
 		if(modelUsr.getSize() == 0)
 			return false;

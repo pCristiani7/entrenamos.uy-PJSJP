@@ -11,6 +11,7 @@ import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import datatypes.DtClase;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
+import excepciones.ClaseRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControlador;
@@ -176,7 +177,8 @@ public class Controlador implements IControlador{
 		}
 		return listDtAct;
 	}
-	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c){
+	
+	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion{
 		if(!mc.existeClase(c.getNombre())) {
 			List<Registro> registros = new ArrayList<>();
 			ActividadDeportiva AD = mad.buscarActividadDeportiva(c.getActividadDeportiva());
@@ -184,7 +186,7 @@ public class Controlador implements IControlador{
 			Clase clase = new Clase(c.getNombre(), c.getUrl(), registros, AD, c.getFecha(), c.getHoraInicio(), c.getFechaReg(),prof);
 			mc.addClase(clase);
 		}else {
-			//excepcion de que ya existe una clase con ese nombre
+			throw new ClaseRepetidaExcepcion("Ya existe una Clase con ese nombre!");
 		}
 	}
 	
@@ -213,6 +215,19 @@ public class Controlador implements IControlador{
         return instituciones_ret;
 	}
 	
+	public String[] listarProfesores() {
+		ArrayList<String> profesores;
+		ManejadorProfesor mP = ManejadorProfesor.getInstancia();
+		profesores = mP.obtenerProfesores();
+		String[] profesores_ret = new String[profesores.size()];
+        int i=0;
+        for(String s:profesores) {
+        	profesores_ret[i]=s;
+        	i++;
+        }
+        return profesores_ret;
+	}
+	
 	public String[] listarUsuarios(){
 		ArrayList<String> usuarios;
 		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
@@ -224,5 +239,11 @@ public class Controlador implements IControlador{
         	i++;
         }
         return usuarios_ret;
+	}
+	
+	public InstitucionDeportiva getInstitucion(String nombre){
+		ManejadorInstitucionDeportiva mInst = ManejadorInstitucionDeportiva.getInstancia();
+		InstitucionDeportiva instDep = mInst.buscarInstitucionDeportiva(nombre);
+		return instDep;
 	}
 }
