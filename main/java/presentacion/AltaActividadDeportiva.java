@@ -1,7 +1,5 @@
 package presentacion;
 
-import java.awt.EventQueue;
-
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
@@ -35,22 +33,6 @@ public class AltaActividadDeportiva extends JInternalFrame {
 	private JTextField textFieldDuracion;
 	private JTextField textFieldCosto;
 	private JComboBox<String> comboBoxInstitucionDeportiva;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AltaActividadDeportiva frame = new AltaActividadDeportiva(null);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

@@ -161,8 +161,7 @@ public class PrincipalPage {
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				altaDictadoDeClaseInternalFrame.inicializarComboBoxInstitucionDeportiva();
-				altaDictadoDeClaseInternalFrame.inicializarComboBoxActividadesAsociadas();
-				altaDictadoDeClaseInternalFrame.inicializarComboBoxProfesores();
+				altaDictadoDeClaseInternalFrame.setInvisible();
 				altaDictadoDeClaseInternalFrame.setVisible(true);
 			}
 		});

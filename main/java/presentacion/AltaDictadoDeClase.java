@@ -26,6 +26,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
 import com.github.lgooddatepicker.components.TimePicker;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class AltaDictadoDeClase extends JInternalFrame {
 
@@ -36,8 +38,14 @@ public class AltaDictadoDeClase extends JInternalFrame {
 	private IControlador iCon;
 	private JTextField textFieldNombre;
 	private JTextField textFieldURL;
+	private JLabel lblNewLabelNombre;
+	private JLabel lblNewLabelFecha;
+	private JLabel lblUrl;
 	private JDateChooser dateChooser;
 	private TimePicker timePicker;
+	private JLabel lblProfesor;
+	private JLabel lblHoraInicio;
+	private JLabel lblActividadesAsociadas;
 	private JComboBox<String> comboBoxInstitucionDeportiva;
 	private JComboBox<String> comboBoxActividadesAsociadas;
 	private JComboBox<String> comboBoxProfesores;
@@ -77,7 +85,7 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		comboBoxInstitucionDeportiva.setBounds(402, 69, 198, 34);
 		getContentPane().add(comboBoxInstitucionDeportiva);
 		
-		JLabel lblActividadesAsociadas = new JLabel("Actividades Asociadas");
+		lblActividadesAsociadas = new JLabel("Actividades Asociadas");
 		lblActividadesAsociadas.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblActividadesAsociadas.setBounds(135, 114, 259, 34);
 		getContentPane().add(lblActividadesAsociadas);
@@ -86,21 +94,21 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		comboBoxActividadesAsociadas.setBounds(402, 114, 198, 34);
 		getContentPane().add(comboBoxActividadesAsociadas);
 		
-		JLabel lblNewLabelNombre = new JLabel("Nombre");
+		lblNewLabelNombre = new JLabel("Nombre");
 		lblNewLabelNombre.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblNewLabelNombre.setBounds(135, 180, 259, 34);
 		getContentPane().add(lblNewLabelNombre);
 		
-		JLabel lblProfesor = new JLabel("Profesor");
+		lblProfesor = new JLabel("Profesor");
 		lblProfesor.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblProfesor.setBounds(135, 315, 259, 34);
 		getContentPane().add(lblProfesor);
 		
-		JComboBox<String> comboBoxProfesores = new JComboBox<String>();
+		comboBoxProfesores = new JComboBox<String>();
 		comboBoxProfesores.setBounds(402, 315, 198, 34);
 		getContentPane().add(comboBoxProfesores);
 		
-		JLabel lblUrl = new JLabel("URL");
+		lblUrl = new JLabel("URL");
 		lblUrl.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblUrl.setBounds(135, 360, 259, 34);
 		getContentPane().add(lblUrl);
@@ -115,17 +123,44 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		textFieldURL.setBounds(402, 360, 198, 34);
 		getContentPane().add(textFieldURL);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnNewButton.setBounds(206, 474, 134, 52);
-		getContentPane().add(btnNewButton);
+		JButton btnNewButtonAceptar1 = new JButton("Aceptar");
+		btnNewButtonAceptar1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inicializarComboBoxActividadesAsociadas();
+				inicializarComboBoxProfesores();
+				btnNewButtonAceptar1.setVisible(false);
+				setVisibleActividades();
+			}
+		});
+		btnNewButtonAceptar1.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnNewButtonAceptar1.setBounds(206, 474, 134, 52);
+		getContentPane().add(btnNewButtonAceptar1);
+		
+		JButton btnNewButtonAceptar2 = new JButton("Aceptar");
+		btnNewButtonAceptar2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnNewButtonAceptar2.setVisible(false);
+				setVisibleData();
+			}
+		});
+		btnNewButtonAceptar2.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnNewButtonAceptar2.setBounds(206, 474, 134, 52);
+		getContentPane().add(btnNewButtonAceptar2);
 		
 		JButton btnCancelar = new JButton("Cancelar/Salir");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnNewButtonAceptar1.setVisible(true);
+				btnNewButtonAceptar2.setVisible(true);
+				limpiarFormulario();
+				setVisible(false);
+			}
+		});
 		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnCancelar.setBounds(431, 474, 134, 52);
 		getContentPane().add(btnCancelar);
 		
-		JLabel lblNewLabelFecha = new JLabel("Fecha");
+		lblNewLabelFecha = new JLabel("Fecha");
 		lblNewLabelFecha.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblNewLabelFecha.setBounds(135, 225, 259, 34);
 		getContentPane().add(lblNewLabelFecha);
@@ -134,7 +169,7 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		dateChooser.setBounds(402, 225, 198, 34);
 		getContentPane().add(dateChooser);
 		
-		JLabel lblHoraInicio = new JLabel("Hora Inicio");
+		lblHoraInicio = new JLabel("Hora Inicio");
 		lblHoraInicio.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblHoraInicio.setBounds(135, 270, 259, 34);
 		getContentPane().add(lblHoraInicio);
@@ -143,6 +178,11 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		timePicker.getComponentTimeTextField().setEditable(false);
 		timePicker.setBounds(402, 270, 198, 34);
 		getContentPane().add(timePicker);
+		
+		JButton btnNewButtonAceptar3 = new JButton("Aceptar");
+		btnNewButtonAceptar3.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnNewButtonAceptar3.setBounds(206, 474, 134, 52);
+		getContentPane().add(btnNewButtonAceptar3);
 	}
 	
 	public boolean inicializarComboBoxInstitucionDeportiva() {
@@ -198,5 +238,43 @@ public class AltaDictadoDeClase extends JInternalFrame {
 			comboBoxProfesores.setModel(modelProfesores);
 			return true;
 		}
+	}
+	
+	public void setVisibleActividades() {
+		this.lblActividadesAsociadas.setVisible(true);
+		this.comboBoxActividadesAsociadas.setVisible(true);
+	}
+	
+	public void setVisibleData() {
+		this.lblNewLabelNombre.setVisible(true);
+		this.lblProfesor.setVisible(true);
+		this.comboBoxProfesores.setVisible(true);
+		this.lblUrl.setVisible(true);
+		this.textFieldNombre.setVisible(true);
+		this.textFieldURL.setVisible(true);
+		this.dateChooser.setVisible(true);
+		this.timePicker.setVisible(true);
+		this.lblNewLabelFecha.setVisible(true);
+		this.lblHoraInicio.setVisible(true);
+	}
+	
+	public void setInvisible() {
+		this.lblActividadesAsociadas.setVisible(false);
+		this.comboBoxActividadesAsociadas.setVisible(false);
+		this.lblNewLabelNombre.setVisible(false);
+		this.lblProfesor.setVisible(false);
+		this.comboBoxProfesores.setVisible(false);
+		this.lblUrl.setVisible(false);
+		this.textFieldNombre.setVisible(false);
+		this.textFieldURL.setVisible(false);
+		this.dateChooser.setVisible(false);
+		this.timePicker.setVisible(false);
+		this.lblNewLabelFecha.setVisible(false);
+		this.lblHoraInicio.setVisible(false);
+	}
+	
+	private void limpiarFormulario() {
+		textFieldNombre.setText("");
+		textFieldURL.setText("");
 	}
 }
