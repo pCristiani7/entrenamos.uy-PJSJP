@@ -1,7 +1,7 @@
 package datatypes;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class DtSocio extends DtUsuario {
 
@@ -11,7 +11,7 @@ public class DtSocio extends DtUsuario {
 		super();		
 	}
 
-	public DtSocio(String nickname, String nombre, String apellido, String email, Date fechaNac, ArrayList<DtRegistro> dtRegistros) {
+	public DtSocio(String nickname, String nombre, String apellido, String email, LocalDate fechaNac, ArrayList<DtRegistro> dtRegistros) {
 		super(nickname, nombre, apellido, email, fechaNac);
 		this.dtRegistros = dtRegistros;
 	}

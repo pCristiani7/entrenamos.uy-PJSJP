@@ -1,13 +1,13 @@
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Socio extends Usuario {
 	private List<Registro> registros = new ArrayList<>();
 
-	public Socio(String nickname, String nombre, String apellido, String email, Date fecha, List<Registro> registros) {
+	public Socio(String nickname, String nombre, String apellido, String email, LocalDate fecha, List<Registro> registros) {
 		super(nickname, nombre, apellido, email, fecha);
 		this.registros = registros;
 	}

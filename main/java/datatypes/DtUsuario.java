@@ -1,19 +1,19 @@
 package datatypes;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public abstract class DtUsuario {
 	private String nickname;
 	private String nombre;
 	private String apellido;
 	private String email;
-	private Date fechaNac;
+	private LocalDate fechaNac;
 	
 	public DtUsuario() {
 		super();
 	}
 	
-	public DtUsuario(String nickname, String nombre, String apellido, String email, Date fechaNac) {
+	public DtUsuario(String nickname, String nombre, String apellido, String email, LocalDate fechaNac) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -38,7 +38,7 @@ public abstract class DtUsuario {
 		return email;
 	}
 
-	public Date getFechaNac() {
+	public LocalDate getFechaNac() {
 		return fechaNac;
 	}
 	

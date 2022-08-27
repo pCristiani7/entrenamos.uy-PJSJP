@@ -161,7 +161,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		this.textFieldNombre.setText(dtUsr.getNombre());
 		this.textFieldApellido.setText(dtUsr.getApellido());
 		this.textFieldEmail.setText(dtUsr.getEmail());
-		this.textFieldFechaNac.setText(dtUsr.getFechaNac().toLocaleString());
+		this.textFieldFechaNac.setText(dtUsr.getFechaNac().toString());
 	}
 
 	public void inicializarInvisibles() {

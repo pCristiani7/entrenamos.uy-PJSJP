@@ -18,12 +18,14 @@ import interfaces.IControlador;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+
+import utilidad.Dating;
 import com.toedter.calendar.JDateChooser;
 
 public class AltaUsuario extends JInternalFrame {
@@ -236,7 +238,7 @@ public class AltaUsuario extends JInternalFrame {
         String nombre = this.textFieldNombre.getText();
         String apellido = this.textFieldApellido.getText();
         String email = this.textFieldEmail.getText();
-        Date fechaNac = this.dateChooser.getDate();
+        LocalDate fechaNac = Dating.toLocalDate(dateChooser.getDate());
         String institucionDeportiva = (String) this.comboBoxInstitucionDeportiva.getSelectedItem();
         String descripcion = this.textFieldDescripcion.getText();
         String biografia = this.textFieldBiografia.getText();
