@@ -15,6 +15,9 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -31,6 +34,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.awt.event.ActionEvent;
@@ -74,8 +79,9 @@ public class AltaDictadoDeClase extends JInternalFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws ParseException 
 	 */
-	public AltaDictadoDeClase(IControlador iCon) {
+	public AltaDictadoDeClase(IControlador iCon) throws ParseException {
 		setTitle("Alta Dictado de Clase");
 		setClosable(true);
 		this.iCon = iCon;
@@ -157,6 +163,13 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		
 		dateChooser = new JDateChooser();
 		dateChooser.setBounds(402, 225, 198, 34);
+		Calendar ca = new GregorianCalendar();
+		String day = ca.get(Calendar.DAY_OF_MONTH) + "";
+		String month = ca.get(Calendar.MONTH) + 1 + "";
+		String year = ca.get(Calendar.YEAR) + "";
+		String dd = year + "-" + month + "-" + day;
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
+		dateChooser.setDate(date);
 		getContentPane().add(dateChooser);
 		
 		JLabel lblNewLabelHora = new JLabel("Hora");
@@ -248,32 +261,37 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		comboBoxInstitucionDeportiva.setModel(new DefaultComboBoxModel<String>());
 		comboBoxActividadesAsociadas.setModel(new DefaultComboBoxModel<String>());
 		comboBoxProfesores.setModel(new DefaultComboBoxModel<String>());
+		textFieldHora.setText("");
+		textFieldMinuto.setText("");
 		dateChooser.setDate(null);
+		setVisible(false);
 	}
 	
 	protected void altaClaseAceptarActionPerformed(ActionEvent arg0) {
-		String actividad = comboBoxInstitucionDeportiva.getSelectedItem().toString();
+		String actividad = comboBoxActividadesAsociadas.getSelectedItem().toString();
     	String nombre = textFieldNombre.getText();
     	String url = textFieldURL.getText();
-    	LocalDate fechaClase = Dating.toLocalDate(dateChooser.getDate());
     	LocalDate currentFecha = LocalDate.now();
     	String profesor = comboBoxProfesores.getSelectedItem().toString();
-    	int hora = Integer.parseInt(textFieldHora.getText());
-    	int minuto = Integer.parseInt(textFieldMinuto.getText());
-		LocalTime lT = LocalTime.of(hora,minuto);
 		if (checkFormulario()) {
     		try {
+    	    	LocalDate fechaClase = Dating.toLocalDate(dateChooser.getDate());
+    	    	int hora = Integer.parseInt(textFieldHora.getText());
+    	    	int minuto = Integer.parseInt(textFieldMinuto.getText());
+    			LocalTime lT = LocalTime.of(hora,minuto);
     			ActividadDeportiva actDep = iCon.getAct(actividad);
     			List<DtRegistro> registros = new ArrayList<>();
     			List<DtClase> clases = new ArrayList<>();
     			DtActividadDeportiva dtActDep = new DtActividadDeportiva(actDep.getNombre(),actDep.getDescripcion(),actDep.getDuracion(),actDep.getCosto(),actDep.getFecha(),clases,actDep.getInstitucionDeportiva().getNombre());
     			DtClase dtClase = new DtClase(nombre,url,registros,actividad,fechaClase,currentFecha,lT,profesor);
     			iCon.AltaDictadoClase(dtActDep, dtClase);
-    			JOptionPane.showMessageDialog(this, "Se ha creado la Clase correctamente!");
+    			JOptionPane.showMessageDialog(this, "La Clase se ha creado con éxito!", "Alta Dictado de Clase",
+	                    JOptionPane.INFORMATION_MESSAGE);
     			limpiarFormulario();
     		}
     		catch (ClaseRepetidaExcepcion ex) {
-    			JOptionPane.showMessageDialog(this, "Ya existe una Clase con ese nombre!", null, JOptionPane.ERROR_MESSAGE);
+    			JOptionPane.showMessageDialog(this, "Ya existe una Clase con ese nombre!", "Alta Dictado de Clase",
+	                    JOptionPane.ERROR_MESSAGE);
     		}
     	}
 	}
@@ -281,21 +299,16 @@ public class AltaDictadoDeClase extends JInternalFrame {
 	private boolean checkFormulario() {
     	String nombre = textFieldNombre.getText();
     	String url = textFieldURL.getText();
-    	
-    	if (comboBoxActividadesAsociadas.getSelectedIndex() == -1) {
-    		JOptionPane.showMessageDialog(this, "Debe haber una actividad deportiva seleccionada!", null, JOptionPane.ERROR_MESSAGE);
+    	String hora = textFieldHora.getText();
+    	String minuto = textFieldMinuto.getText();
+    	boolean date = dateChooser.getDateFormatString().equals(null);
+    	if (nombre.isEmpty() || url.isEmpty() || hora.isEmpty() || minuto.isEmpty() || date) {
+    		JOptionPane.showMessageDialog(this, "No puede haber campos vacios!", "Alta Dictado de Clase",
+                    JOptionPane.ERROR_MESSAGE);    		
     		return false;
-    	}
-    	else if (nombre.isEmpty() || url.isEmpty()) {
-    		JOptionPane.showMessageDialog(this, "No puede haber campos vacios!", null, JOptionPane.ERROR_MESSAGE);
-    		return false;
-    	}
-    	else if (comboBoxProfesores.getSelectedIndex() == -1) {
-    		JOptionPane.showMessageDialog(this, "Debe haber un profesor seleccionado!", null, JOptionPane.ERROR_MESSAGE);
-    		return false;
-    	}
-    	else {
+    	}else {
     		return true;
     	}
     }
+	
 }

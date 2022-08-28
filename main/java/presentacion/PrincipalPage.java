@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import interfaces.Fabrica;
 import interfaces.IControlador;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -47,8 +48,9 @@ public class PrincipalPage {
 
 	/**
 	 * Create the application.
+	 * @throws ParseException 
 	 */
-	public PrincipalPage() {
+	public PrincipalPage() throws ParseException {
 		initialize();
 		
 		Fabrica fab = Fabrica.getInstance();
