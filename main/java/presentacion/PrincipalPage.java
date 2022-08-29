@@ -201,23 +201,28 @@ public class PrincipalPage {
 			public void actionPerformed(ActionEvent e) {
 					if(registroAClaseInternalFrame.inicializarComboBoxInstituciones()) {
 						if(registroAClaseInternalFrame.inicializarComboBoxActividadesAsociadas()) {
-							if(registroAClaseInternalFrame.inicializarComboBoxSocios()) {
-								registroAClaseInternalFrame.setVisible(true);
+							if(registroAClaseInternalFrame.inicializarComboBoxClases()) {
+								if(registroAClaseInternalFrame.inicializarComboBoxSocios()) {
+									registroAClaseInternalFrame.setVisible(true);
+								}else {
+									JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Socios en el sistema!", "Alta Dictado de Clase",
+						                    JOptionPane.ERROR_MESSAGE);
+								}
 							}else {
-								JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Socios en el sistema!", "Alta Dictado de Clase",
+								JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Clases en el sistema!", "Alta Dictado de Clase",
 					                    JOptionPane.ERROR_MESSAGE);
 							}
 						}else {
 							JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Alta Dictado de Clase",
 				                    JOptionPane.ERROR_MESSAGE);
 						}
-					}else {
+					}else{
 						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Alta Dictado de Clase",
 			                    JOptionPane.ERROR_MESSAGE);
 					}
-				
-			}
-		});
+				}
+			});
+		
 		mntmNewMenuItem_6.setFont(new Font("Dialog", Font.BOLD, 12));
 		mntmNewMenuItem_6.setForeground(Color.BLACK);
 		mnNewMenu.add(mntmNewMenuItem_6);

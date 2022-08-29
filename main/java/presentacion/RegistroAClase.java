@@ -40,6 +40,7 @@ public class RegistroAClase extends JInternalFrame {
 	private JComboBox<String> comboBoxInstitucionDeportiva;
 	private JComboBox<String> comboBoxActividadesAsociadas;
 	private JComboBox<String> comboBoxSocios;
+	private JComboBox<String> comboBoxClases;
 
 	/**
 	 * Launch the application.
@@ -98,7 +99,7 @@ public class RegistroAClase extends JInternalFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxActividadesAsociadas.getSelectedItem().toString().equals(e)) {
-						inicializarComboBoxClases(comboBoxActividadesAsociadas.getSelectedItem().toString());
+						inicializarComboBoxDynamic(comboBoxActividadesAsociadas.getSelectedItem().toString());
 					}
 				}
 			}
@@ -125,7 +126,7 @@ public class RegistroAClase extends JInternalFrame {
 		lblClases.setBounds(35, 145, 259, 34);
 		getContentPane().add(lblClases);
 		
-		JComboBox<String> comboBoxClases = new JComboBox<String>();
+		comboBoxClases = new JComboBox<String>();
 		comboBoxClases.setBounds(302, 145, 198, 34);
 		getContentPane().add(comboBoxClases);
 		
@@ -226,8 +227,20 @@ public class RegistroAClase extends JInternalFrame {
 		}
 	}
 	
-	public void inicializarComboBoxClases(String c) {
-		
+	public void inicializarComboBoxDynamic(String n) {
+		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
+			comboBoxClases.setModel(modelClases);
+	}
+	
+	public boolean inicializarComboBoxClases() {
+		String nombre = this.comboBoxActividadesAsociadas.getSelectedItem().toString();
+		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(nombre));
+		if(modelClases.getSize() == 0)
+			return false;
+		else {
+			comboBoxClases.setModel(modelClases);
+			return true;
+		}
 	}
 	
 }

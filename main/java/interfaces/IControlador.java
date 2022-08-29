@@ -39,6 +39,8 @@ public interface IControlador {
 	public void RegistroDictadoClase();
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
+	public String[] listarClasesActividadDeportiva(String ActDep);
+	
 	
 	public String[] listarInstituciones();
 	public String[] listarUsuarios();
