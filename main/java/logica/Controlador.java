@@ -1,5 +1,6 @@
 package logica;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import datatypes.DtClase;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
 import excepciones.ClaseRepetidaExcepcion;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
+import excepciones.RegistroRepetidoExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
 import interfaces.IControlador;
 
@@ -194,7 +196,19 @@ public class Controlador implements IControlador{
 		}
 	}
 	
-	public void RegistroDictadoClase(){
+	//obligatoria
+	public void RegistroDictadoClase(DtClase dtClase, DtSocio dtSocio, Date fecha) throws RegistroRepetidoExcepcion{
+		Clase clase = mc.buscarClase(dtClase.getNombre());
+		Socio socio = ms.buscarSocio(dtSocio.getNickname());
+		List<Registro> registros = socio.getRegistros();
+		Registro reg = new Registro(fecha,socio,clase);
+		if(!registros.contains(reg)) {
+			registros.add(reg);
+			socio.setRegistros(registros);
+		}else {
+			throw new RegistroRepetidoExcepcion("El socio ya esta registrado en esa clase!");
+		}
+		
 		
 	}
 	
