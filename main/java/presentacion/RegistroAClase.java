@@ -10,6 +10,9 @@ import logica.InstitucionDeportiva;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -23,6 +26,8 @@ import datatypes.DtProfesor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.awt.event.ItemEvent;
 
 public class RegistroAClase extends JInternalFrame {
@@ -54,8 +59,9 @@ public class RegistroAClase extends JInternalFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws ParseException 
 	 */
-	public RegistroAClase(IControlador iCon) {
+	public RegistroAClase(IControlador iCon) throws ParseException {
 		this.iCon = iCon;
 		setIconifiable(true);
 		setMaximizable(true);
@@ -129,6 +135,13 @@ public class RegistroAClase extends JInternalFrame {
 		getContentPane().add(lblNewLabelFecha);
 		
 		JDateChooser dateChooser = new JDateChooser();
+		Calendar ca = new GregorianCalendar();
+		String day = ca.get(Calendar.DAY_OF_MONTH) + "";
+		String month = ca.get(Calendar.MONTH) + 1 + "";
+		String year = ca.get(Calendar.YEAR) + "";
+		String dd = year + "-" + month + "-" + day;
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
+		dateChooser.setDate(date);
 		dateChooser.setBounds(302, 361, 198, 34);
 		getContentPane().add(dateChooser);
 		

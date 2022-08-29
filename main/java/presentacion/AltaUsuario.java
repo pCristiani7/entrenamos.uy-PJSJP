@@ -18,8 +18,13 @@ import interfaces.IControlador;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -63,7 +68,7 @@ public class AltaUsuario extends JInternalFrame {
 		});
 	}
 
-	public AltaUsuario(IControlador iCon) {
+	public AltaUsuario(IControlador iCon) throws ParseException {
 		this.iCon = iCon;
 		setIconifiable(true);
 		setMaximizable(true);
@@ -218,10 +223,13 @@ public class AltaUsuario extends JInternalFrame {
 		getContentPane().add(comboBoxInstitucionDeportiva);
 		
 		dateChooser = new JDateChooser();
-		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		Calendar ca = new GregorianCalendar();
+		String day = ca.get(Calendar.DAY_OF_MONTH) + "";
+		String month = ca.get(Calendar.MONTH) + 1 + "";
+		String year = ca.get(Calendar.YEAR) + "";
+		String dd = year + "-" + month + "-" + day;
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
+		dateChooser.setDate(date);
 		dateChooser.setBounds(309, 229, 198, 34);
 		getContentPane().add(dateChooser);
 		
