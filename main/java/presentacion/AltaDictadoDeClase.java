@@ -237,7 +237,7 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		String[] profesoresRet = new String[profesores.size()];
 		int i=0;
 		for(Profesor p: profesores) {
-			profesoresRet[i]=p.getNombre();
+			profesoresRet[i]=p.getNickname();
         	i++;
         }
 		
