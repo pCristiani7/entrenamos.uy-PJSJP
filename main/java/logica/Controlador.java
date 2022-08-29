@@ -188,6 +188,7 @@ public class Controlador implements IControlador{
 			Clase clase = new Clase(c.getNombre(), c.getUrl(), registros, AD, c.getFecha(), c.getHoraInicio(), c.getFechaReg(),prof);
 			mc.addClase(clase);
 			AD.addClase(clase);
+			prof.addClase(clase);
 		}else {
 			throw new ClaseRepetidaExcepcion("Ya existe una Clase con ese nombre!");
 		}
