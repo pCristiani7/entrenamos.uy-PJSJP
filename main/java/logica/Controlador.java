@@ -206,6 +206,18 @@ public class Controlador implements IControlador{
 		
 	}
 	
+	public String[] listarClasesActividadDeportiva(DtActividadDeportiva dtActDep) {
+		ActividadDeportiva AD = mad.buscarActividadDeportiva(dtActDep.getNombre());
+		List<Clase> clases = AD.getClases();
+		String[] clases_ret = new String[clases.size()];
+        int i=0;
+        for(Clase c:clases) {
+        	clases_ret[i]=c.getNombre();
+        	i++;
+        }
+        return clases_ret;
+	}
+	
 	public String[] listarInstituciones() {
 		ArrayList<String> instituciones;
 		ManejadorInstitucionDeportiva mID = ManejadorInstitucionDeportiva.getInstancia();
