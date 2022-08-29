@@ -187,6 +187,7 @@ public class Controlador implements IControlador{
 			Profesor prof = mp.buscarProfesor(c.getProfesor());
 			Clase clase = new Clase(c.getNombre(), c.getUrl(), registros, AD, c.getFecha(), c.getHoraInicio(), c.getFechaReg(),prof);
 			mc.addClase(clase);
+			AD.addClase(clase);
 		}else {
 			throw new ClaseRepetidaExcepcion("Ya existe una Clase con ese nombre!");
 		}
@@ -228,6 +229,19 @@ public class Controlador implements IControlador{
         	i++;
         }
         return profesores_ret;
+	}
+	
+	public String[] listarSocios() {
+		ArrayList<String> socios;
+		ManejadorSocio mS = ManejadorSocio.getInstancia();
+		socios = mS.obtenerSocios();
+		String[]socios_ret = new String[socios.size()];
+        int i=0;
+        for(String s:socios) {
+        	socios_ret[i]=s;
+        	i++;
+        }
+        return socios_ret;
 	}
 	
 	public String[] listarUsuarios(){

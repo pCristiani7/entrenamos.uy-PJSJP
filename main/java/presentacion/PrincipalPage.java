@@ -28,6 +28,7 @@ public class PrincipalPage {
 	private AltaInstitucionDeportiva altaInstitucionDeportivaInternalFrame;
 	private AltaActividadDeportiva altaActividadDeportivaInternalFrame;
 	private AltaDictadoDeClase altaDictadoDeClaseInternalFrame;
+	private RegistroAClase registroAClaseInternalFrame;
 	private final JLabel lblNewLabel = new JLabel("");
 
 	/**
@@ -99,6 +100,14 @@ public class PrincipalPage {
 		altaDictadoDeClaseInternalFrame.setVisible(false);
 		frmEntrenamosUy.getContentPane().add(altaDictadoDeClaseInternalFrame);
 		
+		registroAClaseInternalFrame = new RegistroAClase(iCon);
+		registroAClaseInternalFrame.setIconifiable(false);
+		registroAClaseInternalFrame.setMaximizable(false);
+		jInternalFrameSize = registroAClaseInternalFrame.getSize();
+		registroAClaseInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		registroAClaseInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(registroAClaseInternalFrame);
+		
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Cristiani\\eclipse-workspace\\entrenamos.uy\\entrenamos.uy.png"));
 		lblNewLabel.setBounds(31, 0, 1184, 710);
@@ -128,7 +137,10 @@ public class PrincipalPage {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Alta Usuario");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				altaUsuarioInternalFrame.inicializarComboBoxes();
+				if(!altaUsuarioInternalFrame.inicializarComboBoxes()) {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "Atencion para Profesor: No hay Instituciones registradas!", "Alta Usuario",
+				            JOptionPane.WARNING_MESSAGE);	
+				}
 				altaUsuarioInternalFrame.setVisible(true);
 			}
 		});
@@ -185,6 +197,27 @@ public class PrincipalPage {
 		mnNewMenu.add(mntmNewMenuItem_4);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Registrar a Clase");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					if(registroAClaseInternalFrame.inicializarComboBoxInstituciones()) {
+						if(registroAClaseInternalFrame.inicializarComboBoxActividadesAsociadas()) {
+							if(registroAClaseInternalFrame.inicializarComboBoxSocios()) {
+								registroAClaseInternalFrame.setVisible(true);
+							}else {
+								JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Socios en el sistema!", "Alta Dictado de Clase",
+					                    JOptionPane.ERROR_MESSAGE);
+							}
+						}else {
+							JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Alta Dictado de Clase",
+				                    JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Alta Dictado de Clase",
+			                    JOptionPane.ERROR_MESSAGE);
+					}
+				
+			}
+		});
 		mntmNewMenuItem_6.setFont(new Font("Dialog", Font.BOLD, 12));
 		mntmNewMenuItem_6.setForeground(Color.BLACK);
 		mnNewMenu.add(mntmNewMenuItem_6);

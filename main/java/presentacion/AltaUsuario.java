@@ -228,9 +228,14 @@ public class AltaUsuario extends JInternalFrame {
 		
 	}
 	
-	public void inicializarComboBoxes() {
+	public boolean inicializarComboBoxes() {
 		DefaultComboBoxModel<String> modelInstituciones = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
-		comboBoxInstitucionDeportiva.setModel(modelInstituciones);
+		if(modelInstituciones.getSize() == 0)
+			return false;
+		else {
+			comboBoxInstitucionDeportiva.setModel(modelInstituciones);
+			return true;
+		}
 	}
 	
 	protected void altaUsuarioAceptarActionPerformed(ActionEvent arg0) {

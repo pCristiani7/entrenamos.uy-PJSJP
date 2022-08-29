@@ -85,6 +85,8 @@ public class ActividadDeportiva {
 		this.institucionDeportiva = institucionDeportiva;
 	}
 	
-	
+	public void addClase(Clase c) {
+		this.clases.add(c);
+	}
 	
 }
