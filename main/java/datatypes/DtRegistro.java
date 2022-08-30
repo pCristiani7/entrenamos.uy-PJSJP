@@ -5,18 +5,18 @@ import java.time.LocalDate;
 import logica.Clase;
 
 public class DtRegistro {
-	private Clase clase;
+	private String clase;
 	private LocalDate fecha;
 	
 	
 	
-	public DtRegistro(Clase clase, LocalDate fecha) {
+	public DtRegistro(String clase, LocalDate fecha) {
 		super();
 		this.clase = clase;
 		this.fecha = fecha;
 	}
 
-	public Clase getClase() {
+	public String getClase() {
 		return clase;
 	}
 
