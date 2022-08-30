@@ -196,14 +196,12 @@ public class Controlador implements IControlador{
 		}
 	}
 	
-	public void RegistroDictadoClase(DtClase dtClase, DtSocio dtSocio, LocalDate fecha) throws RegistroRepetidoExcepcion{
-			Clase clase = mc.buscarClase(dtClase.getNombre());
-			Socio socio = ms.buscarSocio(dtSocio.getNickname());
+	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion{
+			Clase clase = mc.buscarClase(nomClase);
+			Socio socio = ms.buscarSocio(nomSocio);
 			List<Registro> registros = socio.getRegistros();
 			Registro reg = new Registro(fecha,socio,clase);
 			if(!registros.contains(reg)) {
-				registros.add(reg);
-				socio.setRegistros(registros);
 				socio.addRegistro(reg);
 				clase.addRegistro(reg);
 			}else {
