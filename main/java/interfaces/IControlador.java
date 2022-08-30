@@ -42,7 +42,7 @@ public interface IControlador {
 	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
 	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion;
-	public void RegistroDictadoClase(DtClase dtClase, DtSocio dtSocio, LocalDate fecha) throws RegistroRepetidoExcepcion;
+	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion;
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
 	public String[] listarClasesActividadDeportiva(String ActDep);
