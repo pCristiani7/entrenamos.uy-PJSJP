@@ -290,7 +290,7 @@ public class RegistroAClase extends JInternalFrame {
 		dtC.getActividadDeportiva() + "\n" + "Profesor: " + dtC.getProfesor() +
 		"\n" + "Hora Inicio: " + dtC.getHoraInicio().toString()+ "\n\n" + "Registros: " + "\n";
 		for(DtRegistro x:registros) {
-			data = data + dtS.getNickname() + " - " + x.getClase().getFecha().toString() + "\n";
+			data = data + dtS.getNickname() + " - " + x.getFecha().toString() + "\n";
 		}
 		textPaneInfoClase.setText(data);
 	}

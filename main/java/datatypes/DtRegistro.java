@@ -2,8 +2,6 @@ package datatypes;
 
 import java.time.LocalDate;
 
-import logica.Clase;
-
 public class DtRegistro {
 	private String clase;
 	private LocalDate fecha;

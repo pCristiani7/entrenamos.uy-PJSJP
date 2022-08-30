@@ -10,7 +10,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
 
+import datatypes.DtClase;
 import datatypes.DtProfesor;
+import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import interfaces.IControlador;
@@ -20,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import java.util.List;
 
 public class ConsultaUsuario extends JInternalFrame {
 
@@ -39,14 +42,14 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JLabel lblNewLabelEmail;
 	private JLabel lblNewLabelApellido;
 	private JLabel lblNewLabelFechaNac;
-	private JComboBox comboBoxActividadesDeportivas;
 	private JLabel lblRegistroaClases;
 	private JLabel lblClasesDictadas;
-	private JComboBox comboBoxClasesDictadas;
-	private JComboBox comboBoxRegistroClases;
-	private JLabel lblAtividadesdeportivas;
-	private JTextPane textPaneData;
-	private JButton btnConsultarDepends;
+	private JComboBox<String> comboBoxClasesDictadas;
+	private JComboBox<String> comboBoxRegistroClases;
+	private JTextPane textPaneDataSocio;
+	private JTextPane textPaneDataProfesor;
+	private JButton btnConsultarDependsRegistro;
+	private JButton btnConsultarDependsDictado;
 
 
 	/**
@@ -162,48 +165,42 @@ public class ConsultaUsuario extends JInternalFrame {
 		lblClasesDictadas.setVisible(false);
 		getContentPane().add(lblClasesDictadas);
 		
-		comboBoxActividadesDeportivas = new JComboBox();
-		comboBoxActividadesDeportivas.setFont(new Font("Dialog", Font.PLAIN, 15));
-		comboBoxActividadesDeportivas.setBounds(289, 431, 219, 41);
-		comboBoxActividadesDeportivas.setVisible(false);
-		getContentPane().add(comboBoxActividadesDeportivas);
-		
 		lblRegistroaClases = new JLabel("Registro a Clases");
 		lblRegistroaClases.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblRegistroaClases.setBounds(511, 289, 198, 52);
 		lblRegistroaClases.setVisible(false);
 		getContentPane().add(lblRegistroaClases);
 		
-		comboBoxClasesDictadas = new JComboBox();
+		comboBoxClasesDictadas = new JComboBox<String>();
 		comboBoxClasesDictadas.setFont(new Font("Dialog", Font.PLAIN, 15));
 		comboBoxClasesDictadas.setBounds(289, 340, 174, 41);
 		comboBoxClasesDictadas.setVisible(false);
 		getContentPane().add(comboBoxClasesDictadas);
 		
-		comboBoxRegistroClases = new JComboBox();
+		comboBoxRegistroClases = new JComboBox<String>();
 		comboBoxRegistroClases.setFont(new Font("Dialog", Font.PLAIN, 15));
 		comboBoxRegistroClases.setBounds(511, 340, 174, 41);
 		comboBoxRegistroClases.setVisible(false);
 		getContentPane().add(comboBoxRegistroClases);
 		
-		lblAtividadesdeportivas = new JLabel("ActividadesDeportivas");
-		lblAtividadesdeportivas.setFont(new Font("Dialog", Font.PLAIN, 22));
-		lblAtividadesdeportivas.setBounds(289, 385, 255, 36);
-		lblAtividadesdeportivas.setVisible(false);
-		getContentPane().add(lblAtividadesdeportivas);
-		
-		textPaneData = new JTextPane();
-		textPaneData.setFont(new Font("Dialog", Font.PLAIN, 15));
-		textPaneData.setEditable(false);
-		textPaneData.setVisible(false);
-		textPaneData.setBounds(20, 289, 219, 244);
-		getContentPane().add(textPaneData);
-		
-		btnConsultarDepends = new JButton("Consultar");
-		btnConsultarDepends.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnConsultarDepends.setBounds(551, 426, 134, 52);
-		btnConsultarDepends.setVisible(false);
-		getContentPane().add(btnConsultarDepends);
+		btnConsultarDependsRegistro = new JButton("Consultar");
+		btnConsultarDependsRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String data = null;
+				String registroClase = comboBoxRegistroClases.getSelectedItem().toString();
+				DtClase dtC = iCon.getDatosClase(registroClase);
+				data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + dtC.getActividadDeportiva() + "\n"
+				+ "Profesor: "  + dtC.getProfesor() + "\n"  + "URL: " + dtC.getUrl() + "\n"  + "Fecha: " + dtC.getFecha().toString() + "\n"
+				+ "Hora Inicio: " + dtC.getHoraInicio().toString();			
+				textPaneDataSocio.setText(data);
+				textPaneDataSocio.setVisible(true);
+				
+			}
+		});
+		btnConsultarDependsRegistro.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnConsultarDependsRegistro.setBounds(551, 426, 134, 52);
+		btnConsultarDependsRegistro.setVisible(false);
+		getContentPane().add(btnConsultarDependsRegistro);
 		
 
 		JButton btnConsultar = new JButton("Consultar");
@@ -212,21 +209,27 @@ public class ConsultaUsuario extends JInternalFrame {
 				String nickname = comboBoxUsuarios.getSelectedItem().toString();
 				DtUsuario dtUsr = iCon.ConsultaUsuario(nickname);
 				if(dtUsr instanceof DtSocio) {
-					lblAtividadesdeportivas.setVisible(false);
+					inicializarComboBoxRegistros();
+					btnConsultarDependsDictado.setVisible(false);
+					btnConsultarDependsRegistro.setVisible(true);
 					comboBoxClasesDictadas.setVisible(false);
-					comboBoxActividadesDeportivas.setVisible(false);
 					lblClasesDictadas.setVisible(false);
 					comboBoxRegistroClases.setVisible(true);
 					lblRegistroaClases.setVisible(true);
+					textPaneDataProfesor.setText(" ");
+					textPaneDataProfesor.setVisible(false);
 					DtSocio dtS = (DtSocio) dtUsr;
 					inicializarInvisiblesSocio(dtS);
 				}else if(dtUsr instanceof DtProfesor) {
-					lblAtividadesdeportivas.setVisible(true);
+					inicializarComboBoxClasesDictadas();
+					btnConsultarDependsRegistro.setVisible(false);
+					btnConsultarDependsDictado.setVisible(true);
 					comboBoxClasesDictadas.setVisible(true);
-					comboBoxActividadesDeportivas.setVisible(true);
 					lblClasesDictadas.setVisible(true);
 					comboBoxRegistroClases.setVisible(false);
 					lblRegistroaClases.setVisible(false);
+					textPaneDataSocio.setText(" ");
+					textPaneDataSocio.setVisible(false);
 					DtProfesor dtP = (DtProfesor) dtUsr;
 					inicializarInvisiblesProfesor(dtP);
 				}
@@ -235,6 +238,46 @@ public class ConsultaUsuario extends JInternalFrame {
 		btnConsultar.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnConsultar.setBounds(70, 178, 134, 52); 
 		getContentPane().add(btnConsultar);
+		
+		btnConsultarDependsDictado = new JButton("Consultar");
+		btnConsultarDependsDictado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String data = null;
+				String claseDictada = comboBoxClasesDictadas.getSelectedItem().toString();
+				DtClase dtC = iCon.getDatosClase(claseDictada);
+				data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + dtC.getActividadDeportiva()
+				+ "\n"  + "URL: " + dtC.getUrl() + "\n"  + "Fecha: " + dtC.getFecha().toString() + "\n"
+				+ "Hora Inicio: " + dtC.getHoraInicio().toString() +
+				"\n" + "Registros: " + "\n";
+				
+				List<DtRegistro> dtR = dtC.getRegistros();
+				for(DtRegistro x:dtR) {
+					data = data + x.getClase() + " - " + x.getFecha().toString() + "\n";
+				}
+				textPaneDataProfesor.setText(data);
+				textPaneDataProfesor.setText(data);
+				textPaneDataProfesor.setVisible(true);
+				
+			}
+		});
+		btnConsultarDependsDictado.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnConsultarDependsDictado.setBounds(309, 427, 134, 52);
+		btnConsultarDependsDictado.setVisible(false);
+		getContentPane().add(btnConsultarDependsDictado);
+		
+		textPaneDataSocio = new JTextPane();
+		textPaneDataSocio.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textPaneDataSocio.setEditable(false);
+		textPaneDataSocio.setVisible(false);
+		textPaneDataSocio.setBounds(289, 289, 198, 244);
+		getContentPane().add(textPaneDataSocio);
+		
+		textPaneDataProfesor = new JTextPane();
+		textPaneDataProfesor.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textPaneDataProfesor.setEditable(false);
+		textPaneDataProfesor.setVisible(false);
+		textPaneDataProfesor.setBounds(511, 289, 198, 244);
+		getContentPane().add(textPaneDataProfesor);
 		
 
 	}
@@ -267,11 +310,10 @@ public class ConsultaUsuario extends JInternalFrame {
 		this.lblNewLabelApellido.setVisible(true);
 		this.lblNewLabelEmail.setVisible(true);
 		this.lblNewLabelFechaNac.setVisible(true);
-		this.lblAtividadesdeportivas.setVisible(true);
+		this.btnConsultarDependsDictado.setVisible(true);
 		this.comboBoxClasesDictadas.setVisible(true);
-		this.comboBoxActividadesDeportivas.setVisible(true);
 		this.lblClasesDictadas.setVisible(true);
-		this.btnConsultarDepends.setVisible(true);
+		this.btnConsultarDependsDictado.setVisible(true);
 	}
 	
 	public void inicializarInvisiblesSocio(DtSocio s) {
@@ -288,7 +330,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		this.lblNewLabelEmail.setVisible(true);
 		this.comboBoxRegistroClases.setVisible(true);
 		this.lblRegistroaClases.setVisible(true);
-		this.btnConsultarDepends.setVisible(true);
+		this.btnConsultarDependsRegistro.setVisible(true);
 	}
 		
 	public boolean inicializarComboBoxes() {
@@ -313,8 +355,8 @@ public class ConsultaUsuario extends JInternalFrame {
 	}
 	
 	public boolean inicializarComboBoxClasesDictadas() {
-		String s = comboBoxUsuarios.getSelectedItem().toString();
-		DefaultComboBoxModel<String> modelUsr = new DefaultComboBoxModel<String>(iCon.listarRegistrosSocio(s));
+		String p = comboBoxUsuarios.getSelectedItem().toString();
+		DefaultComboBoxModel<String> modelUsr = new DefaultComboBoxModel<String>(iCon.listarClasesProf(p));
 		if(modelUsr.getSize() == 0)
 			return false;
 		else {

@@ -236,8 +236,9 @@ public class PrincipalPage {
 		mnNewMenu_1.add(mntmNewMenuItem_1);
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(consultaUsuarioInternalFrame.inicializarComboBoxes())
-					consultaUsuarioInternalFrame.setVisible(true);
+				if(consultaUsuarioInternalFrame.inicializarComboBoxes()) {
+						consultaUsuarioInternalFrame.setVisible(true);
+				}
 				else {
 					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Usuarios en el sistema!", "Consulta Usuario",
 		                    JOptionPane.ERROR_MESSAGE);
