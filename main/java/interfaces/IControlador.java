@@ -29,7 +29,7 @@ public interface IControlador {
 	
 	public void AltaUsuario(DtUsuario dtUser) throws UsuarioRepetidoExcepcion;
 	public DtUsuario ConsultaUsuario(String user);
-	public void ModificarDatosUsuario();	
+	public void ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew);	
 	
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
@@ -43,6 +43,7 @@ public interface IControlador {
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
 	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion;
 	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion;
+	public DtClase getDatosClase(String nomClase);
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
 	public String[] listarClasesActividadDeportiva(String ActDep);
@@ -50,6 +51,8 @@ public interface IControlador {
 	
 	
 	public String[] listarInstituciones();
+	public String[] listarClasesProf(String nickname);
+	public String[] listarRegistrosSocio(String nickname);
 	public String[] listarUsuarios();
 	public String[] listarProfesores();
 	public String[] listarSocios();

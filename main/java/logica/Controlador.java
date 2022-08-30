@@ -81,7 +81,7 @@ public class Controlador implements IControlador{
 			List<Registro> registros = soc.getRegistros();
 			ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 			for(Registro r: registros) {
-				DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+				DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
 				dtRegistros.add(dtReg);
 			}
 			DtSocio dtSocio = new DtSocio(soc.getNickname(), soc.getNombre(),soc.getApellido(), soc.getEmail(),soc.getFecha(), dtRegistros);	
@@ -92,9 +92,34 @@ public class Controlador implements IControlador{
 
 	@Override
 	//Opcional
-	public void ModificarDatosUsuario() {
+	public void ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew) {
 		// TODO Auto-generated method stub
-		
+		if(dtUser instanceof DtSocio) {
+			DtSocio dtSocio = (DtSocio) dtUser;
+			DtSocio dtSocioNew = (DtSocio) dtUserNew;
+			Socio s = ms.buscarSocio(dtSocio.getNickname());
+			s.setNickname(dtSocioNew.getNickname());
+			s.setNombre(dtSocioNew.getNombre());
+			s.setApellido(dtSocioNew.getApellido());
+			s.setEmail(dtSocioNew.getEmail());
+			s.setFecha(dtSocioNew.getFechaNac());
+			
+		}else if(dtUser instanceof DtProfesor) {
+			DtProfesor dtProf = (DtProfesor) dtUser;
+			DtProfesor dtProfNew = (DtProfesor) dtUserNew;
+			Profesor p = mp.buscarProfesor(dtProf.getNickname());
+			p.setNickname(dtProfNew.getNickname());
+			p.setNombre(dtProfNew.getNombre());
+			p.setApellido(dtProfNew.getApellido());
+			p.setEmail(dtProfNew.getEmail());
+			p.setFecha(dtProfNew.getFechaNac());
+			p.setDescripcion(dtProfNew.getBiografia());
+			p.setBiografia(dtProfNew.getBiografia());
+			p.setSitioWeb(dtProfNew.getSitioweb());
+			InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtProfNew.getInstitucionDeportiva());
+			p.setInstitucionDeportiva(ID);	
+			
+		}
 	}
 	
 	//-------------------Casos de uso Institucion Deportiva------------------- 
@@ -141,7 +166,7 @@ public class Controlador implements IControlador{
 				List<Registro> registros = c.getRegistros();
 				ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 				for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
-					DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+					DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
 					dtRegistros.add(dtReg);
 				}		
 				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
@@ -170,7 +195,7 @@ public class Controlador implements IControlador{
 				List<Registro> registros = c.getRegistros();
 				ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 				for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
-					DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+					DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
 					dtRegistros.add(dtReg);
 				}		
 				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
@@ -215,6 +240,18 @@ public class Controlador implements IControlador{
 		}
 	}
 	
+	public DtClase getDatosClase(String nomClase){
+			Clase c = mc.buscarClase(nomClase);
+			List<DtRegistro> listDtReg = new ArrayList<>();
+			List<Registro> listReg = c.getRegistros();
+			for(Registro r: listReg) {
+				DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
+				listDtReg.add(dtReg);
+			}
+			DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(), listDtReg, c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNickname());
+			return dtClase;
+	}
+	
 	public void ConsultaDictadoClase(){
 		
 	}
@@ -246,6 +283,30 @@ public class Controlador implements IControlador{
         	i++;
         }
         return instituciones_ret;
+	}
+	
+	public String[] listarClasesProf(String nickname) {
+		Profesor p = mp.buscarProfesor(nickname);
+		List<Clase> clases = p.getClases();
+		String[] clases_ret = new String[clases.size()];
+        int i=0;
+        for(Clase c: clases) {
+        	clases_ret[i]=c.getNombre();
+        	i++;
+        }
+        return clases_ret;
+	}
+	
+	public String[] listarRegistrosSocio(String nickname) {
+		Socio s = ms.buscarSocio(nickname);
+		List<Registro> registros = s.getRegistros();
+		String[] registros_ret = new String[registros.size()];
+        int i=0;
+        for(Registro r: registros) {
+        	registros_ret[i]= r.getClase().getNombre();
+        	i++;
+        }
+        return registros_ret;
 	}
 	
 	public String[] listarProfesores() {
@@ -292,7 +353,7 @@ public class Controlador implements IControlador{
 		List<Registro> registros = c.getRegistros();
 		ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 		for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
-			DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+			DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
 			dtRegistros.add(dtReg);
 		}	
 		DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
@@ -326,7 +387,7 @@ public class Controlador implements IControlador{
 		List<Registro> registros = s.getRegistros();
 		ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 		for(Registro r: registros) {							
-			DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+			DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
 			dtRegistros.add(dtReg);
 		}	
 		DtSocio dtSocio = new DtSocio(s.getNickname(),s.getNombre(),s.getApellido(),s.getEmail(),s.getFecha(),dtRegistros);
@@ -339,3 +400,4 @@ public class Controlador implements IControlador{
 		return null;
 	}
 }
+
