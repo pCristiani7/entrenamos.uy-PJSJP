@@ -200,14 +200,14 @@ public class Controlador implements IControlador{
 			Clase clase = mc.buscarClase(nomClase);
 			Socio socio = ms.buscarSocio(nomSocio);
 			List<Registro> registros = socio.getRegistros();
-			Registro reg = new Registro(fecha,socio,clase);
 			boolean existeReg = false;
 			for(Registro r: registros) {
-				if(r.getFecha() == reg.getFecha() && r.getClase() == reg.getClase() && r.getSocio() == reg.getSocio()) {
+				if(r.getClase().getNombre() == clase.getNombre() && r.getFecha() == fecha && r.getSocio().getNickname() == socio.getNickname()) {
 					existeReg = true;
 				}
 			}
 			if(!existeReg) {
+				Registro reg = new Registro(fecha,socio,clase);
 				socio.addRegistro(reg);
 				clase.addRegistro(reg);
 			}else {
