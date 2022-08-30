@@ -5,9 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
+import logica.Clase;
 import logica.InstitucionDeportiva;
+import logica.Socio;
+import utilidad.Dating;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,14 +26,21 @@ import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtActividadDeportiva;
+import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtProfesor;
+import datatypes.DtRegistro;
+import datatypes.DtSocio;
+import excepciones.RegistroRepetidoExcepcion;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.awt.event.ItemEvent;
+import javax.swing.JTextPane;
 
 public class RegistroAClase extends JInternalFrame {
 
@@ -41,6 +53,8 @@ public class RegistroAClase extends JInternalFrame {
 	private JComboBox<String> comboBoxActividadesAsociadas;
 	private JComboBox<String> comboBoxSocios;
 	private JComboBox<String> comboBoxClases;
+	private JTextPane textPaneInfoClase;
+	private JDateChooser dateChooser;
 
 	/**
 	 * Launch the application.
@@ -109,16 +123,28 @@ public class RegistroAClase extends JInternalFrame {
 		
 		JLabel lblSocios = new JLabel("Socios");
 		lblSocios.setFont(new Font("Dialog", Font.PLAIN, 22));
-		lblSocios.setBounds(35, 316, 259, 34);
+		lblSocios.setBounds(35, 222, 259, 34);
 		getContentPane().add(lblSocios);
 		
 		comboBoxSocios = new JComboBox<String>();
-		comboBoxSocios.setBounds(302, 316, 198, 34);
+		comboBoxSocios.setBounds(302, 222, 198, 34);
 		getContentPane().add(comboBoxSocios);
 		
-		JButton btnVerClases = new JButton("Ver Clases");
+		
+		textPaneInfoClase = new JTextPane();
+		textPaneInfoClase.setFont(new Font("Dialog", Font.BOLD, 15));
+		textPaneInfoClase.setEditable(false);
+		textPaneInfoClase.setBounds(547, 207, 198, 252);
+		getContentPane().add(textPaneInfoClase);
+		
+		JButton btnVerClases = new JButton("Ver Informacion de Clase");
+		btnVerClases.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				infoClase(e);
+			}
+		});
 		btnVerClases.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnVerClases.setBounds(567, 95, 134, 52);
+		btnVerClases.setBounds(547, 95, 198, 52);
 		getContentPane().add(btnVerClases);
 		
 		JLabel lblClases = new JLabel("Clases");
@@ -132,10 +158,10 @@ public class RegistroAClase extends JInternalFrame {
 		
 		JLabel lblNewLabelFecha = new JLabel("Fecha");
 		lblNewLabelFecha.setFont(new Font("Dialog", Font.PLAIN, 22));
-		lblNewLabelFecha.setBounds(35, 361, 259, 34);
+		lblNewLabelFecha.setBounds(35, 267, 259, 34);
 		getContentPane().add(lblNewLabelFecha);
 		
-		JDateChooser dateChooser = new JDateChooser();
+		dateChooser = new JDateChooser();
 		Calendar ca = new GregorianCalendar();
 		String day = ca.get(Calendar.DAY_OF_MONTH) + "";
 		String month = ca.get(Calendar.MONTH) + 1 + "";
@@ -143,12 +169,22 @@ public class RegistroAClase extends JInternalFrame {
 		String dd = year + "-" + month + "-" + day;
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
 		dateChooser.setDate(date);
-		dateChooser.setBounds(302, 361, 198, 34);
+		dateChooser.setBounds(302, 267, 198, 34);
 		getContentPane().add(dateChooser);
 		
 		JButton btnNewButtonAceptar1 = new JButton("Aceptar");
+		btnNewButtonAceptar1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					registroAClaseAceptarActionPerformed(e);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnNewButtonAceptar1.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnNewButtonAceptar1.setBounds(107, 458, 134, 52);
+		btnNewButtonAceptar1.setBounds(140, 407, 134, 52);
 		getContentPane().add(btnNewButtonAceptar1);
 		
 		JButton btnCancelar = new JButton("Cancelar/Salir");
@@ -157,9 +193,13 @@ public class RegistroAClase extends JInternalFrame {
 			}
 		});
 		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnCancelar.setBounds(332, 458, 134, 52);
+		btnCancelar.setBounds(315, 407, 134, 52);
 		getContentPane().add(btnCancelar);
-
+		
+		JLabel lblInformacion = new JLabel("Informacion");
+		lblInformacion.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblInformacion.setBounds(589, 162, 114, 34);
+		getContentPane().add(lblInformacion);
 	}
 	
 	public boolean inicializarComboBoxInstituciones() {
@@ -243,4 +283,54 @@ public class RegistroAClase extends JInternalFrame {
 		}
 	}
 	
+	protected void infoClase(ActionEvent arg0) {
+		String claseSelected = comboBoxClases.getSelectedItem().toString();
+		DtClase dtC = iCon.findClase(claseSelected);
+		DtSocio dtS = iCon.findSocio(comboBoxSocios.getSelectedItem().toString());
+		List <DtRegistro> registros = dtC.getRegistros();
+		String data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + 
+		dtC.getActividadDeportiva() + "\n" + "Profesor: " + dtC.getProfesor() +
+		"\n" + "Hora Inicio: " + dtC.getHoraInicio().toString()+ "\n\n" + "Registros: " + "\n";
+		for(DtRegistro x:registros) {
+			data = data + dtS.getNickname() + " - " + x.getClase().getFecha().toString() + "\n";
+		}
+		textPaneInfoClase.setText(data);
+	}
+	
+	private void limpiarFormulario() throws ParseException {
+		Calendar ca = new GregorianCalendar();
+		String day = ca.get(Calendar.DAY_OF_MONTH) + "";
+		String month = ca.get(Calendar.MONTH) + 1 + "";
+		String year = ca.get(Calendar.YEAR) + "";
+		String dd = year + "-" + month + "-" + day;
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
+		dateChooser.setDate(date);
+		textPaneInfoClase.setText(" ");
+		setVisible(false);
+	}
+	
+	protected void registroAClaseAceptarActionPerformed(ActionEvent arg0) throws ParseException {
+		LocalDate fechaClase = Dating.toLocalDate(dateChooser.getDate());
+		Clase c = iCon.getClase(comboBoxClases.getSelectedItem().toString());
+		Socio s = iCon.getSocio(comboBoxSocios.getSelectedItem().toString());
+		
+		DtClase dtC = iCon.findClase(comboBoxClases.getSelectedItem().toString());
+		DtSocio dtS = iCon.findSocio(s.getNickname());
+		
+		List <DtRegistro> registros = dtC.getRegistros();
+		List <DtRegistro> registrosSocio = dtS.getDtRegistros();
+		
+		DtClase dtClass = new DtClase(c.getNombre(),c.getUrl(),registros,c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNickname());
+		DtSocio dtSocio = new DtSocio(s.getNickname(),s.getNombre(),s.getApellido(),s.getEmail(),s.getFecha(),registrosSocio);
+		try {
+			iCon.RegistroDictadoClase(dtClass, dtSocio, fechaClase);
+			JOptionPane.showMessageDialog(this, "Registro realizado con éxito!", "Registro a Clase",
+	                JOptionPane.INFORMATION_MESSAGE);
+			limpiarFormulario();
+		}
+		catch (RegistroRepetidoExcepcion ex) {
+			JOptionPane.showMessageDialog(this, "Ya existe un registro!", "Registro a Clase",
+	                JOptionPane.ERROR_MESSAGE);
+		}
+	}
 }

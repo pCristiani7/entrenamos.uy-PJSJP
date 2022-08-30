@@ -1,14 +1,14 @@
 package logica;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Registro {
- private Date fecha;
+ private LocalDate fecha;
  private Socio socio;
  private Clase clase;
 
  
- public Registro(Date fecha, Socio socio, Clase clase) {
+ public Registro(LocalDate fecha, Socio socio, Clase clase) {
 	super();
 	this.fecha = fecha;
 	this.socio = socio;
@@ -16,12 +16,12 @@ public class Registro {
  }
 
 
-public Date getFecha() {
+public LocalDate getFecha() {
 	return fecha;
 }
 
 
-public void setFecha(Date fecha) {
+public void setFecha(LocalDate fecha) {
 	this.fecha = fecha;
 }
 

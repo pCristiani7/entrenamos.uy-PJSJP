@@ -1,6 +1,6 @@
 package logica;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -196,20 +196,19 @@ public class Controlador implements IControlador{
 		}
 	}
 	
-	//obligatoria
-	public void RegistroDictadoClase(DtClase dtClase, DtSocio dtSocio, Date fecha) throws RegistroRepetidoExcepcion{
-		Clase clase = mc.buscarClase(dtClase.getNombre());
-		Socio socio = ms.buscarSocio(dtSocio.getNickname());
-		List<Registro> registros = socio.getRegistros();
-		Registro reg = new Registro(fecha,socio,clase);
-		if(!registros.contains(reg)) {
-			registros.add(reg);
-			socio.setRegistros(registros);
-		}else {
-			throw new RegistroRepetidoExcepcion("El socio ya esta registrado en esa clase!");
+	public void RegistroDictadoClase(DtClase dtClase, DtSocio dtSocio, LocalDate fecha) throws RegistroRepetidoExcepcion{
+			Clase clase = mc.buscarClase(dtClase.getNombre());
+			Socio socio = ms.buscarSocio(dtSocio.getNickname());
+			List<Registro> registros = socio.getRegistros();
+			Registro reg = new Registro(fecha,socio,clase);
+			if(!registros.contains(reg)) {
+				registros.add(reg);
+				socio.setRegistros(registros);
+				socio.addRegistro(reg);
+				clase.addRegistro(reg);
+			}else {
+				throw new RegistroRepetidoExcepcion("El socio ya esta registrado en esa clase!");
 		}
-		
-		
 	}
 	
 	public void ConsultaDictadoClase(){
@@ -284,6 +283,18 @@ public class Controlador implements IControlador{
         return usuarios_ret;
 	}
 	
+	public DtClase findClase(String clase) {
+		Clase c = mc.buscarClase(clase);
+		List<Registro> registros = c.getRegistros();
+		ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
+		for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
+			DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+			dtRegistros.add(dtReg);
+		}	
+		DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
+		return dtclase;
+	}
+	
 	public InstitucionDeportiva getInstitucion(String nombre){
 		ManejadorInstitucionDeportiva mInst = ManejadorInstitucionDeportiva.getInstancia();
 		InstitucionDeportiva instDep = mInst.buscarInstitucionDeportiva(nombre);
@@ -294,5 +305,33 @@ public class Controlador implements IControlador{
 		ManejadorActividadDeportiva mAct = ManejadorActividadDeportiva.getInstancia();
 		ActividadDeportiva actDep = mAct.buscarActividadDeportiva(nombre);
 		return actDep;
+	}
+	
+	public Clase getClase(String nombre){
+		Clase c = mc.buscarClase(nombre);
+		return c;
+	}
+	
+	public Socio getSocio(String nombre){
+		Socio s = ms.buscarSocio(nombre);
+		return s;
+	}
+	
+	public DtSocio findSocio(String name) {
+		Socio s = ms.buscarSocio(name);
+		List<Registro> registros = s.getRegistros();
+		ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
+		for(Registro r: registros) {							
+			DtRegistro dtReg = new DtRegistro(r.getClase(),r.getFecha());
+			dtRegistros.add(dtReg);
+		}	
+		DtSocio dtSocio = new DtSocio(s.getNickname(),s.getNombre(),s.getApellido(),s.getEmail(),s.getFecha(),dtRegistros);
+		return dtSocio;
+	}
+
+	@Override
+	public List<DtRegistro> getRegistrosSocio(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

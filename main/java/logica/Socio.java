@@ -23,6 +23,10 @@ public class Socio extends Usuario {
 	public void setRegistros(List<Registro> registros) {
 		this.registros = registros;
 	}
+	
+	public void addRegistro(Registro r) {
+		this.registros.add(r);
+	}
 
 }
 

@@ -1,6 +1,6 @@
 package interfaces;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
@@ -12,11 +12,14 @@ import excepciones.InstitucionDeportivaRepetidaExcepcion;
 import excepciones.RegistroRepetidoExcepcion;
 import excepciones.UsuarioRepetidoExcepcion;
 import logica.ActividadDeportiva;
+import logica.Clase;
 import logica.InstitucionDeportiva;
+import logica.Socio;
 //import datatypes.DtActividadDeportiva;
 //import datatypes.DtInstitucionDeportiva;
 //import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
+import datatypes.DtRegistro;
 import datatypes.DtSocio;
 
 public interface IControlador {
@@ -39,16 +42,20 @@ public interface IControlador {
 	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
 	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion;
-	public void RegistroDictadoClase(DtClase dtClase, DtSocio dtSocio, Date fecha) throws RegistroRepetidoExcepcion;
+	public void RegistroDictadoClase(DtClase dtClase, DtSocio dtSocio, LocalDate fecha) throws RegistroRepetidoExcepcion;
 	public void ConsultaDictadoClase();
 	public void RankingDictadosClases();
 	public String[] listarClasesActividadDeportiva(String ActDep);
+	public DtClase findClase(String clase);
 	
 	
-	public String[] listarClasesActividadDeportiva(DtActividadDeportiva dtActDep);
 	public String[] listarInstituciones();
 	public String[] listarUsuarios();
 	public String[] listarProfesores();
 	public String[] listarSocios();
+	public Clase getClase(String nombre);
+	public Socio getSocio(String nombre);
+	public List<DtRegistro> getRegistrosSocio(String nombre);
+	public DtSocio findSocio(String name);
 	
 }

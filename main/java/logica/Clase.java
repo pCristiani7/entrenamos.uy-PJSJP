@@ -84,5 +84,7 @@ public class Clase {
 		this.profesor = profesor;
 	}
 
-	
+	public void addRegistro(Registro r) {
+		this.registros.add(r);
+	}
 }

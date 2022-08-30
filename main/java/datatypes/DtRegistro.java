@@ -1,16 +1,16 @@
 package datatypes;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import logica.Clase;
 
 public class DtRegistro {
 	private Clase clase;
-	private Date fecha;
+	private LocalDate fecha;
 	
 	
 	
-	public DtRegistro(Clase clase, Date fecha) {
+	public DtRegistro(Clase clase, LocalDate fecha) {
 		super();
 		this.clase = clase;
 		this.fecha = fecha;
@@ -20,7 +20,7 @@ public class DtRegistro {
 		return clase;
 	}
 
-	public Date getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 	

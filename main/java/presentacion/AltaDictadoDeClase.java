@@ -138,7 +138,12 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		JButton btnNewButtonAceptar1 = new JButton("Aceptar");
 		btnNewButtonAceptar1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				altaClaseAceptarActionPerformed(e);
+				try {
+					altaClaseAceptarActionPerformed(e);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnNewButtonAceptar1.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -148,7 +153,12 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		JButton btnCancelar = new JButton("Cancelar/Salir");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				limpiarFormulario();
+				try {
+					limpiarFormulario();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				setVisible(false);
 			}
 		});
@@ -255,7 +265,7 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		this.comboBoxActividadesAsociadas.setVisible(true);
 	}
 	
-	private void limpiarFormulario() {
+	private void limpiarFormulario() throws ParseException {
 		textFieldNombre.setText("");
 		textFieldURL.setText("");
 		comboBoxInstitucionDeportiva.setModel(new DefaultComboBoxModel<String>());
@@ -263,11 +273,17 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		comboBoxProfesores.setModel(new DefaultComboBoxModel<String>());
 		textFieldHora.setText("");
 		textFieldMinuto.setText("");
-		dateChooser.setDate(null);
+		Calendar ca = new GregorianCalendar();
+		String day = ca.get(Calendar.DAY_OF_MONTH) + "";
+		String month = ca.get(Calendar.MONTH) + 1 + "";
+		String year = ca.get(Calendar.YEAR) + "";
+		String dd = year + "-" + month + "-" + day;
+		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
+		dateChooser.setDate(date);
 		setVisible(false);
 	}
 	
-	protected void altaClaseAceptarActionPerformed(ActionEvent arg0) {
+	protected void altaClaseAceptarActionPerformed(ActionEvent arg0) throws ParseException {
 		String actividad = comboBoxActividadesAsociadas.getSelectedItem().toString();
     	String nombre = textFieldNombre.getText();
     	String url = textFieldURL.getText();
