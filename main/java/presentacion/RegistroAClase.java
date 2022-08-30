@@ -311,19 +311,10 @@ public class RegistroAClase extends JInternalFrame {
 	
 	protected void registroAClaseAceptarActionPerformed(ActionEvent arg0) throws ParseException {
 		LocalDate fechaClase = Dating.toLocalDate(dateChooser.getDate());
-		Clase c = iCon.getClase(comboBoxClases.getSelectedItem().toString());
-		Socio s = iCon.getSocio(comboBoxSocios.getSelectedItem().toString());
-		
-		DtClase dtC = iCon.findClase(comboBoxClases.getSelectedItem().toString());
-		DtSocio dtS = iCon.findSocio(s.getNickname());
-		
-		List <DtRegistro> registros = dtC.getRegistros();
-		List <DtRegistro> registrosSocio = dtS.getDtRegistros();
-		
-		DtClase dtClass = new DtClase(c.getNombre(),c.getUrl(),registros,c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNickname());
-		DtSocio dtSocio = new DtSocio(s.getNickname(),s.getNombre(),s.getApellido(),s.getEmail(),s.getFecha(),registrosSocio);
+		String clase = comboBoxClases.getSelectedItem().toString();
+		String socio = comboBoxSocios.getSelectedItem().toString();
 		try {
-			iCon.RegistroDictadoClase(dtClass, dtSocio, fechaClase);
+			iCon.RegistroDictadoClase(clase, socio, fechaClase);
 			JOptionPane.showMessageDialog(this, "Registro realizado con éxito!", "Registro a Clase",
 	                JOptionPane.INFORMATION_MESSAGE);
 			limpiarFormulario();

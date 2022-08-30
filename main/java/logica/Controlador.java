@@ -202,8 +202,6 @@ public class Controlador implements IControlador{
 			List<Registro> registros = socio.getRegistros();
 			Registro reg = new Registro(fecha,socio,clase);
 			if(!registros.contains(reg)) {
-				registros.add(reg);
-				socio.setRegistros(registros);
 				socio.addRegistro(reg);
 				clase.addRegistro(reg);
 			}else {

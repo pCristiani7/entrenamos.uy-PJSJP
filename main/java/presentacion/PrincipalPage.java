@@ -109,7 +109,7 @@ public class PrincipalPage {
 		frmEntrenamosUy.getContentPane().add(registroAClaseInternalFrame);
 		
 		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Cristiani\\eclipse-workspace\\entrenamos.uy\\entrenamos.uy.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\\\Users\\\\59894\\\\eclipse-workspace\\\\entrenamos.uy/entrenamos.uy.png"));
 		lblNewLabel.setBounds(31, 0, 1184, 710);
 		frmEntrenamosUy.getContentPane().add(lblNewLabel);
 	}
