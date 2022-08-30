@@ -5,9 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
-import logica.Clase;
 import logica.InstitucionDeportiva;
-import logica.Socio;
 import utilidad.Dating;
 
 import javax.swing.JLabel;
@@ -320,7 +318,7 @@ public class RegistroAClase extends JInternalFrame {
 			limpiarFormulario();
 		}
 		catch (RegistroRepetidoExcepcion ex) {
-			JOptionPane.showMessageDialog(this, "Ya existe un registro!", "Registro a Clase",
+			JOptionPane.showMessageDialog(this, "Ya existe un registro de ese Socio!", "Registro a Clase",
 	                JOptionPane.ERROR_MESSAGE);
 		}
 	}
