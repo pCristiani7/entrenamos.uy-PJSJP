@@ -297,6 +297,18 @@ public class Controlador implements IControlador{
         return clases_ret;
 	}
 	
+	public String[] listarRegistrosSocio(String nickname) {
+		Socio s = ms.buscarSocio(nickname);
+		List<Registro> registros = s.getRegistros();
+		String[] registros_ret = new String[registros.size()];
+        int i=0;
+        for(Registro r: registros) {
+        	registros_ret[i]= r.getClase().getNombre();
+        	i++;
+        }
+        return registros_ret;
+	}
+	
 	public String[] listarProfesores() {
 		ArrayList<String> profesores;
 		ManejadorProfesor mP = ManejadorProfesor.getInstancia();
