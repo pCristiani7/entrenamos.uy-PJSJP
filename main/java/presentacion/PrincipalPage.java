@@ -25,10 +25,12 @@ public class PrincipalPage {
 	private JFrame frmEntrenamosUy;
 	private AltaUsuario altaUsuarioInternalFrame;
 	private ConsultaUsuario consultaUsuarioInternalFrame;
+	private ConsultaActividadDeportiva consultaActividadDeportivaInternalFrame;
 	private AltaInstitucionDeportiva altaInstitucionDeportivaInternalFrame;
 	private AltaActividadDeportiva altaActividadDeportivaInternalFrame;
 	private AltaDictadoDeClase altaDictadoDeClaseInternalFrame;
 	private RegistroAClase registroAClaseInternalFrame;
+	private ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
 	private final JLabel lblNewLabel = new JLabel("");
 
 	/**
@@ -107,6 +109,21 @@ public class PrincipalPage {
 		registroAClaseInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
 		registroAClaseInternalFrame.setVisible(false);
 		frmEntrenamosUy.getContentPane().add(registroAClaseInternalFrame);
+		
+		consultaActividadDeportivaInternalFrame = new ConsultaActividadDeportiva(iCon);
+		consultaActividadDeportivaInternalFrame.setIconifiable(false);
+		consultaActividadDeportivaInternalFrame.setMaximizable(false);
+		jInternalFrameSize = consultaActividadDeportivaInternalFrame.getSize();
+		consultaActividadDeportivaInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		consultaActividadDeportivaInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(consultaActividadDeportivaInternalFrame);
+		
+		modificarDatosUsuarioInternalFrame = new ModificarDatosUsuario(iCon);
+		modificarDatosUsuarioInternalFrame.setMaximizable(false);
+		jInternalFrameSize = modificarDatosUsuarioInternalFrame.getSize();
+		modificarDatosUsuarioInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		consultaActividadDeportivaInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(modificarDatosUsuarioInternalFrame);
 		
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setIcon(new ImageIcon("C:\\\\Users\\\\59894\\\\eclipse-workspace\\\\entrenamos.uy/entrenamos.uy.png"));
@@ -248,6 +265,21 @@ public class PrincipalPage {
 		mntmNewMenuItem_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Consulta Actividad Deportiva");
+		mntmNewMenuItem_5.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(consultaActividadDeportivaInternalFrame.inicializarComboBoxInstitucionDeportiva()) {
+					if(consultaActividadDeportivaInternalFrame.inicializarComboBoxActividadesAsociadas()) {
+						consultaActividadDeportivaInternalFrame.setVisible(true);
+					}else {
+						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Consulta Actividad Deportiva",
+			                    JOptionPane.ERROR_MESSAGE);
+					}
+				}else {
+				JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Consulta Actividad Deportiva",
+	                    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		mntmNewMenuItem_5.setFont(new Font("Dialog", Font.BOLD, 12));
 		mntmNewMenuItem_5.setForeground(Color.BLACK);
 		mnNewMenu_1.add(mntmNewMenuItem_5);
@@ -256,6 +288,20 @@ public class PrincipalPage {
 		mnNewMenu_2.setForeground(Color.BLACK);
 		mnNewMenu_2.setFont(new Font("Dialog", Font.BOLD, 12));
 		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Modificar Usuario");
+		mntmNewMenuItem_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(modificarDatosUsuarioInternalFrame.inicializarComboBoxes()) {
+					modificarDatosUsuarioInternalFrame.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Usuarios en el sistema!", "Modificar Usuario",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		mntmNewMenuItem_8.setFont(new Font("Dialog", Font.BOLD, 12));
+		mnNewMenu_2.add(mntmNewMenuItem_8);
 		
 		JMenu mnNewMenu_3 = new JMenu("Datos");
 		mnNewMenu_3.setForeground(Color.BLACK);

@@ -1,6 +1,6 @@
 package datatypes;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +9,7 @@ public class DtActividadDeportiva {
 	private String descripcion;
 	private int duracion;
 	private float costo;
-	private LocalDateTime fecha;
+	private LocalDate fecha;
 	private List<DtClase> clases = new ArrayList<>();
 	private String institucionDeportiva;
 	
@@ -17,7 +17,7 @@ public class DtActividadDeportiva {
 		super();
 	}
 	
-	public DtActividadDeportiva(String nombre, String descripcion, int duracion, float costo, LocalDateTime fecha,
+	public DtActividadDeportiva(String nombre, String descripcion, int duracion, float costo, LocalDate fecha,
 			List<DtClase> clases, String institucionDeportiva) {
 		super();
 		this.nombre = nombre;
@@ -61,11 +61,11 @@ public class DtActividadDeportiva {
 		this.costo = costo;
 	}
 
-	public LocalDateTime getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDateTime fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

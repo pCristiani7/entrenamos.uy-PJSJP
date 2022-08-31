@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
@@ -131,7 +131,7 @@ public class AltaActividadDeportiva extends JInternalFrame {
 	        String desc = this.textFieldDescripcion.getText();
 	        int duracion = Integer.parseInt(this.textFieldDuracion.getText());
 	        float costo = Float.parseFloat(this.textFieldCosto.getText());
-	        LocalDateTime fechaReg = LocalDateTime.now();
+	        LocalDate fechaReg = LocalDate.now();
 	        List<DtClase> dtClase = new ArrayList<>();
 			DtActividadDeportiva dtActDep = new DtActividadDeportiva(nombre,desc,duracion,costo,fechaReg,dtClase,instDep);
 			try {

@@ -19,6 +19,7 @@ import logica.Socio;
 //import datatypes.DtInstitucionDeportiva;
 //import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
+import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
 
@@ -29,7 +30,7 @@ public interface IControlador {
 	
 	public void AltaUsuario(DtUsuario dtUser) throws UsuarioRepetidoExcepcion;
 	public DtUsuario ConsultaUsuario(String user);
-	public void ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew);	
+	public boolean ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew);
 	
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
@@ -60,5 +61,6 @@ public interface IControlador {
 	public Socio getSocio(String nombre);
 	public List<DtRegistro> getRegistrosSocio(String nombre);
 	public DtSocio findSocio(String name);
+	public DtProfesor findProfesor(String name);
 	
 }

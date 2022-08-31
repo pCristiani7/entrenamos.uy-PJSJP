@@ -92,34 +92,30 @@ public class Controlador implements IControlador{
 
 	@Override
 	//Opcional
-	public void ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew) {
+	public boolean ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew) {
 		// TODO Auto-generated method stub
 		if(dtUser instanceof DtSocio) {
 			DtSocio dtSocio = (DtSocio) dtUser;
 			DtSocio dtSocioNew = (DtSocio) dtUserNew;
 			Socio s = ms.buscarSocio(dtSocio.getNickname());
-			s.setNickname(dtSocioNew.getNickname());
 			s.setNombre(dtSocioNew.getNombre());
 			s.setApellido(dtSocioNew.getApellido());
-			s.setEmail(dtSocioNew.getEmail());
 			s.setFecha(dtSocioNew.getFechaNac());
+			return true;
 			
 		}else if(dtUser instanceof DtProfesor) {
 			DtProfesor dtProf = (DtProfesor) dtUser;
 			DtProfesor dtProfNew = (DtProfesor) dtUserNew;
 			Profesor p = mp.buscarProfesor(dtProf.getNickname());
-			p.setNickname(dtProfNew.getNickname());
 			p.setNombre(dtProfNew.getNombre());
 			p.setApellido(dtProfNew.getApellido());
-			p.setEmail(dtProfNew.getEmail());
 			p.setFecha(dtProfNew.getFechaNac());
-			p.setDescripcion(dtProfNew.getBiografia());
+			p.setDescripcion(dtProfNew.getDescripcion());
 			p.setBiografia(dtProfNew.getBiografia());
 			p.setSitioWeb(dtProfNew.getSitioweb());
-			InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtProfNew.getInstitucionDeportiva());
-			p.setInstitucionDeportiva(ID);	
-			
+			return true;	
 		}
+		return false;
 	}
 	
 	//-------------------Casos de uso Institucion Deportiva------------------- 
@@ -403,6 +399,12 @@ public class Controlador implements IControlador{
 		}	
 		DtSocio dtSocio = new DtSocio(s.getNickname(),s.getNombre(),s.getApellido(),s.getEmail(),s.getFecha(),dtRegistros);
 		return dtSocio;
+	}
+	
+	public DtProfesor findProfesor(String name) {
+		Profesor p = mp.buscarProfesor(name);
+		DtProfesor dtProf = new DtProfesor(p.getNickname(),p.getNombre(),p.getApellido(),p.getEmail(),p.getFecha(),p.getDescripcion(),p.getBiografia(),p.getSitioWeb(),p.getInstitucionDeportiva().toString());
+		return dtProf;
 	}
 
 	@Override
