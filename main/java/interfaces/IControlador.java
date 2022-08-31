@@ -33,11 +33,11 @@ public interface IControlador {
 	
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
-	public void ModificarActividadDeportiva();
+	public void ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew);
 	public ActividadDeportiva getAct(String nombre);
 	
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;
-	public void ModificarInstitucionDeportiva();
+	public void ModificarInstitucionDeportiva(String instDep, DtInstitucionDeportiva dtInstDepNew);
 	public InstitucionDeportiva getInstitucion(String nombre);
 	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase

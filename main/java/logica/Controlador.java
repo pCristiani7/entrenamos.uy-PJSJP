@@ -136,8 +136,13 @@ public class Controlador implements IControlador{
 	}
 	
 	//Opcional
-	public void ModificarInstitucionDeportiva() {
-		
+	public void ModificarInstitucionDeportiva(String instDep, DtInstitucionDeportiva dtInstDepNew) {
+		if(mid.existeNickname(instDep)) {
+			InstitucionDeportiva id = mid.buscarInstitucionDeportiva(instDep);
+			id.setNombre(dtInstDepNew.getNombre());
+			id.setDescripcion(dtInstDepNew.getDescripcion());
+			id.setUrl(dtInstDepNew.getUrl());
+		}
 	}
 	
 	//-------------------Casos de uso Actividad Deportiva------------------- 
@@ -178,10 +183,16 @@ public class Controlador implements IControlador{
 		return dtActDep;	
 	}
 	
-	public void ModificarActividadDeportiva() {
-		
+	public void ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew) {
+        if(mad.existeNombre(actDep)) {
+            ActividadDeportiva ad = mad.buscarActividadDeportiva(actDep);
+            ad.setNombre(dtActDepNew.getNombre());
+            ad.setDescripcion(dtActDepNew.getDescripcion());
+            ad.setDuracion(dtActDepNew.getDuracion());
+            ad.setCosto(dtActDepNew.getCosto());
+            ad.setFecha(dtActDepNew.getFecha());
+            }
 	}
-	
 	//-------------------Casos de uso Clase------------------- 
 	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID){
@@ -399,5 +410,6 @@ public class Controlador implements IControlador{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 }
 
