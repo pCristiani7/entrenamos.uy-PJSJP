@@ -283,7 +283,7 @@ public class RegistroAClase extends JInternalFrame {
 	
 	protected void infoClase(ActionEvent arg0) {
 		String claseSelected = comboBoxClases.getSelectedItem().toString();
-		DtClase dtC = iCon.findClase(claseSelected);
+		DtClase dtC = iCon.getDatosClase(claseSelected);
 		DtSocio dtS = iCon.findSocio(comboBoxSocios.getSelectedItem().toString());
 		List <DtRegistro> registros = dtC.getRegistros();
 		String data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + 

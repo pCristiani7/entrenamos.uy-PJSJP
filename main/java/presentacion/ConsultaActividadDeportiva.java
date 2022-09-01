@@ -261,7 +261,7 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 	
 	protected void consultarClase(ActionEvent arg0) {
 		String clase = this.comboBoxClases.getSelectedItem().toString();
-		DtClase dtC = iCon.findClase(clase);
+		DtClase dtC = iCon.getDatosClase(clase);
 		String data_x = null;
 		data_x = "Nombre: " + dtC.getNombre() + "\n" +
 				"URL: " + dtC.getUrl() + "\n" +

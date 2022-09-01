@@ -57,4 +57,8 @@ public class ManejadorInstitucionDeportiva {
 		}
 		return aRetornar;
 	}
+	
+	public List<InstitucionDeportiva> getInstituciones(){
+		return this.institucionesDeportivas;
+	}
 }

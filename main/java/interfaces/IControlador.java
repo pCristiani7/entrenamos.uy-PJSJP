@@ -35,6 +35,7 @@ public interface IControlador {
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
 	public void ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew);
+	public void RankingActividadesDeportivas();
 	public ActividadDeportiva getAct(String nombre);
 	
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;
@@ -45,10 +46,9 @@ public interface IControlador {
 	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion;
 	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion;
 	public DtClase getDatosClase(String nomClase);
-	public void ConsultaDictadoClase();
+	public DtClase ConsultaDictadoClase(String nomClase);
 	public void RankingDictadosClases();
 	public String[] listarClasesActividadDeportiva(String ActDep);
-	public DtClase findClase(String clase);
 	
 	
 	public String[] listarInstituciones();
