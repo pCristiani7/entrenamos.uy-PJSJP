@@ -35,7 +35,7 @@ public interface IControlador {
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
 	public boolean ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew);
-	public void RankingActividadesDeportivas();
+	public List<DtActividadDeportiva> RankingActividadesDeportivas();
 	public ActividadDeportiva getAct(String nombre);
 	
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;

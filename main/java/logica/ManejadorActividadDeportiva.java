@@ -47,4 +47,12 @@ public class ManejadorActividadDeportiva {
 		actividadesDeportivas.remove(actDep);
 	}
 	
+	public List<ActividadDeportiva> getActividades(){
+		return this.actividadesDeportivas;
+	}
+	
+	public Boolean compareActividades(ActividadDeportiva a, ActividadDeportiva b) {
+		return a.getCantClases() < b.getCantClases();
+	}
+	
 }

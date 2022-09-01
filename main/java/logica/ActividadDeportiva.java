@@ -11,6 +11,7 @@ public class ActividadDeportiva {
 	private float costo;
 	private LocalDate fecha;
 	private List<Clase> clases = new ArrayList<>();
+	private int cantClases;
 	private InstitucionDeportiva institucionDeportiva;
 	
 	public ActividadDeportiva() {
@@ -26,6 +27,7 @@ public class ActividadDeportiva {
 		this.costo = costo;
 		this.fecha = fecha;
 		this.clases = clases;
+		this.cantClases = clases.size();
 		this.institucionDeportiva = institucionDeportiva;
 	}
 
@@ -71,6 +73,14 @@ public class ActividadDeportiva {
 
 	public List<Clase> getClases() {
 		return clases;
+	}
+	
+	public int getCantClases() {
+		return cantClases;
+	}
+	
+	public void setCantClases() {
+		this.cantClases = clases.size();
 	}
 
 	public void setClases(List<Clase> clases) {

@@ -191,30 +191,31 @@ public class Controlador implements IControlador{
         return false;
 	}
 	
-	
-	public void RankingActividadesDeportivas() {/*
-		List<DtActividadDeportiva> listDtAct = new ArrayList<>();				//Creo la lista de DtActDep que voy a devolver
-		List<InstitucionDeportiva> listInstDep = mid.getInstituciones();		//Obtengo la lista de InstDep del sistema
-		ActividadDeportiva topActDep = null;								//Declaro una actDep (inicializada en null) para llevar control de la ActDep con mayor cantidad de clases en todo el sistema
-		int maxCountClases = 0, classCounter = 0;							//variables de control
-		for(InstitucionDeportiva id: listInstDep) {							//Recorro todas las instituciones dep. del sistema
-			List<ActividadDeportiva> listAct = id.getActividadesDeportivas();	//Obtengo las actDep vinculadas a la instDep en la que estoy parado
-			for(ActividadDeportiva a: listAct) {								//Por cada ActDep, llevo un contador de cuantas clases tiene vinculadas
-				classCounter = 0;
-				for(Clase c: a.getClases()) {								//Checkeo cuantas clases tiene la actDep
-					classCounter++;
-				}
-				if(classCounter > maxCountClases) {							//Si la cantidad de clases es mayor a la maxima, se reemplaza y remplazo la actual topActDep
-					maxCountClases = classCounter;
-					topActDep = a;
-				}														//FALTA:	Hallar una forma de descartar la actDep al afirmar que es la mayor actual del sistema
-																		
-			}
-		}
-		List<DtClase> listDtClase = new ArrayList<>();	//Lista de DtClase vacia para poder crear el DtActDep (no lo preciso retornar en realidad)
-		DtActividadDeportiva dtActDep = new DtActividadDeportiva(topActDep.getNombre(),topActDep.getDescripcion(),topActDep.getDuracion(),topActDep.getCosto(),topActDep.getFecha(),listDtClase,topActDep.getInstitucionDeportiva().getNombre());
-		listAct.remove(topActDep);
-		listDtAct.add(dtActDep); */
+	public List<DtActividadDeportiva> RankingActividadesDeportivas() {
+		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
+		List<ActividadDeportiva> listAct = mad.getActividades();
+		List<DtClase> listDtClase = new ArrayList<>();
+		int pos;			//Selection sort
+        ActividadDeportiva temp;
+        for (int i = 0; i < listAct.size(); i++) { 	
+            pos = i; 
+            for (int j = i+1; j < listAct.size(); j++) {
+            	ActividadDeportiva actDep1 = listAct.get(j);
+            	ActividadDeportiva actDep2 = listAct.get(pos);
+                if (mad.compareActividades(actDep1,actDep2)) {
+                    pos = j;
+                }
+            }
+
+            temp = listAct.get(pos);
+            listAct.set(pos, listAct.get(i)); 
+            listAct.set(i, temp); 
+        } 
+        for(ActividadDeportiva ad: listAct) {
+        	DtActividadDeportiva dtActDep = new DtActividadDeportiva(ad.getNombre(),ad.getDescripcion(),ad.getDuracion(),ad.getCosto(),ad.getFecha(),listDtClase,ad.getInstitucionDeportiva().getNombre());
+        	listDtAct.add(dtActDep);
+        }
+        return listDtAct;
 	}
 	
 	//-------------------Casos de uso Clase------------------- 
