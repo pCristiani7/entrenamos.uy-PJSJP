@@ -34,12 +34,12 @@ public interface IControlador {
 	
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);
-	public void ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew);
+	public boolean ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew);
 	public void RankingActividadesDeportivas();
 	public ActividadDeportiva getAct(String nombre);
 	
 	public void AltaInsitucionDeportiva(DtInstitucionDeportiva dtInstDep) throws InstitucionDeportivaRepetidaExcepcion;
-	public void ModificarInstitucionDeportiva(String instDep, DtInstitucionDeportiva dtInstDepNew);
+	public boolean ModificarInstitucionDeportiva(String instDep, DtInstitucionDeportiva dtInstDepNew);
 	public InstitucionDeportiva getInstitucion(String nombre);
 	
 	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
@@ -62,5 +62,7 @@ public interface IControlador {
 	public List<DtRegistro> getRegistrosSocio(String nombre);
 	public DtSocio findSocio(String name);
 	public DtProfesor findProfesor(String name);
+	public String[] listarActividades();
+	public DtInstitucionDeportiva getInstitucionDt(String nombre);
 	
 }

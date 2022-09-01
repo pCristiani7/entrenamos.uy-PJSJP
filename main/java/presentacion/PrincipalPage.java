@@ -31,6 +31,8 @@ public class PrincipalPage {
 	private AltaDictadoDeClase altaDictadoDeClaseInternalFrame;
 	private RegistroAClase registroAClaseInternalFrame;
 	private ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
+	private ModificarActividadDeportiva modificarDatosActividadInternalFrame;
+	private ModificarInstitucionDeportiva modificarDatosInstitucionInternalFrame;
 	private final JLabel lblNewLabel = new JLabel("");
 
 	/**
@@ -124,6 +126,20 @@ public class PrincipalPage {
 		modificarDatosUsuarioInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
 		consultaActividadDeportivaInternalFrame.setVisible(false);
 		frmEntrenamosUy.getContentPane().add(modificarDatosUsuarioInternalFrame);
+		
+		modificarDatosActividadInternalFrame = new ModificarActividadDeportiva(iCon);
+		modificarDatosActividadInternalFrame.setMaximizable(false);
+		jInternalFrameSize = modificarDatosActividadInternalFrame.getSize();
+		modificarDatosActividadInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		modificarDatosActividadInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(modificarDatosActividadInternalFrame);
+		
+		modificarDatosInstitucionInternalFrame = new ModificarInstitucionDeportiva(iCon);
+		modificarDatosInstitucionInternalFrame.setMaximizable(false);
+		jInternalFrameSize = modificarDatosInstitucionInternalFrame.getSize();
+		modificarDatosInstitucionInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		modificarDatosInstitucionInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(modificarDatosInstitucionInternalFrame);
 		
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setIcon(new ImageIcon("C:\\\\Users\\\\59894\\\\eclipse-workspace\\\\entrenamos.uy/entrenamos.uy.png"));
@@ -302,6 +318,32 @@ public class PrincipalPage {
 		});
 		mntmNewMenuItem_8.setFont(new Font("Dialog", Font.BOLD, 12));
 		mnNewMenu_2.add(mntmNewMenuItem_8);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Modificar Actividad Deportiva");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(modificarDatosActividadInternalFrame.inicializarComboBoxActividadesAsociadas()) {
+					modificarDatosActividadInternalFrame.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Modificar Actividad",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Modificar Institucion Deportiva");
+		mntmNewMenuItem_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(modificarDatosInstitucionInternalFrame.inicializarComboBoxInstituciones()) {
+					modificarDatosInstitucionInternalFrame.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Modificar Institucion",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_10);
+		mnNewMenu_2.add(mntmNewMenuItem_9);
 		
 		JMenu mnNewMenu_3 = new JMenu("Datos");
 		mnNewMenu_3.setForeground(Color.BLACK);

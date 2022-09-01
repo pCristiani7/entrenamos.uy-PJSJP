@@ -31,6 +31,14 @@ public class ManejadorActividadDeportiva {
 		return encontre;
 	}
 	
+	public ArrayList<String> obtenerActividades(){
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(ActividadDeportiva a: actividadesDeportivas) {
+			aRetornar.add(a.getNombre());
+		}
+		return aRetornar;
+	}
+	
 	public void addActividadDeportiva(ActividadDeportiva actDep) {
 		actividadesDeportivas.add(actDep);
 	}

@@ -132,13 +132,14 @@ public class Controlador implements IControlador{
 	}
 	
 	//Opcional
-	public void ModificarInstitucionDeportiva(String instDep, DtInstitucionDeportiva dtInstDepNew) {
+	public boolean ModificarInstitucionDeportiva(String instDep, DtInstitucionDeportiva dtInstDepNew) {
 		if(mid.existeNickname(instDep)) {
 			InstitucionDeportiva id = mid.buscarInstitucionDeportiva(instDep);
-			id.setNombre(dtInstDepNew.getNombre());
 			id.setDescripcion(dtInstDepNew.getDescripcion());
 			id.setUrl(dtInstDepNew.getUrl());
+			return true;
 		}
+		return false;
 	}
 	
 	//-------------------Casos de uso Actividad Deportiva------------------- 
@@ -179,15 +180,15 @@ public class Controlador implements IControlador{
 		return dtActDep;	
 	}
 	
-	public void ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew) {
+	public boolean ModificarActividadDeportiva(String actDep, DtActividadDeportiva dtActDepNew) {
         if(mad.existeNombre(actDep)) {
             ActividadDeportiva ad = mad.buscarActividadDeportiva(actDep);
-            ad.setNombre(dtActDepNew.getNombre());
             ad.setDescripcion(dtActDepNew.getDescripcion());
             ad.setDuracion(dtActDepNew.getDuracion());
             ad.setCosto(dtActDepNew.getCosto());
-            ad.setFecha(dtActDepNew.getFecha());
+            	return true;
             }
+        return false;
 	}
 	
 	
@@ -218,9 +219,9 @@ public class Controlador implements IControlador{
 	
 	//-------------------Casos de uso Clase------------------- 
 	
-	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID){
+	public List<DtActividadDeportiva> listarActividades(String nombre){
 		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
-		InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(dtID.getNombre());
+		InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(nombre);
 		List<ActividadDeportiva> listAct = ID.getActividadesDeportivas();
 		for(ActividadDeportiva a: listAct) {
 			List<DtClase> listDtClase = new ArrayList<>();
@@ -392,6 +393,20 @@ public class Controlador implements IControlador{
 		return instDep;
 	}
 	
+	public DtInstitucionDeportiva getInstitucionDt(String nombre){
+		InstitucionDeportiva instDep = mid.buscarInstitucionDeportiva(nombre);
+		List<DtActividadDeportiva> actividades = listarActividades(nombre);
+		
+		List<DtProfesor> profesores = new ArrayList<>();
+		List<Profesor> listProf = instDep.getProfesores();
+		for(Profesor p: listProf) {
+			DtProfesor dtProf = new DtProfesor(p.getNickname(),p.getNombre(),p.getApellido(),p.getEmail(),p.getFecha(),p.getDescripcion(),p.getBiografia(),p.getSitioWeb(),p.getInstitucionDeportiva().getNombre());
+			profesores.add(dtProf);
+		}	
+		DtInstitucionDeportiva dtInst = new DtInstitucionDeportiva(instDep.getNombre(),instDep.getDescripcion(),instDep.getUrl(),actividades, profesores);
+		return dtInst;
+	}
+	
 	public ActividadDeportiva getAct(String nombre){
 		ManejadorActividadDeportiva mAct = ManejadorActividadDeportiva.getInstancia();
 		ActividadDeportiva actDep = mAct.buscarActividadDeportiva(nombre);
@@ -425,9 +440,28 @@ public class Controlador implements IControlador{
 		DtProfesor dtProf = new DtProfesor(p.getNickname(),p.getNombre(),p.getApellido(),p.getEmail(),p.getFecha(),p.getDescripcion(),p.getBiografia(),p.getSitioWeb(),p.getInstitucionDeportiva().toString());
 		return dtProf;
 	}
+	
+	public String[] listarActividades() {
+		ArrayList<String> acts;
+		acts = mad.obtenerActividades();
+		String[] acts_ret = new String[acts.size()];
+        int i=0;
+        for(String s:acts) {
+        	acts_ret[i]=s;
+        	i++;
+        }
+        return acts_ret;
+	
+	}
 
 	@Override
 	public List<DtRegistro> getRegistrosSocio(String nombre) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
