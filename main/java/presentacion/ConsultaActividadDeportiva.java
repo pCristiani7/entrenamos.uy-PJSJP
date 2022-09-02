@@ -5,11 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
-import logica.InstitucionDeportiva;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -20,7 +18,6 @@ import javax.swing.JTextPane;
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
-import datatypes.DtProfesor;
 
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
@@ -175,11 +172,8 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 	
 	public boolean inicializarComboBoxActividadesAsociadas() {
 		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
-		InstitucionDeportiva iDep = iCon.getInstitucion(nombre);
-		List<DtActividadDeportiva> dtActDep = new ArrayList<>();
-		List<DtProfesor> dtProf = new ArrayList<>();
-		DtInstitucionDeportiva dtInstDep = new DtInstitucionDeportiva(iDep.getNombre(),iDep.getDescripcion(),iDep.getUrl(),dtActDep,dtProf);
-		List<DtActividadDeportiva> dtAct = iCon.listarActividades(dtInstDep);
+		DtInstitucionDeportiva dtInst = iCon.getInstitucionDt(nombre);
+		List<DtActividadDeportiva> dtAct = dtInst.getActividadesDeportivas();
 		
 		String[] dtActNombre = new String[dtAct.size()];
 		int i=0;
@@ -214,12 +208,8 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 	}
 	
 	public boolean inicializarComboBoxActividades(String n) {
-		InstitucionDeportiva iDep = iCon.getInstitucion(n);
-		List<DtActividadDeportiva> dtActDep = new ArrayList<>();
-		List<DtProfesor> dtProf = new ArrayList<>();
-		DtInstitucionDeportiva dtInstDep = new DtInstitucionDeportiva(iDep.getNombre(),iDep.getDescripcion(),iDep.getUrl(),dtActDep,dtProf);
-		List<DtActividadDeportiva> dtAct = iCon.listarActividades(dtInstDep);
-		
+		DtInstitucionDeportiva dtInst = iCon.getInstitucionDt(n);
+		List<DtActividadDeportiva> dtAct = dtInst.getActividadesDeportivas();
 		String[] dtActNombre = new String[dtAct.size()];
 		int i=0;
 		for(DtActividadDeportiva a: dtAct) {

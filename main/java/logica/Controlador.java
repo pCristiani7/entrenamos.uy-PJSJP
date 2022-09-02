@@ -192,8 +192,8 @@ public class Controlador implements IControlador{
 	}
 	
 	public List<DtActividadDeportiva> RankingActividadesDeportivas() {
-		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
 		List<ActividadDeportiva> listAct = mad.getActividades();
+		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
 		List<DtClase> listDtClase = new ArrayList<>();
 		int pos;			//Selection sort
         ActividadDeportiva temp;

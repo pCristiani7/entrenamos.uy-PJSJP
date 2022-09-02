@@ -5,14 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
-import logica.InstitucionDeportiva;
 import utilidad.Dating;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -26,7 +24,6 @@ import com.toedter.calendar.JDateChooser;
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
-import datatypes.DtProfesor;
 import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import excepciones.RegistroRepetidoExcepcion;
@@ -211,11 +208,8 @@ public class RegistroAClase extends JInternalFrame {
 	}
 	
 	public boolean inicializarComboBoxActividades(String n) {
-		InstitucionDeportiva iDep = iCon.getInstitucion(n);
-		List<DtActividadDeportiva> dtActDep = new ArrayList<>();
-		List<DtProfesor> dtProf = new ArrayList<>();
-		DtInstitucionDeportiva dtInstDep = new DtInstitucionDeportiva(iDep.getNombre(),iDep.getDescripcion(),iDep.getUrl(),dtActDep,dtProf);
-		List<DtActividadDeportiva> dtAct = iCon.listarActividades(dtInstDep);
+		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(n);
+		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
 		
 		String[] dtActNombre = new String[dtAct.size()];
 		int i=0;
@@ -234,11 +228,8 @@ public class RegistroAClase extends JInternalFrame {
 
 	public boolean inicializarComboBoxActividadesAsociadas() {
 		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
-		InstitucionDeportiva iDep = iCon.getInstitucion(nombre);
-		List<DtActividadDeportiva> dtActDep = new ArrayList<>();
-		List<DtProfesor> dtProf = new ArrayList<>();
-		DtInstitucionDeportiva dtInstDep = new DtInstitucionDeportiva(iDep.getNombre(),iDep.getDescripcion(),iDep.getUrl(),dtActDep,dtProf);
-		List<DtActividadDeportiva> dtAct = iCon.listarActividades(dtInstDep);
+		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(nombre);
+		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
 		
 		String[] dtActNombre = new String[dtAct.size()];
 		int i=0;

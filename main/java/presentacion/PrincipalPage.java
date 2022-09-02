@@ -33,6 +33,8 @@ public class PrincipalPage {
 	private ModificarDatosUsuario modificarDatosUsuarioInternalFrame;
 	private ModificarActividadDeportiva modificarDatosActividadInternalFrame;
 	private ModificarInstitucionDeportiva modificarDatosInstitucionInternalFrame;
+	private ConsultaDictadoClase consultaClaseInternalFrame;
+	private RankingActividades rankingActividadesInternalFrame;
 	private final JLabel lblNewLabel = new JLabel("");
 
 	/**
@@ -141,8 +143,22 @@ public class PrincipalPage {
 		modificarDatosInstitucionInternalFrame.setVisible(false);
 		frmEntrenamosUy.getContentPane().add(modificarDatosInstitucionInternalFrame);
 		
+		consultaClaseInternalFrame = new ConsultaDictadoClase(iCon);
+		consultaClaseInternalFrame.setMaximizable(false);
+		jInternalFrameSize = consultaClaseInternalFrame.getSize();
+		consultaClaseInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		consultaClaseInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(consultaClaseInternalFrame);
+		
+		rankingActividadesInternalFrame = new RankingActividades(iCon);
+		rankingActividadesInternalFrame.setMaximizable(false);
+		jInternalFrameSize = rankingActividadesInternalFrame.getSize();
+		rankingActividadesInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		rankingActividadesInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(rankingActividadesInternalFrame);
+		
 		lblNewLabel.setBackground(Color.WHITE);
-		lblNewLabel.setIcon(new ImageIcon("C:\\\\Users\\\\59894\\\\eclipse-workspace\\\\entrenamos.uy/entrenamos.uy.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Cristiani\\eclipse-workspace\\entrenamos.uy\\images\\entrenamos.uy.png"));
 		lblNewLabel.setBounds(31, 0, 1184, 710);
 		frmEntrenamosUy.getContentPane().add(lblNewLabel);
 	}
@@ -300,6 +316,48 @@ public class PrincipalPage {
 		mntmNewMenuItem_5.setForeground(Color.BLACK);
 		mnNewMenu_1.add(mntmNewMenuItem_5);
 		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Consulta Dictado de Clase");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(consultaClaseInternalFrame.inicializarComboBoxInstituciones()) {
+					if(consultaClaseInternalFrame.inicializarComboBoxActividadesAsociadas()) {
+						if(consultaClaseInternalFrame.inicializarComboBoxClases()) { 
+							consultaClaseInternalFrame.setVisible(true);
+							}else {
+							JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Clases en el sistema!", "Consulta Dictado de Clase",
+				                    JOptionPane.ERROR_MESSAGE);
+						}
+					}else {
+						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Consulta Dictado de Clase",
+			                    JOptionPane.ERROR_MESSAGE);
+					}
+				}else{
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Consulta Dictado de Clase",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_7);
+		
+		JMenu mnNewMenuRanking = new JMenu("Ranking");
+		mnNewMenuRanking.setForeground(Color.BLACK);
+		mnNewMenuRanking.setFont(new Font("Dialog", Font.BOLD, 12));
+		menuBar.add(mnNewMenuRanking);
+		
+		JMenuItem mntmNewMenuItem_8_1 = new JMenuItem("Ranking Clases");
+		mntmNewMenuItem_8_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		mnNewMenuRanking.add(mntmNewMenuItem_8_1);
+		
+		JMenuItem mntmNewMenuItem_10_1 = new JMenuItem("Ranking Actividades Deportivas");
+		mntmNewMenuItem_10_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rankingActividadesInternalFrame.chargeRanking();
+				rankingActividadesInternalFrame.setVisible(true);
+			}
+		});
+		mntmNewMenuItem_10_1.setFont(new Font("Dialog", Font.BOLD, 12));
+		mnNewMenuRanking.add(mntmNewMenuItem_10_1);
+		
 		JMenu mnNewMenu_2 = new JMenu("Modificar");
 		mnNewMenu_2.setForeground(Color.BLACK);
 		mnNewMenu_2.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -320,6 +378,7 @@ public class PrincipalPage {
 		mnNewMenu_2.add(mntmNewMenuItem_8);
 		
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Modificar Actividad Deportiva");
+		mntmNewMenuItem_9.setFont(new Font("Dialog", Font.BOLD, 12));
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(modificarDatosActividadInternalFrame.inicializarComboBoxActividadesAsociadas()) {
@@ -332,6 +391,7 @@ public class PrincipalPage {
 		});
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Modificar Institucion Deportiva");
+		mntmNewMenuItem_10.setFont(new Font("Dialog", Font.BOLD, 12));
 		mntmNewMenuItem_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(modificarDatosInstitucionInternalFrame.inicializarComboBoxInstituciones()) {
@@ -344,15 +404,5 @@ public class PrincipalPage {
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_10);
 		mnNewMenu_2.add(mntmNewMenuItem_9);
-		
-		JMenu mnNewMenu_3 = new JMenu("Datos");
-		mnNewMenu_3.setForeground(Color.BLACK);
-		mnNewMenu_3.setFont(new Font("Dialog", Font.BOLD, 12));
-		menuBar.add(mnNewMenu_3);
-		
-		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Cargar Pruebas");
-		mntmNewMenuItem_7.setFont(new Font("Dialog", Font.BOLD, 12));
-		mntmNewMenuItem_7.setForeground(Color.BLACK);
-		mnNewMenu_3.add(mntmNewMenuItem_7);
 	}
 }
