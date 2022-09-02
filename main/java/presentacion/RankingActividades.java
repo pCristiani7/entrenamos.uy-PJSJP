@@ -56,10 +56,18 @@ public class RankingActividades extends JInternalFrame {
 		getContentPane().add(textPane);
 		
 		JLabel lblNewLabel = new JLabel("RANKING ACTIVIDADES");
-		lblNewLabel.setFont(new Font("DialogInput", Font.BOLD | Font.ITALIC, 22));
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 22));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(247, 33, 295, 42);
 		getContentPane().add(lblNewLabel);
+	}
+	
+	public boolean thereSomething () {
+		if(!iCon.listarActividades().equals(null)) {
+			return false;
+		}else {
+			return true;
+		}
 	}
 	
 	public void chargeRanking() {

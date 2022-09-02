@@ -452,7 +452,18 @@ public class Controlador implements IControlador{
         	i++;
         }
         return acts_ret;
+	}
 	
+	public String[] listarClases() {
+		ArrayList<String> clases;
+		clases = mc.obtenerClases();
+		String[] clases_ret = new String[clases.size()];
+        int i=0;
+        for(String s:clases) {
+        	clases_ret[i]=s;
+        	i++;
+        }
+        return clases_ret;
 	}
 
 	@Override

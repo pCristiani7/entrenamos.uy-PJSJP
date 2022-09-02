@@ -64,5 +64,6 @@ public interface IControlador {
 	public DtProfesor findProfesor(String name);
 	public String[] listarActividades();
 	public DtInstitucionDeportiva getInstitucionDt(String nombre);
+	public String[] listarClases();
 	
 }

@@ -35,6 +35,7 @@ public class PrincipalPage {
 	private ModificarInstitucionDeportiva modificarDatosInstitucionInternalFrame;
 	private ConsultaDictadoClase consultaClaseInternalFrame;
 	private RankingActividades rankingActividadesInternalFrame;
+	private RankingClases rankingClasesInternalFrame;
 	private final JLabel lblNewLabel = new JLabel("");
 
 	/**
@@ -156,6 +157,15 @@ public class PrincipalPage {
 		rankingActividadesInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
 		rankingActividadesInternalFrame.setVisible(false);
 		frmEntrenamosUy.getContentPane().add(rankingActividadesInternalFrame);
+		
+		
+		rankingClasesInternalFrame = new RankingClases(iCon);
+		rankingClasesInternalFrame.setMaximizable(false);
+		jInternalFrameSize = rankingClasesInternalFrame.getSize();
+		rankingClasesInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2, (desktopSize.height - jInternalFrameSize.height)/6);
+		rankingClasesInternalFrame.setVisible(false);
+		frmEntrenamosUy.getContentPane().add(rankingClasesInternalFrame);
+		
 		
 		lblNewLabel.setBackground(Color.WHITE);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Cristiani\\eclipse-workspace\\entrenamos.uy\\images\\entrenamos.uy.png"));
@@ -345,14 +355,30 @@ public class PrincipalPage {
 		menuBar.add(mnNewMenuRanking);
 		
 		JMenuItem mntmNewMenuItem_8_1 = new JMenuItem("Ranking Clases");
+		mntmNewMenuItem_8_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(rankingClasesInternalFrame.thereSomething()) {
+					rankingClasesInternalFrame.chargeRanking();
+					rankingClasesInternalFrame.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Clases en el sistema!", "Ranking Clases",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		mntmNewMenuItem_8_1.setFont(new Font("Dialog", Font.BOLD, 12));
 		mnNewMenuRanking.add(mntmNewMenuItem_8_1);
 		
 		JMenuItem mntmNewMenuItem_10_1 = new JMenuItem("Ranking Actividades Deportivas");
 		mntmNewMenuItem_10_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rankingActividadesInternalFrame.chargeRanking();
-				rankingActividadesInternalFrame.setVisible(true);
+				if(rankingActividadesInternalFrame.thereSomething()) {
+					rankingActividadesInternalFrame.chargeRanking();
+					rankingActividadesInternalFrame.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Ranking Actividades",
+		                    JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		mntmNewMenuItem_10_1.setFont(new Font("Dialog", Font.BOLD, 12));
