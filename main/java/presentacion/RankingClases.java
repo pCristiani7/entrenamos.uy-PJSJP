@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.swing.JInternalFrame;
 
-import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import interfaces.IControlador;
 import javax.swing.JLabel;
@@ -64,15 +63,15 @@ public class RankingClases extends JInternalFrame {
 	}
 
 	public boolean thereSomething () {
-		if(!iCon.listarClases().equals(null)) {
+		if(iCon.listarClases().equals(null)) {
 			return false;
 		}else {
 			return true;
 		}
 	}
 	
-	public void chargeRanking() {/*
-		List<DtClase> dtClases;
+	public void chargeRanking() {
+		List<DtClase> dtClases = iCon.RankingDictadosClases();
 		String data = "";
 		for(DtClase a: dtClases) {
 			String nombre = a.getNombre();
@@ -82,6 +81,6 @@ public class RankingClases extends JInternalFrame {
 			int cantInscriptos = aux.getRegistros().size();
 			data = data + nombre + ": " + fecha + " | " + url + ", (Cantidad de Inscriptos: " + cantInscriptos + ")." +  "\n";
         }
-		textPane.setText(data);*/
+		textPane.setText(data);
 	}
 }

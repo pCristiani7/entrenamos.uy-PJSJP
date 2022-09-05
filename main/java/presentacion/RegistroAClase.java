@@ -49,6 +49,7 @@ public class RegistroAClase extends JInternalFrame {
 	private JComboBox<String> comboBoxSocios;
 	private JComboBox<String> comboBoxClases;
 	private JTextPane textPaneInfoClase;
+	private JLabel lblInformacion;
 	private JDateChooser dateChooser;
 
 	/**
@@ -127,9 +128,10 @@ public class RegistroAClase extends JInternalFrame {
 		
 		
 		textPaneInfoClase = new JTextPane();
-		textPaneInfoClase.setFont(new Font("Dialog", Font.BOLD, 15));
+		textPaneInfoClase.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textPaneInfoClase.setEditable(false);
 		textPaneInfoClase.setBounds(547, 207, 198, 252);
+		textPaneInfoClase.setVisible(false);
 		getContentPane().add(textPaneInfoClase);
 		
 		JButton btnVerClases = new JButton("Ver Informacion de Clase");
@@ -185,15 +187,22 @@ public class RegistroAClase extends JInternalFrame {
 		JButton btnCancelar = new JButton("Cancelar/Salir");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				try {
+					limpiarFormulario();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnCancelar.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnCancelar.setBounds(315, 407, 134, 52);
 		getContentPane().add(btnCancelar);
 		
-		JLabel lblInformacion = new JLabel("Informacion");
+		lblInformacion = new JLabel("Informacion");
 		lblInformacion.setFont(new Font("Dialog", Font.PLAIN, 22));
 		lblInformacion.setBounds(589, 162, 114, 34);
+		lblInformacion.setVisible(false);
 		getContentPane().add(lblInformacion);
 	}
 	
@@ -273,6 +282,8 @@ public class RegistroAClase extends JInternalFrame {
 	}
 	
 	protected void infoClase(ActionEvent arg0) {
+		lblInformacion.setVisible(true);
+		textPaneInfoClase.setVisible(true);
 		String claseSelected = comboBoxClases.getSelectedItem().toString();
 		DtClase dtC = iCon.getDatosClase(claseSelected);
 		DtSocio dtS = iCon.findSocio(comboBoxSocios.getSelectedItem().toString());
@@ -286,7 +297,7 @@ public class RegistroAClase extends JInternalFrame {
 		textPaneInfoClase.setText(data);
 	}
 	
-	private void limpiarFormulario() throws ParseException {
+	public void limpiarFormulario() throws ParseException {
 		Calendar ca = new GregorianCalendar();
 		String day = ca.get(Calendar.DAY_OF_MONTH) + "";
 		String month = ca.get(Calendar.MONTH) + 1 + "";
@@ -295,6 +306,8 @@ public class RegistroAClase extends JInternalFrame {
 		Date date = new SimpleDateFormat("yyyy-MM-dd").parse(dd);
 		dateChooser.setDate(date);
 		textPaneInfoClase.setText(" ");
+		textPaneInfoClase.setVisible(false);
+		lblInformacion.setVisible(false);
 		setVisible(false);
 	}
 	

@@ -25,6 +25,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.JTextField;
 
 public class ConsultaActividadDeportiva extends JInternalFrame {
 
@@ -40,7 +41,17 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 	private JTextPane textPaneInfoClase;
 	private JButton btnConsultarClase;
 	private JLabel lblClases;
-	private JTextPane textPaneInfoActividades;
+	private JTextField textFieldNombre;
+	private JTextField textFieldDescripcion;
+	private JTextField textFieldDuracion;
+	private JTextField textFieldCosto;
+	private JTextField textFieldFecha;
+	private JLabel lblNombre;
+	private JLabel lblDescripcion;
+	private JLabel lblDuracion;
+	private JLabel lblCosto;
+	private JLabel lblFecha;
+	
 
 	/**
 	 * Launch the application.
@@ -124,20 +135,14 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		btnConsultarActividad.setBounds(552, 59, 134, 52);
 		getContentPane().add(btnConsultarActividad);
 		
-		textPaneInfoActividades = new JTextPane();
-		textPaneInfoActividades.setFont(new Font("Dialog", Font.BOLD, 15));
-		textPaneInfoActividades.setBounds(32, 176, 268, 164);
-		textPaneInfoActividades.setVisible(false);
-		getContentPane().add(textPaneInfoActividades);
-		
 		lblClases = new JLabel("Clases");
 		lblClases.setFont(new Font("Dialog", Font.PLAIN, 22));
-		lblClases.setBounds(334, 176, 259, 34);
+		lblClases.setBounds(32, 390, 76, 34);
 		lblClases.setVisible(false);
 		getContentPane().add(lblClases);
 		
 		comboBoxClases = new JComboBox<String>();
-		comboBoxClases.setBounds(447, 176, 198, 34);
+		comboBoxClases.setBounds(299, 385, 198, 34);
 		comboBoxClases.setVisible(false);
 		getContentPane().add(comboBoxClases);
 		
@@ -148,15 +153,85 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 			}
 		});
 		btnConsultarClase.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnConsultarClase.setBounds(447, 221, 134, 52);
+		btnConsultarClase.setBounds(552, 384, 134, 34);
 		btnConsultarClase.setVisible(false);
 		getContentPane().add(btnConsultarClase);
 		
 		textPaneInfoClase = new JTextPane();
-		textPaneInfoClase.setFont(new Font("Dialog", Font.BOLD, 15));
-		textPaneInfoClase.setBounds(447, 306, 259, 145);
+		textPaneInfoClase.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textPaneInfoClase.setBounds(299, 425, 198, 134);
 		textPaneInfoClase.setVisible(false);
 		getContentPane().add(textPaneInfoClase);
+		
+		lblNombre = new JLabel("Nombre");
+		lblNombre.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblNombre.setBounds(32, 160, 259, 34);
+		lblNombre.setVisible(false);
+		getContentPane().add(lblNombre);
+		
+		lblDescripcion = new JLabel("Descripcion");
+		lblDescripcion.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblDescripcion.setBounds(32, 205, 259, 34);
+		lblDescripcion.setVisible(false);
+		getContentPane().add(lblDescripcion);
+		
+		lblDuracion = new JLabel("Duracion");
+		lblDuracion.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblDuracion.setBounds(32, 250, 259, 34);
+		lblDuracion.setVisible(false);
+		getContentPane().add(lblDuracion);
+		
+		lblCosto = new JLabel("Costo");
+		lblCosto.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblCosto.setBounds(32, 295, 259, 34);
+		lblCosto.setVisible(false);
+		getContentPane().add(lblCosto);
+		
+		lblFecha = new JLabel("Fecha");
+		lblFecha.setFont(new Font("Dialog", Font.PLAIN, 22));
+		lblFecha.setBounds(32, 340, 259, 34);
+		lblFecha.setVisible(false);
+		getContentPane().add(lblFecha);
+		
+		textFieldNombre = new JTextField();
+		textFieldNombre.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textFieldNombre.setEditable(false);
+		textFieldNombre.setBounds(299, 160, 198, 34);
+		getContentPane().add(textFieldNombre);
+		textFieldNombre.setVisible(false);
+		textFieldNombre.setColumns(10);
+		
+		textFieldDescripcion = new JTextField();
+		textFieldDescripcion.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textFieldDescripcion.setEditable(false);
+		textFieldDescripcion.setColumns(10);
+		textFieldDescripcion.setBounds(299, 205, 198, 34);
+		textFieldDescripcion.setVisible(false);
+		getContentPane().add(textFieldDescripcion);
+		
+		textFieldDuracion = new JTextField();
+		textFieldDuracion.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textFieldDuracion.setEditable(false);
+		textFieldDuracion.setColumns(10);
+		textFieldDuracion.setVisible(false);
+		textFieldDuracion.setBounds(299, 250, 198, 34);
+		getContentPane().add(textFieldDuracion);
+		
+		textFieldCosto = new JTextField();
+		textFieldCosto.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textFieldCosto.setEditable(false);
+		textFieldCosto.setColumns(10);
+		textFieldCosto.setBounds(299, 295, 198, 34);
+		textFieldCosto.setVisible(false);
+		getContentPane().add(textFieldCosto);
+		
+		textFieldFecha = new JTextField();
+		textFieldFecha.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textFieldFecha.setEditable(false);
+		textFieldFecha.setColumns(10);
+		textFieldFecha.setVisible(false);
+		textFieldFecha.setBounds(299, 340, 198, 34);
+		getContentPane().add(textFieldFecha);
 
 	}
 	
@@ -226,8 +301,16 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 	}
 	
 	public void limpiarScreenOnClosing() {
-		textPaneInfoActividades.setText(" ");
-		textPaneInfoActividades.setVisible(false);
+		this.textFieldNombre.setVisible(false);
+		this.textFieldDescripcion.setVisible(false);
+		this.textFieldDuracion.setVisible(false);
+		this.textFieldCosto.setVisible(false);
+		this.textFieldFecha.setVisible(false);
+		this.lblNombre.setVisible(false);
+		this.lblDescripcion.setVisible(false);
+		this.lblDuracion.setVisible(false);
+		this.lblCosto.setVisible(false);
+		this.lblFecha.setVisible(false);
 		btnConsultarClase.setVisible(false);
 		comboBoxClases.setVisible(false);
 		lblClases.setVisible(false);
@@ -238,15 +321,24 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 	protected void consultarActividad(ActionEvent arg0) {
 		String act = this.comboBoxActividadesAsociadas.getSelectedItem().toString();
 		DtActividadDeportiva dtAct = iCon.ConsultaActividadDeportiva(act);
-		String data = null;
-		data = "Nombre: " + dtAct.getNombre() + "\n" +
-				"Descripcion: " + dtAct.getDescripcion() + "\n" +
-				"Duracion: " + dtAct.getDuracion() + "\n" +
-				"Costo: " + "$" + dtAct.getCosto() + "\n" +
-				"Fecha: " + dtAct.getFecha().toString() + "\n";
+		this.textFieldNombre.setText(dtAct.getNombre());
+		this.textFieldDescripcion.setText(dtAct.getDescripcion());
+		String duracion = Integer.toString(dtAct.getDuracion());
+		this.textFieldDuracion.setText(duracion);
+		String costo = "$" + Float.toString(dtAct.getCosto());
+		this.textFieldCosto.setText(costo);
+		this.textFieldFecha.setText(dtAct.getFecha().toString());
 		
-		textPaneInfoActividades.setText(data);
-		textPaneInfoActividades.setVisible(true);
+		this.lblNombre.setVisible(true);
+		this.lblDescripcion.setVisible(true);
+		this.lblDuracion.setVisible(true);
+		this.lblCosto.setVisible(true);
+		this.lblFecha.setVisible(true);
+		this.textFieldNombre.setVisible(true);
+		this.textFieldDescripcion.setVisible(true);
+		this.textFieldDuracion.setVisible(true);
+		this.textFieldCosto.setVisible(true);
+		this.textFieldFecha.setVisible(true);
 	}
 	
 	protected void consultarClase(ActionEvent arg0) {
@@ -256,10 +348,9 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		data_x = "Nombre: " + dtC.getNombre() + "\n" +
 				"URL: " + dtC.getUrl() + "\n" +
 				"Profesor: " + dtC.getProfesor() + "\n" +
-				"Fecha: " + "$" + dtC.getFecha().toString() + "\n" +
+				"Fecha: " + dtC.getFecha().toString() + "\n" +
 				"Hora Inicio: " + dtC.getHoraInicio();
 		textPaneInfoClase.setText(data_x);
 		textPaneInfoClase.setVisible(true);
 	}
-
 }

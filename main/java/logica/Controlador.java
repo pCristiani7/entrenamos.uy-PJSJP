@@ -263,7 +263,7 @@ public class Controlador implements IControlador{
 			List<Registro> registros = socio.getRegistros();
 			boolean existeReg = false;
 			for(Registro r: registros) {
-				if(r.getClase().getNombre() == clase.getNombre() && r.getFecha().equals(fecha) && r.getSocio().getNickname() == socio.getNickname()) {
+				if(r.getClase().getNombre() == clase.getNombre() && r.getSocio().getNickname() == socio.getNickname()) {
 					existeReg = true;
 				}
 			}

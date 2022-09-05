@@ -9,6 +9,8 @@ import java.awt.Font;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.SwingConstants;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 import datatypes.DtClase;
 import datatypes.DtProfesor;
@@ -72,6 +74,13 @@ public class ConsultaUsuario extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public ConsultaUsuario(IControlador iCon) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarScreenOnClosing();
+			}
+		});
+		
 		setTitle("Consulta Usuario");
 		setClosable(true);
 		this.iCon = iCon;
@@ -85,6 +94,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabel);
 		
 		comboBoxUsuarios = new JComboBox<String>();
+		comboBoxUsuarios.setFont(new Font("Dialog", Font.PLAIN, 12));
 		comboBoxUsuarios.setBounds(20, 138, 229, 36);
 		getContentPane().add(comboBoxUsuarios);
 
@@ -95,7 +105,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabelNickname);
 		
 		textFieldNickname = new JTextField();
-		textFieldNickname.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textFieldNickname.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textFieldNickname.setEditable(false);
 		textFieldNickname.setColumns(10);
 		textFieldNickname.setBounds(511, 48, 198, 34);
@@ -109,7 +119,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabelNombre);
 		
 		textFieldNombre = new JTextField();
-		textFieldNombre.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textFieldNombre.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textFieldNombre.setEditable(false);
 		textFieldNombre.setColumns(10);
 		textFieldNombre.setBounds(511, 93, 198, 34);
@@ -123,7 +133,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabelApellido);
 		
 		textFieldApellido = new JTextField();
-		textFieldApellido.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textFieldApellido.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textFieldApellido.setEditable(false);
 		textFieldApellido.setColumns(10);
 		textFieldApellido.setBounds(511, 138, 198, 34);
@@ -137,7 +147,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabelEmail);
 		
 		textFieldEmail = new JTextField();
-		textFieldEmail.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textFieldEmail.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textFieldEmail.setEditable(false);
 		textFieldEmail.setColumns(10);
 		textFieldEmail.setBounds(511, 183, 198, 34);
@@ -151,7 +161,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblNewLabelFechaNac);
 		
 		textFieldFechaNac = new JTextField();
-		textFieldFechaNac.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textFieldFechaNac.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textFieldFechaNac.setEditable(false);
 		textFieldFechaNac.setColumns(10);
 		textFieldFechaNac.setBounds(511, 232, 198, 34);
@@ -172,7 +182,7 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(lblRegistroaClases);
 		
 		comboBoxClasesDictadas = new JComboBox<String>();
-		comboBoxClasesDictadas.setFont(new Font("Dialog", Font.PLAIN, 15));
+		comboBoxClasesDictadas.setFont(new Font("Dialog", Font.PLAIN, 12));
 		comboBoxClasesDictadas.setBounds(289, 340, 174, 41);
 		comboBoxClasesDictadas.setVisible(false);
 		getContentPane().add(comboBoxClasesDictadas);
@@ -266,17 +276,17 @@ public class ConsultaUsuario extends JInternalFrame {
 		getContentPane().add(btnConsultarDependsDictado);
 		
 		textPaneDataSocio = new JTextPane();
-		textPaneDataSocio.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textPaneDataSocio.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textPaneDataSocio.setEditable(false);
 		textPaneDataSocio.setVisible(false);
-		textPaneDataSocio.setBounds(289, 289, 198, 244);
+		textPaneDataSocio.setBounds(289, 340, 198, 193);
 		getContentPane().add(textPaneDataSocio);
 		
 		textPaneDataProfesor = new JTextPane();
-		textPaneDataProfesor.setFont(new Font("Dialog", Font.PLAIN, 15));
+		textPaneDataProfesor.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textPaneDataProfesor.setEditable(false);
 		textPaneDataProfesor.setVisible(false);
-		textPaneDataProfesor.setBounds(511, 289, 198, 244);
+		textPaneDataProfesor.setBounds(511, 340, 198, 193);
 		getContentPane().add(textPaneDataProfesor);
 		
 
@@ -352,6 +362,33 @@ public class ConsultaUsuario extends JInternalFrame {
 			comboBoxRegistroClases.setModel(modelUsr);
 			return true;
 		}
+	}
+	
+	public void limpiarScreenOnClosing() {
+		this.textFieldNickname.setVisible(false);
+		this.textFieldNombre.setVisible(false);
+		this.textFieldApellido.setVisible(false);
+		this.textFieldEmail.setVisible(false);
+		this.textFieldFechaNac.setVisible(false);
+		this.lblNewLabelNickname.setVisible(false);
+		this.lblNewLabelNombre.setVisible(false);
+		this.lblNewLabelFechaNac.setVisible(false);
+		this.lblNewLabelApellido.setVisible(false);
+		this.lblNewLabelEmail.setVisible(false);
+		this.comboBoxRegistroClases.setVisible(false);
+		this.lblRegistroaClases.setVisible(false);
+		this.btnConsultarDependsRegistro.setVisible(false);
+		this.lblNewLabelNickname.setVisible(false);
+		this.lblNewLabelNombre.setVisible(false);
+		this.lblNewLabelApellido.setVisible(false);
+		this.lblNewLabelEmail.setVisible(false);
+		this.lblNewLabelFechaNac.setVisible(false);
+		this.btnConsultarDependsDictado.setVisible(false);
+		this.comboBoxClasesDictadas.setVisible(false);
+		this.lblClasesDictadas.setVisible(false);
+		this.btnConsultarDependsDictado.setVisible(false);
+		this.textPaneDataProfesor.setVisible(false);
+		this.textPaneDataSocio.setVisible(false);
 	}
 	
 	public boolean inicializarComboBoxClasesDictadas() {
