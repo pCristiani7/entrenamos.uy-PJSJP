@@ -30,5 +30,5 @@ también una aplicación especial disponible para los administradores de la pl
 servirá para tareas de gestión en general.
 
 Tecnologias usadas:
- *      Java
+ *      Java, Swing, Hibernate
  *      HTML, CSS
