@@ -2,6 +2,7 @@ package logica;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
@@ -215,6 +216,7 @@ public class Controlador implements IControlador{
         	DtActividadDeportiva dtActDep = new DtActividadDeportiva(ad.getNombre(),ad.getDescripcion(),ad.getDuracion(),ad.getCosto(),ad.getFecha(),listDtClase,ad.getInstitucionDeportiva().getNombre());
         	listDtAct.add(dtActDep);
         }
+        Collections.reverse(listDtAct);
         return listDtAct;
 	}
 	
@@ -320,6 +322,7 @@ public class Controlador implements IControlador{
         	DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(),listDtReg,c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNombre());
         	listDtClase.add(dtClase);
         }
+        Collections.reverse(listDtClase);
         return listDtClase;
 	}
 	
