@@ -296,8 +296,31 @@ public class Controlador implements IControlador{
 		return dtClase;
 	}
 	
-	public void RankingDictadosClases(){
-		
+	public List<DtClase> RankingDictadosClases(){
+		List<DtClase> listDtClase = new ArrayList<>();
+		List<Clase> listClase = mc.getClases();
+		int pos;			//Selection sort
+		Clase temp;
+        for (int i = 0; i < listClase.size(); i++) { 	
+            pos = i; 
+            for (int j = i+1; j < listClase.size(); j++) {
+            	Clase clase1 = listClase.get(j);
+            	Clase clase2 = listClase.get(pos);
+                if (mc.compareClases(clase1,clase2)) {
+                    pos = j;
+                }
+            }
+
+            temp = listClase.get(pos);
+            listClase.set(pos, listClase.get(i)); 
+            listClase.set(i, temp); 
+        } 
+        for(Clase c: listClase) {
+        	List<DtRegistro> listDtReg = new ArrayList<>();
+        	DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(),listDtReg,c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNombre());
+        	listDtClase.add(dtClase);
+        }
+        return listDtClase;
 	}
 	
 	public String[] listarClasesActividadDeportiva(String actDep) {

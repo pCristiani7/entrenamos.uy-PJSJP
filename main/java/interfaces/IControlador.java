@@ -47,7 +47,7 @@ public interface IControlador {
 	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion;
 	public DtClase getDatosClase(String nomClase);
 	public DtClase ConsultaDictadoClase(String nomClase);
-	public void RankingDictadosClases();
+	public List<DtClase> RankingDictadosClases();
 	public String[] listarClasesActividadDeportiva(String ActDep);
 	
 	

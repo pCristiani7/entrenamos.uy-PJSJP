@@ -39,4 +39,12 @@ public class ManejadorClase {
 		clases.remove(c);
 	}
 	
+	public List<Clase> getClases(){
+		return this.clases;
+	}
+	
+	public Boolean compareClases(Clase a, Clase b) {
+		return a.getRegistros().size() < b.getRegistros().size();
+	}
+	
 }
