@@ -31,6 +31,14 @@ public class ManejadorClase {
 		return existe;
 	}
 	
+	public ArrayList<String> obtenerClases(){
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(Clase a: clases) {
+			aRetornar.add(a.getNombre());
+		}
+		return aRetornar;
+	}
+	
 	public void addClase(Clase c) {
 		clases.add(c);
 	}

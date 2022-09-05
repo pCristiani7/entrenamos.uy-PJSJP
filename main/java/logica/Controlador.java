@@ -192,8 +192,8 @@ public class Controlador implements IControlador{
 	}
 	
 	public List<DtActividadDeportiva> RankingActividadesDeportivas() {
-		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
 		List<ActividadDeportiva> listAct = mad.getActividades();
+		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
 		List<DtClase> listDtClase = new ArrayList<>();
 		int pos;			//Selection sort
         ActividadDeportiva temp;
@@ -475,7 +475,18 @@ public class Controlador implements IControlador{
         	i++;
         }
         return acts_ret;
+	}
 	
+	public String[] listarClases() {
+		ArrayList<String> clases;
+		clases = mc.obtenerClases();
+		String[] clases_ret = new String[clases.size()];
+        int i=0;
+        for(String s:clases) {
+        	clases_ret[i]=s;
+        	i++;
+        }
+        return clases_ret;
 	}
 
 	@Override

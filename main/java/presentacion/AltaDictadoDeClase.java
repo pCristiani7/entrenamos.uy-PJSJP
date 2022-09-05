@@ -5,9 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
-import logica.ActividadDeportiva;
-import logica.InstitucionDeportiva;
-import logica.Profesor;
 import utilidad.Dating;
 
 import javax.swing.JLabel;
@@ -217,11 +214,8 @@ public class AltaDictadoDeClase extends JInternalFrame {
 	
 	public boolean inicializarComboBoxActividadesAsociadas() {
 		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
-		InstitucionDeportiva iDep = iCon.getInstitucion(nombre);
-		List<DtActividadDeportiva> dtActDep = new ArrayList<>();
-		List<DtProfesor> dtProf = new ArrayList<>();
-		DtInstitucionDeportiva dtInstDep = new DtInstitucionDeportiva(iDep.getNombre(),iDep.getDescripcion(),iDep.getUrl(),dtActDep,dtProf);
-		List<DtActividadDeportiva> dtAct = iCon.listarActividades(dtInstDep);
+		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(nombre);
+		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
 		
 		String[] dtActNombre = new String[dtAct.size()];
 		int i=0;
@@ -241,12 +235,12 @@ public class AltaDictadoDeClase extends JInternalFrame {
 	
 	public boolean inicializarComboBoxProfesores() {
 		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
-		InstitucionDeportiva iDep = iCon.getInstitucion(nombre);
-		List<Profesor> profesores = iDep.getProfesores();
+		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(nombre);
+		List<DtProfesor> profesores = instDep.getProfesores();
 		
 		String[] profesoresRet = new String[profesores.size()];
 		int i=0;
-		for(Profesor p: profesores) {
+		for(DtProfesor p: profesores) {
 			profesoresRet[i]=p.getNickname();
         	i++;
         }
@@ -295,10 +289,10 @@ public class AltaDictadoDeClase extends JInternalFrame {
     	    	int hora = Integer.parseInt(textFieldHora.getText());
     	    	int minuto = Integer.parseInt(textFieldMinuto.getText());
     			LocalTime lT = LocalTime.of(hora,minuto);
-    			ActividadDeportiva actDep = iCon.getAct(actividad);
+    			//ActividadDeportiva actDep = iCon.getAct(actividad);
     			List<DtRegistro> registros = new ArrayList<>();
-    			List<DtClase> clases = new ArrayList<>();
-    			DtActividadDeportiva dtActDep = new DtActividadDeportiva(actDep.getNombre(),actDep.getDescripcion(),actDep.getDuracion(),actDep.getCosto(),actDep.getFecha(),clases,actDep.getInstitucionDeportiva().getNombre());
+    			//List<DtClase> clases = new ArrayList<>();
+    			DtActividadDeportiva dtActDep = iCon.ConsultaActividadDeportiva(actividad);
     			DtClase dtClase = new DtClase(nombre,url,registros,actividad,fechaClase,currentFecha,lT,profesor);
     			iCon.AltaDictadoClase(dtActDep, dtClase);
     			JOptionPane.showMessageDialog(this, "La Clase se ha creado con éxito!", "Alta Dictado de Clase",
