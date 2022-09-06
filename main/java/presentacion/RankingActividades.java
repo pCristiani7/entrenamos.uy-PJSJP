@@ -63,7 +63,7 @@ public class RankingActividades extends JInternalFrame {
 	}
 	
 	public boolean thereSomething () {
-		if(iCon.listarActividades().equals(null)) {
+		if(!iCon.listarActividades().equals(null)) {
 			return false;
 		}else {
 			return true;
