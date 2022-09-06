@@ -4,7 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
+@Entity
 public class Socio extends Usuario {
+	
+	@OneToMany(mappedBy="socio",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Registro> registros = new ArrayList<>();
 
 	public Socio(String nickname, String nombre, String apellido, String email, LocalDate fecha, List<Registro> registros) {

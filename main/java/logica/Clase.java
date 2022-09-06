@@ -5,12 +5,35 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+@Entity
 public class Clase {
+	@Id
 	private String nombre;
 	private String url;
+	
+	@OneToMany(mappedBy="clase",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Registro> registros = new ArrayList<>();
+	
+	@ManyToOne
+	@JoinColumn(
+			insertable=false,
+			updatable=false
+	)
 	private ActividadDeportiva actividadDeportiva;
+	
+	@ManyToOne
+	@JoinColumn(
+			insertable=false,
+			updatable=false
+	)
 	private Profesor profesor;
+	
 	private LocalDate   fecha;
 	private LocalTime horaInicio;
 	private LocalDate fechaReg;

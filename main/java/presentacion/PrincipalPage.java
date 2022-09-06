@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 
 import interfaces.Fabrica;
 import interfaces.IControlador;
+import persistencia.Conexion;
+
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.awt.event.ActionEvent;
@@ -60,8 +62,8 @@ public class PrincipalPage {
 	 */
 	public PrincipalPage() throws ParseException {
 		initialize();
-		
-		Fabrica fab = Fabrica.getInstance();
+		Conexion con = Conexion.getInstancia()
+;		Fabrica fab = Fabrica.getInstance();
 		IControlador iCon = fab.getIControlador();
 		
 		Dimension desktopSize = frmEntrenamosUy.getSize();

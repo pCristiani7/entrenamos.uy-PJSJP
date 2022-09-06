@@ -402,15 +402,22 @@ public class Controlador implements IControlador{
 	}
 	
 	public String[] listarUsuarios(){
-		ArrayList<String> usuarios;
-		ManejadorUsuario mu = ManejadorUsuario.getInstancia();
-		usuarios = mu.obtenerUsuarios();
-		String[] usuarios_ret = new String[usuarios.size()];
-        int i=0;
-        for(String s:usuarios) {
-        	usuarios_ret[i]=s;
-        	i++;
-        }
+		ArrayList<String> socios;
+		ManejadorSocio mS = ManejadorSocio.getInstancia();
+		socios = mS.obtenerSocios();
+		ArrayList<String> profesores;
+		ManejadorProfesor mP = ManejadorProfesor.getInstancia();
+		profesores = mP.obtenerProfesores();
+		String[] usuarios_ret = new String[profesores.size() + socios.size()];
+		int i = 0;
+		for(String s: socios) {
+			usuarios_ret[i] = s;
+			i++;
+		}
+		for(String p: profesores) {
+			usuarios_ret[i] = p;
+			i++;
+		}
         return usuarios_ret;
 	}
 	

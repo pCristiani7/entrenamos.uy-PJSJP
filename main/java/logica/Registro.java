@@ -2,13 +2,38 @@ package logica;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
+@IdClass(RegistroId.class)
 public class Registro {
- private LocalDate fecha;
- private Socio socio;
- private Clase clase;
+	@Id
+	private LocalDate fecha;
+	@Id
+	@ManyToOne
+	@JoinColumn(
+			insertable=false,
+			updatable=false
+	)
+	private Socio socio;
+	@Id
+	@ManyToOne
+	@JoinColumn(
+			insertable=false,
+			updatable=false
+	)
+	private Clase clase;
 
  
- public Registro(LocalDate fecha, Socio socio, Clase clase) {
+ public Registro() {
+		super();
+	}
+
+public Registro(LocalDate fecha, Socio socio, Clase clase) {
 	super();
 	this.fecha = fecha;
 	this.socio = socio;

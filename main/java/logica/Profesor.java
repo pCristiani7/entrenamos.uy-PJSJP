@@ -4,11 +4,24 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+@Entity
 public class Profesor extends Usuario {
 	private String descripcion;
 	private String biografia;
 	private String sitioWeb;
+	
+	@OneToMany(mappedBy="profesor",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Clase> clases = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(
+			insertable=false,
+			updatable=false
+	)
 	private InstitucionDeportiva institucionDeportiva;
 	
 	
