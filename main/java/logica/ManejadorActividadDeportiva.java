@@ -3,10 +3,14 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import persistencia.Conexion;
+
 public class ManejadorActividadDeportiva {
 	
 	private static ManejadorActividadDeportiva instancia = null;
-	private List<ActividadDeportiva> actividadesDeportivas = new ArrayList<>();
 	
 	public static ManejadorActividadDeportiva getInstancia() {
 		if (instancia == null)
@@ -15,7 +19,12 @@ public class ManejadorActividadDeportiva {
 	}
 	
 	public ActividadDeportiva buscarActividadDeportiva(String nombre) {
-		for(ActividadDeportiva actDep: actividadesDeportivas) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select a from ActividadDeportiva a");
+		@SuppressWarnings("unchecked")
+		List<ActividadDeportiva> listActividad = (List<ActividadDeportiva>) query.getResultList();
+		for(ActividadDeportiva actDep: listActividad) {
 			if(actDep.getNombre().equals(nombre))
 				return actDep;
 		}
@@ -24,7 +33,12 @@ public class ManejadorActividadDeportiva {
 	
 	public boolean existeNombre(String nombre) {
 		boolean encontre = false;
-		for(ActividadDeportiva a: actividadesDeportivas) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select a from ActividadDeportiva a");
+		@SuppressWarnings("unchecked")
+		List<ActividadDeportiva> listActividad = (List<ActividadDeportiva>) query.getResultList();
+		for(ActividadDeportiva a: listActividad) {
 			if(a.getNombre().equals(nombre))
 				encontre = true;
 		}
@@ -32,27 +46,36 @@ public class ManejadorActividadDeportiva {
 	}
 	
 	public ArrayList<String> obtenerActividades(){
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select a from ActividadDeportiva a");
+		@SuppressWarnings("unchecked")
+		List<ActividadDeportiva> listActividad = (List<ActividadDeportiva>) query.getResultList();
 		ArrayList<String> aRetornar = new ArrayList<>();
-		for(ActividadDeportiva a: actividadesDeportivas) {
+		for(ActividadDeportiva a: listActividad) {
 			aRetornar.add(a.getNombre());
 		}
 		return aRetornar;
 	}
 	
 	public void addActividadDeportiva(ActividadDeportiva actDep) {
-		actividadesDeportivas.add(actDep);
-	}
-	
-	public void removeActividadDeportiva (ActividadDeportiva actDep){
-		actividadesDeportivas.remove(actDep);
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		em.getTransaction().begin();
+		em.persist(actDep);
+		em.getTransaction().commit();
 	}
 	
 	public List<ActividadDeportiva> getActividades(){
-		return this.actividadesDeportivas;
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select a from ActividadDeportiva a");
+		@SuppressWarnings("unchecked")
+		List<ActividadDeportiva> listActividad = (List<ActividadDeportiva>) query.getResultList();
+		return listActividad;
 	}
 	
 	public Boolean compareActividades(ActividadDeportiva a, ActividadDeportiva b) {
 		return a.getCantClases() < b.getCantClases();
 	}
-	
 }
