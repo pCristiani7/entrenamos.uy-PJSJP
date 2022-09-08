@@ -21,29 +21,13 @@ public class ManejadorClase {
 	public Clase buscarClase (String nombre) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		Query query = em.createQuery("select c from Clase c");
-		@SuppressWarnings("unchecked")
-		List<Clase> listClase = (List<Clase>) query.getResultList();
-		Clase x = null;
-		for(Clase c: listClase) {
-			if(c.getNombre().equals(nombre))
-				return c;
-		}
-		return x;
+		return em.find(Clase.class, nombre);
 	}
 	
 	public boolean existeClase (String nombre) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		Query query = em.createQuery("select c from Clase c");
-		@SuppressWarnings("unchecked")
-		List<Clase> listClase = (List<Clase>) query.getResultList();
-		boolean existe = false;
-		for(Clase c: listClase) {
-			if(c.getNombre().equals(nombre))
-				existe = true;
-		}
-		return existe;
+		return em.find(Clase.class, nombre) != null;
 	}
 	
 	public ArrayList<String> obtenerClases(){

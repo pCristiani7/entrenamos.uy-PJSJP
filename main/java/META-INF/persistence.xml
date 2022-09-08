@@ -2,6 +2,11 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="gymhibernate" transaction-type="RESOURCE_LOCAL">
 	<class>logica.InstitucionDeportiva</class>
+	<class>logica.ActividadDeportiva</class>
+	<class>logica.Clase</class>
+	<class>logica.Profesor</class>
+	<class>logica.Registro</class>
+	<class>logica.Socio</class>
 	<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

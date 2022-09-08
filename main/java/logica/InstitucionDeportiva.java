@@ -2,11 +2,11 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 @Entity
 public class InstitucionDeportiva {
@@ -81,4 +81,25 @@ public class InstitucionDeportiva {
 	public void addProfesor(Profesor profesor) {
 		this.profesores.add(profesor);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(actividadesDeportivas, descripcion, nombre, profesores, url);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		InstitucionDeportiva other = (InstitucionDeportiva) obj;
+		return Objects.equals(actividadesDeportivas, other.actividadesDeportivas)
+				&& Objects.equals(descripcion, other.descripcion) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(profesores, other.profesores) && Objects.equals(url, other.url);
+	}
+	
+	
 }

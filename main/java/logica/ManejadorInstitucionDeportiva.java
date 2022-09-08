@@ -29,44 +29,33 @@ public class ManejadorInstitucionDeportiva {
 		em.getTransaction().commit();
 	}
 	
-	public boolean existeNickname(String nombre) {
-		boolean encontre = false;
+	public void modIntitucionDeportiva(InstitucionDeportiva instDep) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
+		em.getTransaction().begin();
 		
-		Query query = em.createQuery("select s from InstitucionDeportiva s");
-		@SuppressWarnings("unchecked")
-		List<InstitucionDeportiva> listInstDep = (List<InstitucionDeportiva>) query.getResultList();
+		em.merge(instDep);
 		
-		for(InstitucionDeportiva p: listInstDep) {
-			if(p.getNombre().equals(nombre))
-				encontre = true;
-		}
-		return encontre;
+		em.getTransaction().commit();
+	}
+	
+	public boolean existeNickname(String nombre) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		return em.find(InstitucionDeportiva.class, nombre) != null;
 	}
 	
 	public InstitucionDeportiva buscarInstitucionDeportiva(String nombre) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		
-		InstitucionDeportiva instDep = em.find(InstitucionDeportiva.class, nombre);
-		return instDep;
+		return em.find(InstitucionDeportiva.class, nombre);
 	}
 	
 	public String retornarNomInstDep(String nombre) {
-		String nomProf = null;
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
 		
-		Query query = em.createQuery("select s from InstitucionDeportiva s");
-		@SuppressWarnings("unchecked")
-		List<InstitucionDeportiva> listInstDep = (List<InstitucionDeportiva>) query.getResultList();
-		
-		for(InstitucionDeportiva id: listInstDep) {
-			if(id.getNombre().equals(nombre))
-				nomProf = id.getNombre();
-		}
-		return nomProf;
+		return em.find(InstitucionDeportiva.class, nombre).getNombre();
 	}
 	
 	public ArrayList<String> obtenerInstituciones(){

@@ -8,10 +8,11 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import persistencia.RegistroId;
+
 @Entity
 @IdClass(RegistroId.class)
 public class Registro {
-	@Id
 	private LocalDate fecha;
 	@Id
 	@ManyToOne

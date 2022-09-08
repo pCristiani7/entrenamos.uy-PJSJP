@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -110,4 +111,26 @@ public class Clase {
 	public void addRegistro(Registro r) {
 		this.registros.add(r);
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(actividadDeportiva, fecha, fechaReg, horaInicio, nombre, profesor, registros, url);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Clase other = (Clase) obj;
+		return Objects.equals(actividadDeportiva, other.actividadDeportiva) && Objects.equals(fecha, other.fecha)
+				&& Objects.equals(fechaReg, other.fechaReg) && Objects.equals(horaInicio, other.horaInicio)
+				&& Objects.equals(nombre, other.nombre) && Objects.equals(profesor, other.profesor)
+				&& Objects.equals(registros, other.registros) && Objects.equals(url, other.url);
+	}
+	
+	
 }

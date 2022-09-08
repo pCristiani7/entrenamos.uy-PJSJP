@@ -24,7 +24,6 @@ public class Controlador implements IControlador{
 	ManejadorInstitucionDeportiva mid = ManejadorInstitucionDeportiva.getInstancia();
 	ManejadorProfesor mp = ManejadorProfesor.getInstancia();
 	ManejadorSocio ms = ManejadorSocio.getInstancia();
-	ManejadorUsuario mu = ManejadorUsuario.getInstancia();
 	ManejadorActividadDeportiva mad = ManejadorActividadDeportiva.getInstancia();
 	ManejadorClase mc = ManejadorClase.getInstancia();
 	
@@ -56,13 +55,11 @@ public class Controlador implements IControlador{
 				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
 				mp.addProfesor(prof);
 				id.addProfesor(prof);
-				mu.agregarUsuario(prof);
 			}else if(dtUser instanceof DtSocio){
 				List<Registro> registros = new ArrayList<>();
 				DtSocio dtSocio = (DtSocio) dtUser;
 				Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),registros);
 				ms.addSocio(socio);
-				mu.agregarUsuario(socio);
 			}
 		} else {
 			throw new UsuarioRepetidoExcepcion("Ya existe un usuario con esas credenciales!");
@@ -138,6 +135,7 @@ public class Controlador implements IControlador{
 			InstitucionDeportiva id = mid.buscarInstitucionDeportiva(instDep);
 			id.setDescripcion(dtInstDepNew.getDescripcion());
 			id.setUrl(dtInstDepNew.getUrl());
+			mid.modIntitucionDeportiva(id);
 			return true;
 		}
 		return false;
@@ -187,6 +185,7 @@ public class Controlador implements IControlador{
             ad.setDescripcion(dtActDepNew.getDescripcion());
             ad.setDuracion(dtActDepNew.getDuracion());
             ad.setCosto(dtActDepNew.getCosto());
+            mad.modActividadDeportiva(ad);
             	return true;
             }
         return false;

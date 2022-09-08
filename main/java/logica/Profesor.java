@@ -3,6 +3,7 @@ package logica;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -81,4 +82,29 @@ public class Profesor extends Usuario {
 	public void addClase(Clase c) {
 		this.clases.add(c);
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(biografia, clases, descripcion, institucionDeportiva, sitioWeb);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Profesor other = (Profesor) obj;
+		return Objects.equals(biografia, other.biografia) && Objects.equals(clases, other.clases)
+				&& Objects.equals(descripcion, other.descripcion)
+				&& Objects.equals(institucionDeportiva, other.institucionDeportiva)
+				&& Objects.equals(sitioWeb, other.sitioWeb);
+	}
+	
+	
 }

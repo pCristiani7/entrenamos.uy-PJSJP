@@ -21,28 +21,13 @@ public class ManejadorActividadDeportiva {
 	public ActividadDeportiva buscarActividadDeportiva(String nombre) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		Query query = em.createQuery("select a from ActividadDeportiva a");
-		@SuppressWarnings("unchecked")
-		List<ActividadDeportiva> listActividad = (List<ActividadDeportiva>) query.getResultList();
-		for(ActividadDeportiva actDep: listActividad) {
-			if(actDep.getNombre().equals(nombre))
-				return actDep;
-		}
-		return null;
+		return em.find(ActividadDeportiva.class, nombre);
 	}
 	
 	public boolean existeNombre(String nombre) {
-		boolean encontre = false;
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		Query query = em.createQuery("select a from ActividadDeportiva a");
-		@SuppressWarnings("unchecked")
-		List<ActividadDeportiva> listActividad = (List<ActividadDeportiva>) query.getResultList();
-		for(ActividadDeportiva a: listActividad) {
-			if(a.getNombre().equals(nombre))
-				encontre = true;
-		}
-		return encontre;
+		return em.find(ActividadDeportiva.class, nombre) != null;
 	}
 	
 	public ArrayList<String> obtenerActividades(){
@@ -63,6 +48,14 @@ public class ManejadorActividadDeportiva {
 		EntityManager em = conexion.getEntityManager();
 		em.getTransaction().begin();
 		em.persist(actDep);
+		em.getTransaction().commit();
+	}
+	
+	public void modActividadDeportiva(ActividadDeportiva actDep) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		em.getTransaction().begin();
+		em.merge(actDep);
 		em.getTransaction().commit();
 	}
 	

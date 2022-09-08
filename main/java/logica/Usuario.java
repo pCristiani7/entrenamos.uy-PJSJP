@@ -1,6 +1,7 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -67,5 +68,25 @@ public abstract class Usuario {
 	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(apellido, email, fecha, nickname, nombre);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(apellido, other.apellido) && Objects.equals(email, other.email)
+				&& Objects.equals(fecha, other.fecha) && Objects.equals(nickname, other.nickname)
+				&& Objects.equals(nombre, other.nombre);
+	}
+	
 	
 }	
