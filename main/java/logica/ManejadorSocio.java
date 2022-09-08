@@ -3,11 +3,16 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import persistencia.Conexion;
+
 public class ManejadorSocio {
 	
 	private static ManejadorSocio instancia = null;
-	private List<Socio> socios = new ArrayList<>();
 	
+	private ManejadorSocio() {}
 	
 	public static ManejadorSocio getInstancia() {
 		if (instancia == null)
@@ -16,43 +21,55 @@ public class ManejadorSocio {
 	}
 	
 	public void addSocio(Socio socio) {
-		socios.add(socio);
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		em.getTransaction().begin();
+		
+		em.persist(socio);
+		
+		em.getTransaction().commit();
 	}
 	
-	public void removeSocio(Socio socio){
-		socios.remove(socio);
+	public void modSocio(Socio soc) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		em.getTransaction().begin();
+		
+		em.merge(soc);
+		
+		em.getTransaction().commit();
 	}
 	
 	public boolean existeEmail(String email) {
-		boolean encontre = false;
-		for(Socio s: socios) {
-			if(s.getEmail().equals(email))
-				encontre = true;
-		}
-		return encontre;
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		return em.find(Profesor.class, email) != null;
 	}
 	
 	public boolean existeNickname(String nickname) {
-		boolean encontre = false;
-		for(Socio s: socios) {
-			if(s.getNickname().equals(nickname))
-				encontre = true;
-		}
-		return encontre;
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		return em.find(Profesor.class, nickname) != null;
 	}
 	
 	public Socio buscarSocio(String nickname) {
-		Socio x = null;
-		for(Socio s: socios) {
-			if(s.getNickname().equals(nickname))
-				return s;
-		}
-		return x;
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		return em.find(Socio.class, nickname);
 	}
 	
+	
 	public ArrayList<String> obtenerSocios(){
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		Query query = em.createQuery("select s from Socio s");
+		@SuppressWarnings("unchecked")
+		List<Socio> listSoc = (List<Socio>) query.getResultList();
+		
 		ArrayList<String> aRetornar = new ArrayList<>();
-		for(Socio s: socios) {
+		
+		for(Socio s: listSoc) {
 			aRetornar.add(s.getNickname());
 		}
 		return aRetornar;
