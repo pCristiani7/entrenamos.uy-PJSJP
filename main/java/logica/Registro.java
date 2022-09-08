@@ -7,12 +7,15 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import persistencia.RegistroId;
 
 @Entity
 @IdClass(RegistroId.class)
 public class Registro {
+
 	private LocalDate fecha;
 	@Id
 	@ManyToOne

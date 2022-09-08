@@ -11,22 +11,22 @@ public class RegistroId implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
-	private Socio socio;
-	private Clase clase;
+	private String socio;
+	private String clase;
 	
 	public RegistroId() {
 		super();
 	}
-	public Socio getSocio() {
+	public String getSocio() {
 		return socio;
 	}
-	public void setSocio(Socio socio) {
+	public void setSocio(String socio) {
 		this.socio = socio;
 	}
-	public Clase getClase() {
+	public String getClase() {
 		return clase;
 	}
-	public void setClase(Clase clase) {
+	public void setClase(String clase) {
 		this.clase = clase;
 	}
 	@Override
