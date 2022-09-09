@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import datatypes.DtActividadDeportiva;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtProfesor;
@@ -54,7 +53,7 @@ public class Controlador implements IControlador{
 				InstitucionDeportiva id = mid.buscarInstitucionDeportiva(dtProf.getInstitucionDeportiva());
 				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
 				mp.addProfesor(prof);
-				//id.addProfesor(prof);
+				id.addProfesor(prof);
 				mid.modIntitucionDeportiva(id);
 			}else if(dtUser instanceof DtSocio){
 				List<Registro> registros = new ArrayList<>();

@@ -2,8 +2,6 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -18,8 +16,8 @@ public class InstitucionDeportiva {
 	@OneToMany(mappedBy="institucionDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<ActividadDeportiva> actividadesDeportivas = new ArrayList<>();
 	
-	//@OneToMany(mappedBy="institucionDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
-	//private List<Profesor> profesores = new ArrayList<>();
+	@OneToMany(mappedBy="institucionDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<Profesor> profesores = new ArrayList<>();
 	
 	public InstitucionDeportiva() {
 		super();
@@ -67,19 +65,19 @@ public class InstitucionDeportiva {
 		this.actividadesDeportivas = actividadesDeportivas;
 	}
 
-	//public List<Profesor> getProfesores() {
-	//return profesores;
-	//}
+	public List<Profesor> getProfesores() {
+	return profesores;
+	}
 
-	//public void setProfesores(List<Profesor> profesores) {
-	//	this.profesores = profesores;
-	//}
+	public void setProfesores(List<Profesor> profesores) {
+		this.profesores = profesores;
+	}
 	
 	public void addActividad(ActividadDeportiva actividad) {
 		this.actividadesDeportivas.add(actividad);
 	}
-	//public void addProfesor(Profesor profesor) {
-	//	this.profesores.add(profesor);
-	//}
+	public void addProfesor(Profesor profesor) {
+		this.profesores.add(profesor);
+	}
 
 }

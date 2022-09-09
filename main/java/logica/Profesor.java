@@ -21,9 +21,7 @@ public class Profesor extends Usuario {
 	
 	@ManyToOne
 	@JoinColumn(
-			name = "institucion",
-			insertable=false,
-			updatable=false
+			name = "institucionDeportiva"
 	)
 	private InstitucionDeportiva institucionDeportiva;
 	

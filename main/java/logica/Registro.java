@@ -18,15 +18,13 @@ public class Registro {
 	@Id
 	@ManyToOne
 	@JoinColumn(
-			insertable=false,
-			updatable=false
+			name = "socio"
 	)
 	private Socio socio;
 	@Id
 	@ManyToOne
 	@JoinColumn(
-			insertable=false,
-			updatable=false
+			name = "clase"
 	)
 	private Clase clase;
 

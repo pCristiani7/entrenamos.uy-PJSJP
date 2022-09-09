@@ -3,8 +3,6 @@ package logica;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -27,8 +25,7 @@ public class ActividadDeportiva {
 	private int cantClases;
 	@ManyToOne
 	@JoinColumn(
-			insertable=false,
-			updatable=false
+			name = "institucionDeportiva"
 	)
 	private InstitucionDeportiva institucionDeportiva;
 	
@@ -116,28 +113,5 @@ public class ActividadDeportiva {
 	public void addClase(Clase c) {
 		this.clases.add(c);
 	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(cantClases, clases, costo, descripcion, duracion, fecha, institucionDeportiva, nombre);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ActividadDeportiva other = (ActividadDeportiva) obj;
-		return cantClases == other.cantClases && Objects.equals(clases, other.clases)
-				&& Float.floatToIntBits(costo) == Float.floatToIntBits(other.costo)
-				&& Objects.equals(descripcion, other.descripcion) && duracion == other.duracion
-				&& Objects.equals(fecha, other.fecha)
-				&& Objects.equals(institucionDeportiva, other.institucionDeportiva)
-				&& Objects.equals(nombre, other.nombre);
-	}
-	
 	
 }
