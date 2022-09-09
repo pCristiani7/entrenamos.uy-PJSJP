@@ -7,7 +7,6 @@
 	<class>logica.Profesor</class>
 	<class>logica.Registro</class>
 	<class>logica.Socio</class>
-	<class>logica.Usuario</class>
 	
 	<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
