@@ -40,16 +40,19 @@ public class ManejadorSocio {
 		em.getTransaction().commit();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean existeEmail(String email) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		return em.find(Profesor.class, email) != null;
+		Query query = em.createQuery("select s from Socio s where s.email='"+email+"'");
+		List<Socio> socios = query.getResultList();
+		return (socios .size() != 0);
 	}
 	
 	public boolean existeNickname(String nickname) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		return em.find(Profesor.class, nickname) != null;
+		return em.find(Socio.class, nickname) != null;
 	}
 	
 	public Socio buscarSocio(String nickname) {

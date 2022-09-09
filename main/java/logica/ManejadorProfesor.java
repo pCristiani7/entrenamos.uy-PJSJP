@@ -40,10 +40,13 @@ public class ManejadorProfesor {
 		em.getTransaction().commit();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public boolean existeEmail(String email) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		return em.find(Profesor.class, email) != null;
+		Query query = em.createQuery("select p from Profesor p where p.email='"+email+"'");
+		List<Profesor> profesores = query.getResultList();
+		return (profesores .size() != 0);
 	}
 	
 	public boolean existeNickname(String nickname) {
