@@ -31,40 +31,25 @@ public class DtInstitucionDeportiva {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 
 	public String getUrl() {
 		return url;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
 
 	public List<DtActividadDeportiva> getActividadesDeportivas() {
 		return actividadesDeportivas;
 	}
 
-	public void setActividadesDeportivas(List<DtActividadDeportiva> actividadesDeportivas) {
-		this.actividadesDeportivas = actividadesDeportivas;
-	}
 
 	public List<DtProfesor> getProfesores() {
 		return profesores;
 	}
 
-	public void setProfesores(List<DtProfesor> profesores) {
-		this.profesores = profesores;
-	}
 	
 }

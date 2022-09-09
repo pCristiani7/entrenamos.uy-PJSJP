@@ -7,6 +7,7 @@
 	<class>logica.Profesor</class>
 	<class>logica.Registro</class>
 	<class>logica.Socio</class>
+	
 	<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

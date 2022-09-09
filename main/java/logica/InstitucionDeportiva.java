@@ -30,7 +30,7 @@ public class InstitucionDeportiva {
 		this.descripcion = descripcion;
 		this.url = url;
 		this.actividadesDeportivas = actividadesDeportivas;
-		//this.profesores = profesores;
+		this.profesores = profesores;
 	}
 
 	public String getNombre() {
