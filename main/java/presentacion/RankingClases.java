@@ -63,7 +63,7 @@ public class RankingClases extends JInternalFrame {
 	}
 
 	public boolean thereSomething () {
-		if(!iCon.listarClases().equals(null)) {
+		if(iCon.listarClases().equals(null)) {
 			return false;
 		}else {
 			return true;

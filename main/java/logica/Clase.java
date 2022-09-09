@@ -23,15 +23,13 @@ public class Clase {
 	
 	@ManyToOne
 	@JoinColumn(
-			insertable=false,
-			updatable=false
+			name="actividadDeportiva"
 	)
 	private ActividadDeportiva actividadDeportiva;
 	
 	@ManyToOne
 	@JoinColumn(
-			insertable=false,
-			updatable=false
+			name="profesor"
 	)
 	private Profesor profesor;
 	

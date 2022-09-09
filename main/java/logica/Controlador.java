@@ -311,7 +311,6 @@ public class Controlador implements IControlador{
                     pos = j;
                 }
             }
-
             temp = listClase.get(pos);
             listClase.set(pos, listClase.get(i)); 
             listClase.set(i, temp); 
