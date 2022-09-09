@@ -33,55 +33,33 @@ public class DtActividadDeportiva {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public String getDescripcion() {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
 
 	public int getDuracion() {
 		return duracion;
 	}
 
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
-	}
 
 	public float getCosto() {
 		return costo;
-	}
-
-	public void setCosto(float costo) {
-		this.costo = costo;
 	}
 
 	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
 
 	public List<DtClase> getClases() {
 		return clases;
 	}
 
-	public void setClases(List<DtClase> clases) {
-		this.clases = clases;
-	}
 
 	public String getInstitucionDeportiva() {
 		return institucionDeportiva;
 	}
 
-	public void setInstitucionDeportiva(String institucionDeportiva) {
-		this.institucionDeportiva = institucionDeportiva;
-	}
 }

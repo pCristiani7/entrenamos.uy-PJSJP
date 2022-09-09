@@ -36,52 +36,39 @@ public class DtClase {
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
+	
 	public String getUrl() {
 		return url;
 	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
+	
+	
 	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
+	
+	
 	public LocalTime getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(LocalTime horaInicio) {
-		this.horaInicio = horaInicio;
-	}
+	
+	
 	public LocalDate getFechaReg() {
 		return fechaReg;
 	}
-	public void setFechaReg(LocalDate fechaReg) {
-		this.fechaReg = fechaReg;
-	}
+	
+	
 	public List<DtRegistro> getRegistros() {
 		return registros;
 	}
-	public void setRegistros(List<DtRegistro> registros) {
-		this.registros = registros;
-	}
+	
+	
 	public String getActividadDeportiva() {
 		return actividadDeportiva;
 	}
 
-	public void setActividadDeportiva(String actividadDeportiva) {
-		this.actividadDeportiva = actividadDeportiva;
-	}
 
 	public String getProfesor() {
 		return profesor;
-	}
-
-	public void setProfesor(String profesor) {
-		this.profesor = profesor;
 	}
 }
