@@ -31,6 +31,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -91,6 +93,16 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		getContentPane().add(lblNewLabelInstitucionDeportiva);
 		
 		comboBoxInstitucionDeportiva = new JComboBox<String>();
+		comboBoxInstitucionDeportiva.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == ItemEvent.SELECTED) {
+					if(!comboBoxInstitucionDeportiva.getSelectedItem().toString().equals(e)) {
+						inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString());
+						inicializarComboBoxProfesoreReact(comboBoxInstitucionDeportiva.getSelectedItem().toString());
+					}
+				}
+			}
+		});
 		comboBoxInstitucionDeportiva.setBounds(402, 69, 198, 34);
 		getContentPane().add(comboBoxInstitucionDeportiva);
 		
@@ -254,6 +266,26 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		}
 	}
 	
+	public boolean inicializarComboBoxProfesoreReact(String s) {
+		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(s);
+		List<DtProfesor> profesores = instDep.getProfesores();
+		
+		String[] profesoresRet = new String[profesores.size()];
+		int i=0;
+		for(DtProfesor p: profesores) {
+			profesoresRet[i]=p.getNickname();
+        	i++;
+        }
+		
+		DefaultComboBoxModel<String> modelProfesores = new DefaultComboBoxModel<String>(profesoresRet);
+		if(modelProfesores.getSize() == 0)
+			return false;
+		else {
+			comboBoxProfesores.setModel(modelProfesores);
+			return true;
+		}
+	}
+	
 	public void setVisibleActividades() {
 		this.lblActividadesAsociadas.setVisible(true);
 		this.comboBoxActividadesAsociadas.setVisible(true);
@@ -320,5 +352,24 @@ public class AltaDictadoDeClase extends JInternalFrame {
     		return true;
     	}
     }
+	
+	public boolean inicializarComboBoxActividades(String n) {
+		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(n);
+		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
+		
+		String[] dtActNombre = new String[dtAct.size()];
+		int i=0;
+		for(DtActividadDeportiva a: dtAct) {
+        	dtActNombre[i]=a.getNombre();
+        	i++;
+        }
+		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
+		if(modelActividades.getSize() == 0)
+			return false;
+		else {
+			comboBoxActividadesAsociadas.setModel(modelActividades);
+			return true;
+		}
+	}
 	
 }

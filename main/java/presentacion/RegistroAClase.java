@@ -92,6 +92,7 @@ public class RegistroAClase extends JInternalFrame {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxInstitucionDeportiva.getSelectedItem().toString().equals(e)) {
 						inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString());
+						inicializarComboBoxDynamic(comboBoxActividadesAsociadas.getSelectedItem().toString());
 					}
 				}
 			}
@@ -265,9 +266,18 @@ public class RegistroAClase extends JInternalFrame {
 		}
 	}
 	
-	public void inicializarComboBoxDynamic(String n) {
+	public boolean inicializarComboBoxDynamic(String n){
 		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
-			comboBoxClases.setModel(modelClases);
+		if(modelClases.getSize() == 0)
+			return false;
+		else {
+			if(modelClases.equals(null)) {
+				comboBoxClases.setModel(null);
+			}else {
+				comboBoxClases.setModel(modelClases);
+			}
+			return true;
+		}
 	}
 	
 	public boolean inicializarComboBoxClases() {
@@ -276,7 +286,11 @@ public class RegistroAClase extends JInternalFrame {
 		if(modelClases.getSize() == 0)
 			return false;
 		else {
-			comboBoxClases.setModel(modelClases);
+			if(modelClases.equals(null)) {
+				comboBoxClases.setModel(null);
+			}else {
+				comboBoxClases.setModel(modelClases);
+			}
 			return true;
 		}
 	}
