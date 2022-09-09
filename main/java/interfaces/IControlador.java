@@ -50,7 +50,8 @@ public interface IControlador {
 	public List<DtClase> RankingDictadosClases();
 	public String[] listarClasesActividadDeportiva(String ActDep);
 	
-	
+	public String[] listarInstitucionesConActYProf();
+	public String[] listarInstitucionesConAct();
 	public String[] listarInstituciones();
 	public String[] listarClasesProf(String nickname);
 	public String[] listarRegistrosSocio(String nickname);

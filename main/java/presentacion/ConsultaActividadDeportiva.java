@@ -236,7 +236,7 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 	}
 	
 	public boolean inicializarComboBoxInstitucionDeportiva() {
-		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
+		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstitucionesConAct());
 		if(modelInstitucionDeportiva.getSize() == 0)
 			return false;
 		else {

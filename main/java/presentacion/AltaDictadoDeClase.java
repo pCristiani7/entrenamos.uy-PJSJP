@@ -215,7 +215,7 @@ public class AltaDictadoDeClase extends JInternalFrame {
 	}
 	
 	public boolean inicializarComboBoxInstitucionDeportiva() {
-		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
+		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstitucionesConActYProf());
 		if(modelInstitucionDeportiva.getSize() == 0)
 			return false;
 		else {

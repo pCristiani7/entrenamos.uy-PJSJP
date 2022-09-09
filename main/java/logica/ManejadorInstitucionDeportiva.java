@@ -74,4 +74,14 @@ public class ManejadorInstitucionDeportiva {
 		}
 		return aRetornar;
 	}
+	
+	public List<InstitucionDeportiva> getInstituciones(){
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		Query query = em.createQuery("select s from InstitucionDeportiva s");
+		@SuppressWarnings("unchecked")
+		List<InstitucionDeportiva> listInstDep = (List<InstitucionDeportiva>) query.getResultList();
+		return listInstDep;
+	}
 }

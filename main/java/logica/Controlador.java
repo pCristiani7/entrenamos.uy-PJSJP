@@ -336,8 +336,40 @@ public class Controlador implements IControlador{
         return clases_ret;
 	}
 	
-	//crear funcion similar con las condiciones de que tenga actividades y profesores
-	//crear funcion que retorne lista de las istituciones con actividades deportivas
+	public String[] listarInstitucionesConActYProf() {
+		ArrayList<String> instituciones = new ArrayList<>();
+		List<InstitucionDeportiva> listId = mid.getInstituciones();
+		for(InstitucionDeportiva id: listId) {
+			if(id.getActividadesDeportivas().size() > 0 && id.getProfesores().size() > 0) {
+				instituciones.add(id.getNombre());
+			}
+		}
+		String[] instituciones_ret = new String[instituciones.size()];
+        int i=0;
+        for(String s:instituciones) {
+        	instituciones_ret[i]=s;
+        	i++;
+        }
+        return instituciones_ret;
+	}
+	
+	public String[] listarInstitucionesConAct() {
+		ArrayList<String> instituciones = new ArrayList<>();
+		List<InstitucionDeportiva> listId = mid.getInstituciones();
+		for(InstitucionDeportiva id: listId) {
+			if(id.getActividadesDeportivas().size() > 0) {
+				instituciones.add(id.getNombre());
+			}
+		}
+		String[] instituciones_ret = new String[instituciones.size()];
+        int i=0;
+        for(String s:instituciones) {
+        	instituciones_ret[i]=s;
+        	i++;
+        }
+        return instituciones_ret;
+	}
+	
 	public String[] listarInstituciones() {
 		ArrayList<String> instituciones;
 		instituciones = mid.obtenerInstituciones();
