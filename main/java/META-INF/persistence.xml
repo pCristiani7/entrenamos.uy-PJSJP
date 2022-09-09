@@ -14,6 +14,6 @@
 			<property name="hibernate.connection.password" value="tecnologo"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/entrenamosUy"/>
 			<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-		</properties>
+	</properties>
 	</persistence-unit>
 </persistence>

@@ -43,13 +43,13 @@ public class ManejadorSocio {
 	public boolean existeEmail(String email) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		return em.find(Profesor.class, email) != null;
+		return em.find(Socio.class, email) != null;
 	}
 	
 	public boolean existeNickname(String nickname) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		return em.find(Profesor.class, nickname) != null;
+		return em.find(Socio.class, nickname) != null;
 	}
 	
 	public Socio buscarSocio(String nickname) {

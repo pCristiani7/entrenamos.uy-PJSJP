@@ -51,11 +51,12 @@ public class ManejadorInstitucionDeportiva {
 		return em.find(InstitucionDeportiva.class, nombre);
 	}
 	
-	public String retornarNomInstDep(String nombre) {
+	public String retornarNomInstDep(String nickname) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		
-		return em.find(InstitucionDeportiva.class, nombre).getNombre();
+		Profesor prof = em.find(Profesor.class, nickname);
+		InstitucionDeportiva id = prof.getInstitucionDeportiva();
+		return id.getNombre();
 	}
 	
 	public ArrayList<String> obtenerInstituciones(){

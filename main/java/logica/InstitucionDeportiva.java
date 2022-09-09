@@ -18,8 +18,8 @@ public class InstitucionDeportiva {
 	@OneToMany(mappedBy="institucionDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<ActividadDeportiva> actividadesDeportivas = new ArrayList<>();
 	
-	@OneToMany(mappedBy="institucionDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
-	private List<Profesor> profesores = new ArrayList<>();
+	//@OneToMany(mappedBy="institucionDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
+	//private List<Profesor> profesores = new ArrayList<>();
 	
 	public InstitucionDeportiva() {
 		super();
@@ -32,7 +32,7 @@ public class InstitucionDeportiva {
 		this.descripcion = descripcion;
 		this.url = url;
 		this.actividadesDeportivas = actividadesDeportivas;
-		this.profesores = profesores;
+		//this.profesores = profesores;
 	}
 
 	public String getNombre() {
@@ -67,39 +67,19 @@ public class InstitucionDeportiva {
 		this.actividadesDeportivas = actividadesDeportivas;
 	}
 
-	public List<Profesor> getProfesores() {
-		return profesores;
-	}
+	//public List<Profesor> getProfesores() {
+	//return profesores;
+	//}
 
-	public void setProfesores(List<Profesor> profesores) {
-		this.profesores = profesores;
-	}
+	//public void setProfesores(List<Profesor> profesores) {
+	//	this.profesores = profesores;
+	//}
 	
 	public void addActividad(ActividadDeportiva actividad) {
 		this.actividadesDeportivas.add(actividad);
 	}
-	public void addProfesor(Profesor profesor) {
-		this.profesores.add(profesor);
-	}
+	//public void addProfesor(Profesor profesor) {
+	//	this.profesores.add(profesor);
+	//}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(actividadesDeportivas, descripcion, nombre, profesores, url);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		InstitucionDeportiva other = (InstitucionDeportiva) obj;
-		return Objects.equals(actividadesDeportivas, other.actividadesDeportivas)
-				&& Objects.equals(descripcion, other.descripcion) && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(profesores, other.profesores) && Objects.equals(url, other.url);
-	}
-	
-	
 }

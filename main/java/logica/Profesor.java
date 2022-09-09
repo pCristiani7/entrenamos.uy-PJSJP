@@ -18,8 +18,10 @@ public class Profesor extends Usuario {
 	
 	@OneToMany(mappedBy="profesor",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Clase> clases = new ArrayList<>();
+	
 	@ManyToOne
 	@JoinColumn(
+			name = "institucion",
 			insertable=false,
 			updatable=false
 	)
