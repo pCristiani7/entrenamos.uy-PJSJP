@@ -61,6 +61,20 @@ public class ManejadorProfesor {
 		return em.find(Profesor.class, nickname);
 	}
 	
+	public List<Profesor> getProfesroresDeInstDep(InstitucionDeportiva ID){
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select a from Profesor a");
+		@SuppressWarnings("unchecked")
+		List<Profesor> listProf = (List<Profesor>) query.getResultList();
+		List<Profesor> ret = new ArrayList<>();
+		for(Profesor p: listProf) {
+			if(p.getInstitucionDeportiva() == ID) {
+				ret.add(p);
+			}
+		}
+		return ret;
+	}
 	
 	
 	public ArrayList<String> obtenerProfesores(){

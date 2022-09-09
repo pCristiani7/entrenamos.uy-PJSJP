@@ -68,6 +68,20 @@ public class ManejadorActividadDeportiva {
 		return listActividad;
 	}
 	
+	public List<ActividadDeportiva> getActividadesDeInstDep(InstitucionDeportiva ID){
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select a from ActividadDeportiva a");
+		@SuppressWarnings("unchecked")
+		List<ActividadDeportiva> listActividad = (List<ActividadDeportiva>) query.getResultList();
+		List<ActividadDeportiva> ret = new ArrayList<>();
+		for(ActividadDeportiva ad: listActividad) {
+			if(ad.getInstitucionDeportiva() == ID) {
+				ret.add(ad);
+			}
+		}
+		return ret;
+	}
 	public Boolean compareActividades(ActividadDeportiva a, ActividadDeportiva b) {
 		return a.getCantClases() < b.getCantClases();
 	}

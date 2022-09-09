@@ -224,7 +224,7 @@ public class Controlador implements IControlador{
 	public List<DtActividadDeportiva> listarActividades(String nombre){
 		List<DtActividadDeportiva> listDtAct = new ArrayList<>();
 		InstitucionDeportiva ID = mid.buscarInstitucionDeportiva(nombre);
-		List<ActividadDeportiva> listAct = ID.getActividadesDeportivas();
+		List<ActividadDeportiva> listAct = mad.getActividadesDeInstDep(ID);
 		for(ActividadDeportiva a: listAct) {
 			List<DtClase> listDtClase = new ArrayList<>();
 			List<Clase> listClase = a.getClases();
