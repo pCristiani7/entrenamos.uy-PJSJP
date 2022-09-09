@@ -83,6 +83,6 @@ public class ManejadorActividadDeportiva {
 		return ret;
 	}
 	public Boolean compareActividades(ActividadDeportiva a, ActividadDeportiva b) {
-		return a.getCantClases() < b.getCantClases();
+		return a.getClases().size()< b.getClases().size();
 	}
 }

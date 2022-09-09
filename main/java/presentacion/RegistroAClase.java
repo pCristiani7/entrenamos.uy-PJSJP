@@ -216,45 +216,7 @@ public class RegistroAClase extends JInternalFrame {
 			return true;
 		}
 	}
-	
-	public boolean inicializarComboBoxActividades(String n) {
-		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(n);
-		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
-		
-		String[] dtActNombre = new String[dtAct.size()];
-		int i=0;
-		for(DtActividadDeportiva a: dtAct) {
-        	dtActNombre[i]=a.getNombre();
-        	i++;
-        }
-		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
-		if(modelActividades.getSize() == 0)
-			return false;
-		else {
-			comboBoxActividadesAsociadas.setModel(modelActividades);
-			return true;
-		}
-	}
 
-	public boolean inicializarComboBoxActividadesAsociadas() {
-		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
-		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(nombre);
-		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
-		
-		String[] dtActNombre = new String[dtAct.size()];
-		int i=0;
-		for(DtActividadDeportiva a: dtAct) {
-        	dtActNombre[i]=a.getNombre();
-        	i++;
-        }
-		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
-		if(modelActividades.getSize() == 0)
-			return false;
-		else {
-			comboBoxActividadesAsociadas.setModel(modelActividades);
-			return true;
-		}
-	}
 	
 	public boolean inicializarComboBoxSocios() {
 		DefaultComboBoxModel<String> modelSocios = new DefaultComboBoxModel<String>(iCon.listarSocios());
@@ -262,35 +224,6 @@ public class RegistroAClase extends JInternalFrame {
 			return false;
 		else {
 			comboBoxSocios.setModel(modelSocios);
-			return true;
-		}
-	}
-	
-	public boolean inicializarComboBoxDynamic(String n){
-		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
-		if(modelClases.getSize() == 0)
-			return false;
-		else {
-			if(modelClases.equals(null)) {
-				comboBoxClases.setModel(null);
-			}else {
-				comboBoxClases.setModel(modelClases);
-			}
-			return true;
-		}
-	}
-	
-	public boolean inicializarComboBoxClases() {
-		String nombre = this.comboBoxActividadesAsociadas.getSelectedItem().toString();
-		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(nombre));
-		if(modelClases.getSize() == 0)
-			return false;
-		else {
-			if(modelClases.equals(null)) {
-				comboBoxClases.setModel(null);
-			}else {
-				comboBoxClases.setModel(modelClases);
-			}
 			return true;
 		}
 	}
@@ -338,6 +271,81 @@ public class RegistroAClase extends JInternalFrame {
 		catch (RegistroRepetidoExcepcion ex) {
 			JOptionPane.showMessageDialog(this, "Ya existe un registro de ese Socio!", "Registro a Clase",
 	                JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	public boolean inicializarComboBoxInstitucionDeportiva() {
+		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
+		if(modelInstitucionDeportiva.getSize() == 0)
+			return false;
+		else {
+			comboBoxInstitucionDeportiva.setModel(modelInstitucionDeportiva);
+			return true;
+		}
+	}
+	
+	public boolean inicializarComboBoxActividadesAsociadas() {
+		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
+		DtInstitucionDeportiva dtInst = iCon.getInstitucionDt(nombre);
+		List<DtActividadDeportiva> dtAct = dtInst.getActividadesDeportivas();
+		
+		String[] dtActNombre = new String[dtAct.size()];
+		int i=0;
+		for(DtActividadDeportiva a: dtAct) {
+        	dtActNombre[i]=a.getNombre();
+        	i++;
+        }
+		
+		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
+		if(modelActividades.getSize() == 0)
+			return false;
+		else {
+			comboBoxActividadesAsociadas.setModel(modelActividades);
+			return true;
+		}
+	}
+	
+	public void inicializarComboBoxDynamic(String n) {
+		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
+		DefaultComboBoxModel<String> modelNull = null;
+		if(modelClases.equals(null)) {
+			comboBoxClases.setModel(modelNull);
+		}else {
+			comboBoxClases.setModel(modelClases);
+		}
+	}
+	
+	public boolean inicializarComboBoxClases() {
+		String nombre = this.comboBoxActividadesAsociadas.getSelectedItem().toString();
+		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(nombre));
+		DefaultComboBoxModel<String> modelNull = null;
+		if(modelClases.getSize() == 0)
+			return false;
+		else {
+			if(modelClases.equals(null)) {
+				comboBoxClases.setModel(modelNull);
+			}else {
+				comboBoxClases.setModel(modelClases);
+			}
+			return true;
+		}
+	}
+	
+	public boolean inicializarComboBoxActividades(String n) {
+		DtInstitucionDeportiva dtInst = iCon.getInstitucionDt(n);
+		List<DtActividadDeportiva> dtAct = dtInst.getActividadesDeportivas();
+		String[] dtActNombre = new String[dtAct.size()];
+		int i=0;
+		for(DtActividadDeportiva a: dtAct) {
+        	dtActNombre[i]=a.getNombre();
+        	i++;
+        }
+		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
+		if(modelActividades.getSize() == 0)
+			return false;
+		else {
+			comboBoxActividadesAsociadas.setModel(modelActividades);
+			return true;
 		}
 	}
 }

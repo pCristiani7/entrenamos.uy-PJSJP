@@ -336,10 +336,11 @@ public class Controlador implements IControlador{
         return clases_ret;
 	}
 	
+	//crear funcion similar con las condiciones de que tenga actividades y profesores
+	//crear funcion que retorne lista de las istituciones con actividades deportivas
 	public String[] listarInstituciones() {
 		ArrayList<String> instituciones;
-		ManejadorInstitucionDeportiva mID = ManejadorInstitucionDeportiva.getInstancia();
-		instituciones = mID.obtenerInstituciones();
+		instituciones = mid.obtenerInstituciones();
 		String[] instituciones_ret = new String[instituciones.size()];
         int i=0;
         for(String s:instituciones) {
