@@ -331,7 +331,7 @@ public class PrincipalPage {
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Consulta Dictado de Clase");
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(consultaClaseInternalFrame.inicializarComboBoxInstitucionDeportiva()) {
+				if(consultaClaseInternalFrame.inicializarComboBoxInstituciones()) {
 					if(consultaClaseInternalFrame.inicializarComboBoxActividadesAsociadas()) {
 						if(consultaClaseInternalFrame.inicializarComboBoxClases()) { 
 							consultaClaseInternalFrame.setVisible(true);

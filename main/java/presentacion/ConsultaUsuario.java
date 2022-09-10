@@ -21,8 +21,6 @@ import interfaces.IControlador;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -98,15 +96,6 @@ public class ConsultaUsuario extends JInternalFrame {
 		comboBoxUsuarios = new JComboBox<String>();
 		comboBoxUsuarios.setFont(new Font("Dialog", Font.PLAIN, 12));
 		comboBoxUsuarios.setBounds(20, 138, 229, 36);
-		comboBoxUsuarios.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange() == ItemEvent.SELECTED) {
-					if(!comboBoxUsuarios.getSelectedItem().toString().equals(e)) {
-						limpiarScreenOnClosing();
-					}
-				}
-			}
-		});
 		getContentPane().add(comboBoxUsuarios);
 
 		lblNewLabelNickname = new JLabel("Nickname");
@@ -196,30 +185,12 @@ public class ConsultaUsuario extends JInternalFrame {
 		comboBoxClasesDictadas.setFont(new Font("Dialog", Font.PLAIN, 12));
 		comboBoxClasesDictadas.setBounds(289, 340, 174, 41);
 		comboBoxClasesDictadas.setVisible(false);
-		comboBoxClasesDictadas.addItemListener(new ItemListener() {
-		public void itemStateChanged(ItemEvent e) {
-			if(e.getStateChange() == ItemEvent.SELECTED) {
-				if(!comboBoxClasesDictadas.getSelectedItem().toString().equals(e)) {
-					clearPane();
-				}
-			}
-		}
-		});
 		getContentPane().add(comboBoxClasesDictadas);
 		
 		comboBoxRegistroClases = new JComboBox<String>();
 		comboBoxRegistroClases.setFont(new Font("Dialog", Font.PLAIN, 15));
 		comboBoxRegistroClases.setBounds(511, 340, 174, 41);
 		comboBoxRegistroClases.setVisible(false);
-		comboBoxRegistroClases.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange() == ItemEvent.SELECTED) {
-					if(!comboBoxRegistroClases.getSelectedItem().toString().equals(e)) {
-						clearPane();
-					}
-				}
-			}
-		});
 		getContentPane().add(comboBoxRegistroClases);
 		
 		btnConsultarDependsRegistro = new JButton("Consultar");
@@ -385,14 +356,9 @@ public class ConsultaUsuario extends JInternalFrame {
 	public boolean inicializarComboBoxRegistros() {
 		String s = comboBoxUsuarios.getSelectedItem().toString();
 		DefaultComboBoxModel<String> modelUsr = new DefaultComboBoxModel<String>(iCon.listarRegistrosSocio(s));
-		if(modelUsr.getSize() == 0) {
-			comboBoxRegistroClases.setSelectedIndex(-1);
-		comboBoxRegistroClases.setEnabled(false);
-		this.btnConsultarDependsRegistro.setEnabled(false);
-		return false;
-		}else {
-			comboBoxRegistroClases.setEnabled(true);
-			this.btnConsultarDependsRegistro.setEnabled(true);
+		if(modelUsr.getSize() == 0)
+			return false;
+		else {
 			comboBoxRegistroClases.setModel(modelUsr);
 			return true;
 		}
@@ -428,21 +394,11 @@ public class ConsultaUsuario extends JInternalFrame {
 	public boolean inicializarComboBoxClasesDictadas() {
 		String p = comboBoxUsuarios.getSelectedItem().toString();
 		DefaultComboBoxModel<String> modelUsr = new DefaultComboBoxModel<String>(iCon.listarClasesProf(p));
-		if(modelUsr.getSize() == 0) {
-			comboBoxClasesDictadas.setSelectedIndex(-1);
-			comboBoxClasesDictadas.setEnabled(false);
-			this.btnConsultarDependsRegistro.setEnabled(false);
+		if(modelUsr.getSize() == 0)
 			return false;
-		}else {
-			comboBoxClasesDictadas.setEnabled(true);
-			this.btnConsultarDependsDictado.setEnabled(true);
+		else {
 			comboBoxClasesDictadas.setModel(modelUsr);
 			return true;
 		}
-	}
-	
-	public void clearPane() {
-		this.textPaneDataProfesor.setVisible(false);
-		this.textPaneDataSocio.setVisible(false);
 	}
 }

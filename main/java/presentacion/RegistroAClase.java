@@ -51,7 +51,6 @@ public class RegistroAClase extends JInternalFrame {
 	private JTextPane textPaneInfoClase;
 	private JLabel lblInformacion;
 	private JDateChooser dateChooser;
-	private JButton btnVerClases;
 
 	/**
 	 * Launch the application.
@@ -92,8 +91,6 @@ public class RegistroAClase extends JInternalFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxInstitucionDeportiva.getSelectedItem().toString().equals(e)) {
-						limpiarTextPane();
-						if(inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString()))
 						inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString());
 						inicializarComboBoxDynamic(comboBoxActividadesAsociadas.getSelectedItem().toString());
 					}
@@ -113,7 +110,6 @@ public class RegistroAClase extends JInternalFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxActividadesAsociadas.getSelectedItem().toString().equals(e)) {
-						limpiarTextPane();
 						inicializarComboBoxDynamic(comboBoxActividadesAsociadas.getSelectedItem().toString());
 					}
 				}
@@ -139,7 +135,7 @@ public class RegistroAClase extends JInternalFrame {
 		textPaneInfoClase.setVisible(false);
 		getContentPane().add(textPaneInfoClase);
 		
-		btnVerClases = new JButton("Ver Informacion de Clase");
+		JButton btnVerClases = new JButton("Ver Informacion de Clase");
 		btnVerClases.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				infoClase(e);
@@ -262,13 +258,6 @@ public class RegistroAClase extends JInternalFrame {
 		setVisible(false);
 	}
 	
-
-	public void limpiarTextPane(){
-		textPaneInfoClase.setText(" ");
-		textPaneInfoClase.setVisible(false);
-		lblInformacion.setVisible(false);
-	}
-	
 	protected void registroAClaseAceptarActionPerformed(ActionEvent arg0) throws ParseException {
 		LocalDate fechaClase = Dating.toLocalDate(dateChooser.getDate());
 		String clase = comboBoxClases.getSelectedItem().toString();
@@ -286,7 +275,7 @@ public class RegistroAClase extends JInternalFrame {
 	}
 	
 	public boolean inicializarComboBoxInstitucionDeportiva() {
-		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstitucionesConAct());
+		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
 		if(modelInstitucionDeportiva.getSize() == 0)
 			return false;
 		else {
@@ -308,11 +297,8 @@ public class RegistroAClase extends JInternalFrame {
         }
 		
 		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
-		if(modelActividades.getSize() == 0) {
-			comboBoxActividadesAsociadas.setSelectedIndex(-1);
+		if(modelActividades.getSize() == 0)
 			return false;
-		}
-
 		else {
 			comboBoxActividadesAsociadas.setModel(modelActividades);
 			return true;
@@ -321,31 +307,26 @@ public class RegistroAClase extends JInternalFrame {
 	
 	public void inicializarComboBoxDynamic(String n) {
 		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
-		if(modelClases.getSize() == 0) {
-			comboBoxClases.setSelectedIndex(-1);
-			comboBoxClases.setEnabled(false);
-			this.btnVerClases.setEnabled(false);
-		}
-		else {
+		DefaultComboBoxModel<String> modelNull = null;
+		if(modelClases.equals(null)) {
+			comboBoxClases.setModel(modelNull);
+		}else {
 			comboBoxClases.setModel(modelClases);
-			comboBoxClases.setEnabled(true);
-			this.btnVerClases.setEnabled(true);
 		}
 	}
 	
 	public boolean inicializarComboBoxClases() {
 		String nombre = this.comboBoxActividadesAsociadas.getSelectedItem().toString();
 		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(nombre));
-		if(modelClases.getSize() == 0) {
-			comboBoxClases.setSelectedIndex(-1);
-			comboBoxClases.setEnabled(false);
-			this.btnVerClases.setEnabled(false);
+		DefaultComboBoxModel<String> modelNull = null;
+		if(modelClases.getSize() == 0)
 			return false;
-		}
 		else {
-			comboBoxClases.setModel(modelClases);
-			comboBoxClases.setEnabled(true);
-			this.btnVerClases.setEnabled(true);
+			if(modelClases.equals(null)) {
+				comboBoxClases.setModel(modelNull);
+			}else {
+				comboBoxClases.setModel(modelClases);
+			}
 			return true;
 		}
 	}
@@ -360,10 +341,8 @@ public class RegistroAClase extends JInternalFrame {
         	i++;
         }
 		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
-		if(modelActividades.getSize() == 0) {
-			comboBoxActividadesAsociadas.setSelectedIndex(-1);
+		if(modelActividades.getSize() == 0)
 			return false;
-		}
 		else {
 			comboBoxActividadesAsociadas.setModel(modelActividades);
 			return true;

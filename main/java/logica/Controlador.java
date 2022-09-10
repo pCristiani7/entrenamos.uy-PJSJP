@@ -25,6 +25,7 @@ public class Controlador implements IControlador{
 	ManejadorSocio ms = ManejadorSocio.getInstancia();
 	ManejadorActividadDeportiva mad = ManejadorActividadDeportiva.getInstancia();
 	ManejadorClase mc = ManejadorClase.getInstancia();
+	ManejadorRegistro mr = ManejadorRegistro.getInstancia();
 	
 	public Controlador() {
 		
@@ -261,15 +262,16 @@ public class Controlador implements IControlador{
 	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion{
 			Clase clase = mc.buscarClase(nomClase);
 			Socio socio = ms.buscarSocio(nomSocio);
-			List<Registro> registros = socio.getRegistros();
+			List<Registro> registrosSocio = mr.getRegistrosSocio(socio);
 			boolean existeReg = false;
-			for(Registro r: registros) {
-				if(r.getClase().getNombre() == clase.getNombre() && r.getSocio().getNickname() == socio.getNickname()) {
+			for(Registro r: registrosSocio) {
+				if(r.getClase().getNombre() == clase.getNombre()) {
 					existeReg = true;
 				}
 			}
 			if(!existeReg) {
 				Registro reg = new Registro(fecha,socio,clase);
+				mr.addRegisistro(reg);
 				socio.addRegistro(reg);
 				clase.addRegistro(reg);
 			}else {
