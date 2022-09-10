@@ -43,6 +43,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 	private JLabel lblHoraInicio;
 	private JLabel lblRegistros;
 	private JTextPane textPane;
+	private JButton btnVerInformacion;
 	
 	/**
 	 * Launch the application.
@@ -87,7 +88,10 @@ public class ConsultaDictadoClase extends JInternalFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxInstitucionDeportiva.getSelectedItem().toString().equals(e)) {
-						inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString());
+						clearOnClosing();
+						if(inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString()))
+							inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString());
+							inicializarComboBoxDynamic(comboBoxActividadesAsociadas.getSelectedItem().toString());
 					}
 				}
 			}
@@ -105,6 +109,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxActividadesAsociadas.getSelectedItem().toString().equals(e)) {
+						clearOnClosing();
 						inicializarComboBoxDynamic(comboBoxActividadesAsociadas.getSelectedItem().toString());
 					}
 				}
@@ -122,7 +127,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		comboBoxClases.setBounds(317, 130, 198, 34);
 		getContentPane().add(comboBoxClases);
 		
-		JButton btnVerInformacion = new JButton("Ver");
+		btnVerInformacion = new JButton("Ver");
 		btnVerInformacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				consultarDatos(e);
@@ -188,72 +193,6 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		getContentPane().add(textPane);
 
 	}
-
-	public boolean inicializarComboBoxInstituciones() {
-		DefaultComboBoxModel<String> modelInstituciones = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
-		if(modelInstituciones.getSize() == 0)
-			return false;
-		else {
-			comboBoxInstitucionDeportiva.setModel(modelInstituciones);
-			return true;
-		}
-	}
-	
-	public boolean inicializarComboBoxActividades(String n) {
-		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(n);
-		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
-		
-		String[] dtActNombre = new String[dtAct.size()];
-		int i=0;
-		for(DtActividadDeportiva a: dtAct) {
-        	dtActNombre[i]=a.getNombre();
-        	i++;
-        }
-		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
-		if(modelActividades.getSize() == 0)
-			return false;
-		else {
-			comboBoxActividadesAsociadas.setModel(modelActividades);
-			return true;
-		}
-	}
-
-	public boolean inicializarComboBoxActividadesAsociadas() {
-		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
-		DtInstitucionDeportiva instDep = iCon.getInstitucionDt(nombre);
-		List<DtActividadDeportiva> dtAct = instDep.getActividadesDeportivas();
-		
-		String[] dtActNombre = new String[dtAct.size()];
-		int i=0;
-		for(DtActividadDeportiva a: dtAct) {
-        	dtActNombre[i]=a.getNombre();
-        	i++;
-        }
-		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
-		if(modelActividades.getSize() == 0)
-			return false;
-		else {
-			comboBoxActividadesAsociadas.setModel(modelActividades);
-			return true;
-		}
-	}
-	
-	public void inicializarComboBoxDynamic(String n) {
-		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
-			comboBoxClases.setModel(modelClases);
-	}
-	
-	public boolean inicializarComboBoxClases() {
-		String nombre = this.comboBoxActividadesAsociadas.getSelectedItem().toString();
-		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(nombre));
-		if(modelClases.getSize() == 0)
-			return false;
-		else {
-			comboBoxClases.setModel(modelClases);
-			return true;
-		}
-	}
-	
 	public void clearOnClosing() {
 		this.lblNombre.setVisible(false);
 		this.lblProfesor.setVisible(false);
@@ -286,5 +225,92 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		this.textFieldProfesor.setVisible(true);
 		this.textFieldHoraInicio.setVisible(true);
 		textPane.setVisible(true);
+	}
+	
+	// NEWS
+	
+	public boolean inicializarComboBoxInstitucionDeportiva() {
+		DefaultComboBoxModel<String> modelInstitucionDeportiva = new DefaultComboBoxModel<String>(iCon.listarInstitucionesConAct());
+		if(modelInstitucionDeportiva.getSize() == 0)
+			return false;
+		else {
+			comboBoxInstitucionDeportiva.setModel(modelInstitucionDeportiva);
+			return true;
+		}
+	}
+	
+	public boolean inicializarComboBoxActividadesAsociadas() {
+		String nombre = this.comboBoxInstitucionDeportiva.getSelectedItem().toString();
+		DtInstitucionDeportiva dtInst = iCon.getInstitucionDt(nombre);
+		List<DtActividadDeportiva> dtAct = dtInst.getActividadesDeportivas();
+		
+		String[] dtActNombre = new String[dtAct.size()];
+		int i=0;
+		for(DtActividadDeportiva a: dtAct) {
+        	dtActNombre[i]=a.getNombre();
+        	i++;
+        }
+		
+		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
+		if(modelActividades.getSize() == 0) {
+			comboBoxActividadesAsociadas.setSelectedIndex(-1);
+			return false;
+		}
+
+		else {
+			comboBoxActividadesAsociadas.setModel(modelActividades);
+			return true;
+		}
+	}
+	
+	public void inicializarComboBoxDynamic(String n) {
+		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
+		if(modelClases.getSize() == 0) {
+			comboBoxClases.setSelectedIndex(-1);
+			comboBoxClases.setEnabled(false);
+			this.btnVerInformacion.setEnabled(false);
+		}
+		else {
+			comboBoxClases.setModel(modelClases);
+			comboBoxClases.setEnabled(true);
+			this.btnVerInformacion.setEnabled(true);
+		}
+	}
+	
+	public boolean inicializarComboBoxClases() {
+		String nombre = this.comboBoxActividadesAsociadas.getSelectedItem().toString();
+		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(nombre));
+		if(modelClases.getSize() == 0) {
+			comboBoxClases.setSelectedIndex(-1);
+			comboBoxClases.setEnabled(false);
+			this.btnVerInformacion.setEnabled(false);
+			return false;
+		}
+		else {
+			comboBoxClases.setModel(modelClases);
+			comboBoxClases.setEnabled(true);
+			this.btnVerInformacion.setEnabled(true);
+			return true;
+		}
+	}
+	
+	public boolean inicializarComboBoxActividades(String n) {
+		DtInstitucionDeportiva dtInst = iCon.getInstitucionDt(n);
+		List<DtActividadDeportiva> dtAct = dtInst.getActividadesDeportivas();
+		String[] dtActNombre = new String[dtAct.size()];
+		int i=0;
+		for(DtActividadDeportiva a: dtAct) {
+        	dtActNombre[i]=a.getNombre();
+        	i++;
+        }
+		DefaultComboBoxModel<String> modelActividades = new DefaultComboBoxModel<String>(dtActNombre);
+		if(modelActividades.getSize() == 0) {
+			comboBoxActividadesAsociadas.setSelectedIndex(-1);
+			return false;
+		}
+		else {
+			comboBoxActividadesAsociadas.setModel(modelActividades);
+			return true;
+		}
 	}
 }
