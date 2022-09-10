@@ -212,7 +212,7 @@ public class RegistroAClase extends JInternalFrame {
 	}
 	
 	public boolean inicializarComboBoxInstituciones() {
-		DefaultComboBoxModel<String> modelInstituciones = new DefaultComboBoxModel<String>(iCon.listarInstituciones());
+		DefaultComboBoxModel<String> modelInstituciones = new DefaultComboBoxModel<String>(iCon.listarInstitucionesConActYClases());
 		if(modelInstituciones.getSize() == 0)
 			return false;
 		else {

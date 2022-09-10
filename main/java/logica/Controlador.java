@@ -372,6 +372,26 @@ public class Controlador implements IControlador{
         return instituciones_ret;
 	}
 	
+	public String[] listarInstitucionesConActYClases() {
+		ArrayList<String> instituciones = new ArrayList<>();
+		List<InstitucionDeportiva> listId = mid.getInstituciones();
+		for(InstitucionDeportiva id: listId) {
+			List<ActividadDeportiva> listAct = id.getActividadesDeportivas();
+			for(ActividadDeportiva ad: listAct) {
+				if(ad.getClases().size() > 0) {
+					instituciones.add(id.getNombre());
+				}
+			}
+		}
+		String[] instituciones_ret = new String[instituciones.size()];
+        int i=0;
+        for(String s:instituciones) {
+        	instituciones_ret[i]=s;
+        	i++;
+        }
+        return instituciones_ret;
+	}
+	
 	public String[] listarInstitucionesConClases() {
 		ArrayList<String> instituciones = new ArrayList<>();
 		List<InstitucionDeportiva> listId = mid.getInstituciones();

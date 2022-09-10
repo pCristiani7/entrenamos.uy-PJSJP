@@ -52,6 +52,7 @@ public interface IControlador {
 	
 	public String[] listarInstitucionesConActYProf();
 	public String[] listarInstitucionesConAct();
+	public String[] listarInstitucionesConActYClases();
 	public String[] listarInstituciones();
 	public String[] listarClasesProf(String nickname);
 	public String[] listarRegistrosSocio(String nickname);
