@@ -95,6 +95,7 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxInstitucionDeportiva.getSelectedItem().toString().equals(e)) {
+						limpiarScreenOnClosing();
 						inicializarComboBoxActividades(comboBoxInstitucionDeportiva.getSelectedItem().toString());
 					}
 				}
@@ -108,11 +109,24 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		lblActividadesAsociadas.setBounds(32, 93, 259, 34);
 		getContentPane().add(lblActividadesAsociadas);
 		
+		
+		btnConsultarClase = new JButton("Ver Clase");
+		btnConsultarClase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				consultarClase(e);
+			}
+		});
+		btnConsultarClase.setFont(new Font("Dialog", Font.BOLD, 12));
+		btnConsultarClase.setBounds(552, 384, 134, 34);
+		btnConsultarClase.setVisible(false);
+		getContentPane().add(btnConsultarClase);
+		
 		comboBoxActividadesAsociadas = new JComboBox<String>();
 		comboBoxActividadesAsociadas.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange() == ItemEvent.SELECTED) {
 					if(!comboBoxActividadesAsociadas.getSelectedItem().toString().equals(e)) {
+						limpiarScreenOnClosing();
 						inicializarComboBoxDynamic(comboBoxActividadesAsociadas.getSelectedItem().toString());
 					}
 				}
@@ -124,11 +138,18 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		JButton btnConsultarActividad = new JButton("Consultar");
 		btnConsultarActividad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				inicializarComboBoxClases();
-				consultarActividad(e);
-				btnConsultarClase.setVisible(true);
-				lblClases.setVisible(true);
-				comboBoxClases.setVisible(true);
+				if(inicializarComboBoxClases()) {
+					consultarActividad(e);
+					btnConsultarClase.setVisible(true);
+					lblClases.setVisible(true);
+					comboBoxClases.setVisible(true);
+				}else {
+					consultarActividad(e);
+					btnConsultarClase.setVisible(false);
+					lblClases.setVisible(false);
+					comboBoxClases.setVisible(false);
+				}
+				
 			}
 		});
 		btnConsultarActividad.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -145,17 +166,6 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		comboBoxClases.setBounds(299, 385, 198, 34);
 		comboBoxClases.setVisible(false);
 		getContentPane().add(comboBoxClases);
-		
-		btnConsultarClase = new JButton("Ver Clase");
-		btnConsultarClase.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				consultarClase(e);
-			}
-		});
-		btnConsultarClase.setFont(new Font("Dialog", Font.BOLD, 12));
-		btnConsultarClase.setBounds(552, 384, 134, 34);
-		btnConsultarClase.setVisible(false);
-		getContentPane().add(btnConsultarClase);
 		
 		textPaneInfoClase = new JTextPane();
 		textPaneInfoClase.setFont(new Font("Dialog", Font.ITALIC, 15));
@@ -266,9 +276,14 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		}
 	}
 	
-	public void inicializarComboBoxDynamic(String n) {
+	public boolean inicializarComboBoxDynamic(String n) {
 		DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(iCon.listarClasesActividadDeportiva(n));
-			comboBoxClases.setModel(modelClases);
+			if(modelClases.getSize() == 0)
+				return false;
+			else {
+				comboBoxClases.setModel(modelClases);
+				return true;
+			}
 	}
 	
 	public boolean inicializarComboBoxClases() {
@@ -353,4 +368,5 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		textPaneInfoClase.setText(data_x);
 		textPaneInfoClase.setVisible(true);
 	}
+	
 }
