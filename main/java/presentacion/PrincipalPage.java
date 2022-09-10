@@ -236,19 +236,12 @@ public class PrincipalPage {
 		mntmNewMenuItem_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(altaDictadoDeClaseInternalFrame.inicializarComboBoxInstitucionDeportiva()) {
-					if(altaDictadoDeClaseInternalFrame.inicializarComboBoxActividadesAsociadas()) {
-						if(altaDictadoDeClaseInternalFrame.inicializarComboBoxProfesores()) {
+					altaDictadoDeClaseInternalFrame.inicializarComboBoxActividadesAsociadas();
+						altaDictadoDeClaseInternalFrame.inicializarComboBoxProfesores();
 							altaDictadoDeClaseInternalFrame.setVisible(true);
-						}else {
-							JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Profesores en el sistema!", "Alta Dictado de Clase",
-				                    JOptionPane.ERROR_MESSAGE);
-						}
-					}else {
-						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Alta Dictado de Clase",
-			                    JOptionPane.ERROR_MESSAGE);
-					}
 				}else {
-					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Alta Dictado de Clase",
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "Error con Instituciones"
+							+ "\n" + "- Revisar Actividades y Profesores asociados!", "Alta Dictado de Clase",
 		                    JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -261,24 +254,13 @@ public class PrincipalPage {
 		mntmNewMenuItem_6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					if(registroAClaseInternalFrame.inicializarComboBoxInstituciones()) {
-						if(registroAClaseInternalFrame.inicializarComboBoxActividadesAsociadas()) {
-							if(registroAClaseInternalFrame.inicializarComboBoxClases()) {
-								if(registroAClaseInternalFrame.inicializarComboBoxSocios()) {
+						registroAClaseInternalFrame.inicializarComboBoxActividadesAsociadas(); 
+							registroAClaseInternalFrame.inicializarComboBoxClases();
+								registroAClaseInternalFrame.inicializarComboBoxSocios();
 									registroAClaseInternalFrame.setVisible(true);
-								}else {
-									JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Socios en el sistema!", "Alta Dictado de Clase",
-						                    JOptionPane.ERROR_MESSAGE);
-								}
-							}else {
-								JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Clases en el sistema!", "Alta Dictado de Clase",
-					                    JOptionPane.ERROR_MESSAGE);
-							}
-						}else {
-							JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Alta Dictado de Clase",
-				                    JOptionPane.ERROR_MESSAGE);
-						}
 					}else{
-						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Alta Dictado de Clase",
+						JOptionPane.showMessageDialog(frmEntrenamosUy, "Error con Instituciones"
+								+ "\n" + "- Revisar Actividades y Clases asociadas!", "Alta Dictado de Clase",
 			                    JOptionPane.ERROR_MESSAGE);
 					}
 				}
@@ -319,7 +301,7 @@ public class PrincipalPage {
 			                    JOptionPane.ERROR_MESSAGE);
 					}
 				}else {
-				JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Consulta Actividad Deportiva",
+				JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Consulta Actividad Deportiva",
 	                    JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -340,11 +322,11 @@ public class PrincipalPage {
 				                    JOptionPane.ERROR_MESSAGE);
 						}
 					}else {
-						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Actividades en el sistema!", "Consulta Dictado de Clase",
+						JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Clases en el sistema!", "Consulta Dictado de Clase",
 			                    JOptionPane.ERROR_MESSAGE);
 					}
 				}else{
-					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Instituciones en el sistema!", "Consulta Dictado de Clase",
+					JOptionPane.showMessageDialog(frmEntrenamosUy, "No hay Clases en el sistema!", "Consulta Dictado de Clase",
 		                    JOptionPane.ERROR_MESSAGE);
 				}
 			}

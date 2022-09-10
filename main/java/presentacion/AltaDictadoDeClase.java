@@ -371,5 +371,4 @@ public class AltaDictadoDeClase extends JInternalFrame {
 			return true;
 		}
 	}
-	
 }

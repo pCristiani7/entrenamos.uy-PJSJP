@@ -25,8 +25,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
-import javax.swing.JTextPane;
 import java.util.List;
+
+import javax.swing.JTextArea;
+import java.awt.ScrollPane;
+import javax.swing.JScrollPane;
 
 public class ConsultaUsuario extends JInternalFrame {
 
@@ -50,10 +53,12 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JLabel lblClasesDictadas;
 	private JComboBox<String> comboBoxClasesDictadas;
 	private JComboBox<String> comboBoxRegistroClases;
-	private JTextPane textPaneDataSocio;
-	private JTextPane textPaneDataProfesor;
 	private JButton btnConsultarDependsRegistro;
 	private JButton btnConsultarDependsDictado;
+	private JTextArea textPaneDataProfesor;
+	private JTextArea textPaneDataSocio;
+	private JScrollPane scrollPaneSocio;
+	private JScrollPane scrollPaneProf;
 
 
 	/**
@@ -304,19 +309,27 @@ public class ConsultaUsuario extends JInternalFrame {
 		btnConsultarDependsDictado.setVisible(false);
 		getContentPane().add(btnConsultarDependsDictado);
 		
-		textPaneDataSocio = new JTextPane();
+		textPaneDataSocio = new JTextArea();
 		textPaneDataSocio.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textPaneDataSocio.setEditable(false);
-		textPaneDataSocio.setVisible(false);
 		textPaneDataSocio.setBounds(289, 340, 198, 193);
+		textPaneDataSocio.setVisible(false);
 		getContentPane().add(textPaneDataSocio);
 		
-		textPaneDataProfesor = new JTextPane();
+		textPaneDataProfesor = new JTextArea();
 		textPaneDataProfesor.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textPaneDataProfesor.setEditable(false);
+		textPaneDataSocio.setBounds(511, 340, 198, 193);
 		textPaneDataProfesor.setVisible(false);
-		textPaneDataProfesor.setBounds(511, 340, 198, 193);
 		getContentPane().add(textPaneDataProfesor);
+		
+		scrollPaneSocio = new JScrollPane(textPaneDataSocio, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneSocio.setBounds(39, 41, 198, 193);
+		getContentPane().add(scrollPaneSocio);
+		
+		scrollPaneProf = new JScrollPane(textPaneDataProfesor, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPaneProf.setBounds(511, 340, 198, 193);
+		getContentPane().add(scrollPaneProf);
 		
 
 	}
@@ -421,8 +434,8 @@ public class ConsultaUsuario extends JInternalFrame {
 		this.comboBoxClasesDictadas.setVisible(false);
 		this.lblClasesDictadas.setVisible(false);
 		this.btnConsultarDependsDictado.setVisible(false);
-		this.textPaneDataProfesor.setVisible(false);
-		this.textPaneDataSocio.setVisible(false);
+		this.scrollPaneSocio.setVisible(false);
+		this.scrollPaneProf.setVisible(false);
 	}
 	
 	public boolean inicializarComboBoxClasesDictadas() {
@@ -431,18 +444,18 @@ public class ConsultaUsuario extends JInternalFrame {
 		if(modelUsr.getSize() == 0) {
 			comboBoxClasesDictadas.setSelectedIndex(-1);
 			comboBoxClasesDictadas.setEnabled(false);
-			this.btnConsultarDependsRegistro.setEnabled(false);
+			btnConsultarDependsDictado.setEnabled(false);
 			return false;
 		}else {
 			comboBoxClasesDictadas.setEnabled(true);
-			this.btnConsultarDependsDictado.setEnabled(true);
+			btnConsultarDependsDictado.setEnabled(true);
 			comboBoxClasesDictadas.setModel(modelUsr);
 			return true;
 		}
 	}
 	
 	public void clearPane() {
-		this.textPaneDataProfesor.setVisible(false);
-		this.textPaneDataSocio.setVisible(false);
+		this.scrollPaneSocio.setVisible(false);
+		this.scrollPaneProf.setVisible(false);
 	}
 }

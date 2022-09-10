@@ -377,10 +377,14 @@ public class Controlador implements IControlador{
 		List<InstitucionDeportiva> listId = mid.getInstituciones();
 		for(InstitucionDeportiva id: listId) {
 			List<ActividadDeportiva> listAct = id.getActividadesDeportivas();
+			boolean clases = false;
 			for(ActividadDeportiva ad: listAct) {
 				if(ad.getClases().size() > 0) {
-					instituciones.add(id.getNombre());
+					clases = true;
 				}
+			}
+			if(clases) {
+				instituciones.add(id.getNombre());
 			}
 		}
 		String[] instituciones_ret = new String[instituciones.size()];
@@ -567,6 +571,11 @@ public class Controlador implements IControlador{
         	i++;
         }
         return clases_ret;
+	}
+	
+	public ArrayList<String> listarSociosFront(){
+		ArrayList<String> aRetornar = ms.obtenerSocios();
+		return aRetornar;
 	}
 
 	@Override

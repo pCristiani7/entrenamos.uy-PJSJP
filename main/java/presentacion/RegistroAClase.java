@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -36,6 +37,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.awt.event.ItemEvent;
 import javax.swing.JTextPane;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class RegistroAClase extends JInternalFrame {
 
@@ -74,6 +77,12 @@ public class RegistroAClase extends JInternalFrame {
 	 * @throws ParseException 
 	 */
 	public RegistroAClase(IControlador iCon) throws ParseException {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarTextPane();
+			}
+		});
 		this.iCon = iCon;
 		setIconifiable(true);
 		setMaximizable(true);
@@ -142,7 +151,11 @@ public class RegistroAClase extends JInternalFrame {
 		btnVerClases = new JButton("Ver Informacion de Clase");
 		btnVerClases.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				infoClase(e);
+				if(listarSocios() == 1) {
+					infoClaseWithSocios(e);
+				}else{
+					infoClaseWithOutSocios(e);
+				}
 			}
 		});
 		btnVerClases.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -224,15 +237,19 @@ public class RegistroAClase extends JInternalFrame {
 	
 	public boolean inicializarComboBoxSocios() {
 		DefaultComboBoxModel<String> modelSocios = new DefaultComboBoxModel<String>(iCon.listarSocios());
-		if(modelSocios.getSize() == 0)
+		if(modelSocios.getSize() == 0) {
+			comboBoxSocios.setSelectedIndex(-1);
+			comboBoxSocios.setEnabled(false);
 			return false;
+		}
 		else {
+			comboBoxSocios.setEnabled(true);
 			comboBoxSocios.setModel(modelSocios);
 			return true;
 		}
 	}
 	
-	protected void infoClase(ActionEvent arg0) {
+	protected void infoClaseWithSocios(ActionEvent arg0) {
 		lblInformacion.setVisible(true);
 		textPaneInfoClase.setVisible(true);
 		String claseSelected = comboBoxClases.getSelectedItem().toString();
@@ -245,6 +262,17 @@ public class RegistroAClase extends JInternalFrame {
 		for(DtRegistro x:registros) {
 			data = data + dtS.getNickname() + " - " + x.getFecha().toString() + "\n";
 		}
+		textPaneInfoClase.setText(data);
+	}
+	
+	protected void infoClaseWithOutSocios(ActionEvent arg0) {
+		lblInformacion.setVisible(true);
+		textPaneInfoClase.setVisible(true);
+		String claseSelected = comboBoxClases.getSelectedItem().toString();
+		DtClase dtC = iCon.getDatosClase(claseSelected);
+		String data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + 
+		dtC.getActividadDeportiva() + "\n" + "Profesor: " + dtC.getProfesor() +
+		"\n" + "Hora Inicio: " + dtC.getHoraInicio().toString();
 		textPaneInfoClase.setText(data);
 	}
 	
@@ -367,6 +395,15 @@ public class RegistroAClase extends JInternalFrame {
 		else {
 			comboBoxActividadesAsociadas.setModel(modelActividades);
 			return true;
+		}
+	}
+	
+	public int listarSocios() {
+		ArrayList<String> socios = iCon.listarSociosFront();
+		if(socios.size() > 0) {
+			return 1;
+		}else {
+			return 2;
 		}
 	}
 }

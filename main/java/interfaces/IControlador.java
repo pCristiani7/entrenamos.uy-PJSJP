@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
@@ -67,5 +68,6 @@ public interface IControlador {
 	public String[] listarActividades();
 	public DtInstitucionDeportiva getInstitucionDt(String nombre);
 	public String[] listarClases();
+	public ArrayList<String> listarSociosFront();
 	
 }
