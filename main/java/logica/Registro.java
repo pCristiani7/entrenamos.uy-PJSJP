@@ -13,7 +13,7 @@ import persistencia.RegistroId;
 @Entity
 @IdClass(RegistroId.class)
 public class Registro {
-
+	
 	private LocalDate fecha;
 	@Id
 	@ManyToOne

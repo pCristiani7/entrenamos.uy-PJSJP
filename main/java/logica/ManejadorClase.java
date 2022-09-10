@@ -50,6 +50,14 @@ public class ManejadorClase {
 		em.persist(c);
 		em.getTransaction().commit();
 	}
+	
+	public void modClase(Clase c) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		em.getTransaction().begin();
+		em.merge(c);
+		em.getTransaction().commit();
+	}
 
 	public List<Clase> getClases(){
 		Conexion conexion = Conexion.getInstancia();

@@ -21,8 +21,7 @@ public class ActividadDeportiva {
 	
 	@OneToMany(mappedBy="actividadDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Clase> clases = new ArrayList<>();
-	
-	private int cantClases;
+
 	@ManyToOne
 	@JoinColumn(
 			name = "institucionDeportiva"
@@ -42,7 +41,6 @@ public class ActividadDeportiva {
 		this.costo = costo;
 		this.fecha = fecha;
 		this.clases = clases;
-		this.cantClases = clases.size();
 		this.institucionDeportiva = institucionDeportiva;
 	}
 
@@ -90,13 +88,6 @@ public class ActividadDeportiva {
 		return clases;
 	}
 	
-	public int getCantClases() {
-		return cantClases;
-	}
-	
-	public void setCantClases() {
-		this.cantClases = clases.size();
-	}
 
 	public void setClases(List<Clase> clases) {
 		this.clases = clases;
