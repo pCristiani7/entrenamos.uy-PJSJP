@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class AltaInstitucionDeportiva extends JInternalFrame {
 
@@ -54,6 +56,12 @@ public class AltaInstitucionDeportiva extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaInstitucionDeportiva(IControlador iCon) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarFormulario();
+			}
+		});
 		setClosable(true);
 		setTitle("Alta Institucion Deportiva");
 		this.iCon = iCon;

@@ -19,11 +19,12 @@ import java.awt.event.ItemListener;
 
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
 import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class ConsultaDictadoClase extends JInternalFrame {
 
@@ -42,8 +43,9 @@ public class ConsultaDictadoClase extends JInternalFrame {
 	private JLabel lblProfesor;
 	private JLabel lblHoraInicio;
 	private JLabel lblRegistros;
-	private JTextPane textPane;
 	private JButton btnVerInformacion;
+	private JTextArea textPane;
+	private JScrollPane scrollRegistros;
 	
 	/**
 	 * Launch the application.
@@ -181,16 +183,23 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		
 		lblRegistros = new JLabel("Registros");
 		lblRegistros.setFont(new Font("Dialog", Font.PLAIN, 22));
-		lblRegistros.setBounds(50, 352, 259, 147);
+		lblRegistros.setBounds(50, 336, 259, 163);
 		lblRegistros.setVisible(false);
 		getContentPane().add(lblRegistros);
 		
-		textPane = new JTextPane();
+		textPane = new JTextArea();
 		textPane.setFont(new Font("Dialog", Font.ITALIC, 15));
 		textPane.setEditable(false);
 		textPane.setBounds(317, 352, 198, 147);
-		textPane.setVisible(false);
 		getContentPane().add(textPane);
+		
+		scrollRegistros = new JScrollPane(
+				textPane,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollRegistros.setBounds(317, 336, 198, 163);
+		scrollRegistros.setVisible(false);
+		getContentPane().add(scrollRegistros);
 
 	}
 	public void clearOnClosing() {
@@ -202,6 +211,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		this.textFieldProfesor.setVisible(false);
 		this.textFieldHoraInicio.setVisible(false);
 		this.textPane.setVisible(false);
+		this.scrollRegistros.setVisible(false);
 	}
 	
 	protected void consultarDatos(ActionEvent arg0) {
@@ -210,7 +220,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		List <DtRegistro> registros = dtC.getRegistros();
 		String data = "";
 		for(DtRegistro x:registros) {
-			data = data + x.getFecha().toString() + "\n";
+			data = data + x.getSocio() + " - "+ x.getFecha().toString() + "\n";
 		}
 		textPane.setText(data);
 		textFieldNombre.setText(dtC.getNombre());
@@ -225,6 +235,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		this.textFieldProfesor.setVisible(true);
 		this.textFieldHoraInicio.setVisible(true);
 		textPane.setVisible(true);
+		scrollRegistros.setVisible(true);
 	}
 	
 	// NEWS

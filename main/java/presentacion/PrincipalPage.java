@@ -60,6 +60,7 @@ public class PrincipalPage {
 	 * Create the application.
 	 * @throws ParseException 
 	 */
+	@SuppressWarnings("unused")
 	public PrincipalPage() throws ParseException {
 		initialize();
 		Conexion con = Conexion.getInstancia()
@@ -202,6 +203,7 @@ public class PrincipalPage {
 					JOptionPane.showMessageDialog(frmEntrenamosUy, "Atencion para Profesor: No hay Instituciones registradas!", "Alta Usuario",
 				            JOptionPane.WARNING_MESSAGE);	
 				}
+				altaUsuarioInternalFrame.inicializar();
 				altaUsuarioInternalFrame.setVisible(true);
 			}
 		});
@@ -260,7 +262,7 @@ public class PrincipalPage {
 									registroAClaseInternalFrame.setVisible(true);
 					}else{
 						JOptionPane.showMessageDialog(frmEntrenamosUy, "Error con Instituciones"
-								+ "\n" + "- Revisar Actividades y Clases asociadas!", "Alta Dictado de Clase",
+								+ "\n" + "- Revisar Actividades y Clases asociadas!", "Registro a Clase",
 			                    JOptionPane.ERROR_MESSAGE);
 					}
 				}
@@ -341,7 +343,7 @@ public class PrincipalPage {
 		JMenuItem mntmNewMenuItem_8_1 = new JMenuItem("Ranking Clases");
 		mntmNewMenuItem_8_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(rankingClasesInternalFrame.thereSomething()) {
+				if(rankingClasesInternalFrame.thereSomething() == 1) {
 					rankingClasesInternalFrame.chargeRanking();
 					rankingClasesInternalFrame.setVisible(true);
 				}else {
@@ -356,7 +358,7 @@ public class PrincipalPage {
 		JMenuItem mntmNewMenuItem_10_1 = new JMenuItem("Ranking Actividades Deportivas");
 		mntmNewMenuItem_10_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(rankingActividadesInternalFrame.thereSomething()) {
+				if(rankingActividadesInternalFrame.thereSomething() == 1) {
 					rankingActividadesInternalFrame.chargeRanking();
 					rankingActividadesInternalFrame.setVisible(true);
 				}else {

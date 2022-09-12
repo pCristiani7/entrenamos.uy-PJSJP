@@ -2,6 +2,7 @@ package presentacion;
 
 import java.awt.EventQueue;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
@@ -9,9 +10,11 @@ import javax.swing.JInternalFrame;
 import datatypes.DtClase;
 import interfaces.IControlador;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
+
 import java.awt.Font;
 import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 public class RankingClases extends JInternalFrame {
 
@@ -20,7 +23,8 @@ public class RankingClases extends JInternalFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private IControlador iCon;
-	private JTextPane textPane;
+	private JTextArea textPane;
+	private JScrollPane scroll;
 
 	/**
 	 * Launch the application.
@@ -50,23 +54,33 @@ public class RankingClases extends JInternalFrame {
 		
 		JLabel lblRankingClases = new JLabel("RANKING CLASES");
 		lblRankingClases.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRankingClases.setFont(new Font("Dialog", Font.BOLD, 22));
-		lblRankingClases.setBounds(253, 39, 295, 42);
+		lblRankingClases.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 22));
+		lblRankingClases.setBounds(92, 34, 170, 42);
 		getContentPane().add(lblRankingClases);
 		
-		textPane = new JTextPane();
-		textPane.setFont(new Font("Dialog", Font.PLAIN, 20));
+		textPane = new JTextArea();
+		textPane.setFont(new Font("Franklin Gothic Medium", Font.ITALIC, 18));
 		textPane.setEditable(false);
-		textPane.setBounds(18, 93, 766, 431);
+		textPane.setLineWrap(true);
+		textPane.setWrapStyleWord(true);
+		textPane.setBounds(92, 87, 600, 400);
 		getContentPane().add(textPane);
+		
+		scroll = new JScrollPane(
+				textPane,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scroll.setBounds(92, 87, 600, 400);
+		getContentPane().add(scroll);
 
 	}
 
-	public boolean thereSomething () {
-		if(iCon.listarClases().equals(null)) {
-			return false;
+	public int thereSomething () {
+		ArrayList<String> clases = iCon.listarClasesFront();
+		if(clases.size() > 0) {
+			return 1;
 		}else {
-			return true;
+			return 2;
 		}
 	}
 	

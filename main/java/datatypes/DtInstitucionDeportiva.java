@@ -3,9 +3,6 @@ package datatypes;
 import java.util.ArrayList;
 import java.util.List;
 
-import logica.ActividadDeportiva;
-import logica.InstitucionDeportiva;
-
 public class DtInstitucionDeportiva {
 	private String nombre;
 	private String descripcion;

@@ -66,5 +66,8 @@ public interface IControlador {
 	public DtInstitucionDeportiva getInstitucionDt(String nombre);
 	public String[] listarClases();
 	public ArrayList<String> listarSociosFront();
+	public ArrayList<String> listarActsFront();
+	public ArrayList<String> listarClasesFront();
+	public ArrayList<String> listarProfesoresFront();
 	
 }

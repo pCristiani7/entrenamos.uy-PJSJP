@@ -20,6 +20,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class AltaActividadDeportiva extends JInternalFrame {
 
@@ -38,6 +40,12 @@ public class AltaActividadDeportiva extends JInternalFrame {
 	 * Create the frame.
 	 */
 	public AltaActividadDeportiva(IControlador iCon) {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarFormulario();
+			}
+		});
 		getContentPane().setFont(new Font("Dialog", Font.PLAIN, 22));
 		this.iCon = iCon;
 		setClosable(true);

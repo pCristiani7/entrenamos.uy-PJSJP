@@ -80,7 +80,7 @@ public class Controlador implements IControlador{
 			List<Registro> registros = soc.getRegistros();
 			ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 			for(Registro r: registros) {
-				DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
+				DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha(),soc.getNickname());
 				dtRegistros.add(dtReg);
 			}
 			DtSocio dtSocio = new DtSocio(soc.getNickname(), soc.getNombre(),soc.getApellido(), soc.getEmail(),soc.getFecha(), dtRegistros);	
@@ -168,7 +168,7 @@ public class Controlador implements IControlador{
 				List<Registro> registros = c.getRegistros();
 				ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 				for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
-					DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
+					DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha(),r.getSocio().getNickname());
 					dtRegistros.add(dtReg);
 				}		
 				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
@@ -233,7 +233,7 @@ public class Controlador implements IControlador{
 				List<Registro> registros = c.getRegistros();
 				ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 				for(Registro r: registros) {									//Para cada clase, obtengo su lista de registros
-					DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
+					DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha(),r.getSocio().getNickname());
 					dtRegistros.add(dtReg);
 				}		
 				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), dtRegistros, c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
@@ -284,7 +284,7 @@ public class Controlador implements IControlador{
 			List<DtRegistro> listDtReg = new ArrayList<>();
 			List<Registro> listReg = c.getRegistros();
 			for(Registro r: listReg) {
-				DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
+				DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha(),r.getSocio().getNickname());
 				listDtReg.add(dtReg);
 			}
 			DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(), listDtReg, c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNickname());
@@ -530,7 +530,7 @@ public class Controlador implements IControlador{
 		List<Registro> registros = s.getRegistros();
 		ArrayList<DtRegistro> dtRegistros = new ArrayList<DtRegistro>();
 		for(Registro r: registros) {							
-			DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha());
+			DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha(),s.getNickname());
 			dtRegistros.add(dtReg);
 		}	
 		DtSocio dtSocio = new DtSocio(s.getNickname(),s.getNombre(),s.getApellido(),s.getEmail(),s.getFecha(),dtRegistros);
@@ -571,6 +571,21 @@ public class Controlador implements IControlador{
 		ArrayList<String> aRetornar = ms.obtenerSocios();
 		return aRetornar;
 	}
-
+	
+	public ArrayList<String> listarProfesoresFront(){
+		ArrayList<String> aRetornar = mid.obtenerInstituciones();
+		return aRetornar;
+	}
+	
+	
+	public ArrayList<String> listarActsFront(){
+		ArrayList<String> aRetornar = mad.obtenerActividades();
+		return aRetornar;
+	}
+	
+	public ArrayList<String> listarClasesFront(){
+		ArrayList<String> aRetornar = mc.obtenerClases();
+		return aRetornar;
+	}
 }
 

@@ -28,7 +28,6 @@ import javax.swing.JTextField;
 import java.util.List;
 
 import javax.swing.JTextArea;
-import java.awt.ScrollPane;
 import javax.swing.JScrollPane;
 
 public class ConsultaUsuario extends JInternalFrame {
@@ -55,10 +54,10 @@ public class ConsultaUsuario extends JInternalFrame {
 	private JComboBox<String> comboBoxRegistroClases;
 	private JButton btnConsultarDependsRegistro;
 	private JButton btnConsultarDependsDictado;
-	private JTextArea textPaneDataProfesor;
-	private JTextArea textPaneDataSocio;
-	private JScrollPane scrollPaneSocio;
-	private JScrollPane scrollPaneProf;
+	private JTextArea textAreaSocio;
+	private JTextArea textAreaProfesor;
+	private JScrollPane scrollSocio;
+	private JScrollPane scrollProfesor;
 
 
 	/**
@@ -236,8 +235,9 @@ public class ConsultaUsuario extends JInternalFrame {
 				data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + dtC.getActividadDeportiva() + "\n"
 				+ "Profesor: "  + dtC.getProfesor() + "\n"  + "URL: " + dtC.getUrl() + "\n"  + "Fecha: " + dtC.getFecha().toString() + "\n"
 				+ "Hora Inicio: " + dtC.getHoraInicio().toString();			
-				textPaneDataSocio.setText(data);
-				textPaneDataSocio.setVisible(true);
+				textAreaSocio.setText(data);
+				textAreaSocio.setVisible(true);
+				scrollSocio.setVisible(true);
 				
 			}
 		});
@@ -260,8 +260,9 @@ public class ConsultaUsuario extends JInternalFrame {
 					lblClasesDictadas.setVisible(false);
 					comboBoxRegistroClases.setVisible(true);
 					lblRegistroaClases.setVisible(true);
-					textPaneDataProfesor.setText(" ");
-					textPaneDataProfesor.setVisible(false);
+					textAreaProfesor.setText(" ");
+					textAreaProfesor.setVisible(false);
+					scrollProfesor.setVisible(false);
 					DtSocio dtS = (DtSocio) dtUsr;
 					inicializarInvisiblesSocio(dtS);
 				}else if(dtUsr instanceof DtProfesor) {
@@ -272,8 +273,9 @@ public class ConsultaUsuario extends JInternalFrame {
 					lblClasesDictadas.setVisible(true);
 					comboBoxRegistroClases.setVisible(false);
 					lblRegistroaClases.setVisible(false);
-					textPaneDataSocio.setText(" ");
-					textPaneDataSocio.setVisible(false);
+					textAreaSocio.setText(" ");
+					textAreaSocio.setVisible(false);
+					scrollSocio.setVisible(false);
 					DtProfesor dtP = (DtProfesor) dtUsr;
 					inicializarInvisiblesProfesor(dtP);
 				}
@@ -298,9 +300,9 @@ public class ConsultaUsuario extends JInternalFrame {
 				for(DtRegistro x:dtR) {
 					data = data + x.getClase() + " - " + x.getFecha().toString() + "\n";
 				}
-				textPaneDataProfesor.setText(data);
-				textPaneDataProfesor.setText(data);
-				textPaneDataProfesor.setVisible(true);
+				textAreaProfesor.setText(data);
+				textAreaProfesor.setVisible(true);
+				scrollProfesor.setVisible(true);
 				
 			}
 		});
@@ -309,27 +311,40 @@ public class ConsultaUsuario extends JInternalFrame {
 		btnConsultarDependsDictado.setVisible(false);
 		getContentPane().add(btnConsultarDependsDictado);
 		
-		textPaneDataSocio = new JTextArea();
-		textPaneDataSocio.setFont(new Font("Dialog", Font.ITALIC, 15));
-		textPaneDataSocio.setEditable(false);
-		textPaneDataSocio.setBounds(289, 340, 198, 193);
-		textPaneDataSocio.setVisible(false);
-		getContentPane().add(textPaneDataSocio);
+		textAreaSocio = new JTextArea();
+		textAreaSocio.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textAreaSocio.setEditable(false);
+		textAreaSocio.setBounds(289, 340, 198, 200);
+		textAreaSocio.setLineWrap(true);
+		textAreaSocio.setWrapStyleWord(true);
+		textAreaSocio.setVisible(false);
+		getContentPane().add(textAreaSocio);
 		
-		textPaneDataProfesor = new JTextArea();
-		textPaneDataProfesor.setFont(new Font("Dialog", Font.ITALIC, 15));
-		textPaneDataProfesor.setEditable(false);
-		textPaneDataSocio.setBounds(511, 340, 198, 193);
-		textPaneDataProfesor.setVisible(false);
-		getContentPane().add(textPaneDataProfesor);
+		scrollSocio = new JScrollPane(
+				textAreaSocio,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollSocio.setBounds(289, 340, 198, 200);
+		scrollSocio.setVisible(false);
+		getContentPane().add(scrollSocio);
 		
-		scrollPaneSocio = new JScrollPane(textPaneDataSocio, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneSocio.setBounds(39, 41, 198, 193);
-		getContentPane().add(scrollPaneSocio);
 		
-		scrollPaneProf = new JScrollPane(textPaneDataProfesor, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPaneProf.setBounds(511, 340, 198, 193);
-		getContentPane().add(scrollPaneProf);
+		textAreaProfesor = new JTextArea();
+		textAreaProfesor.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textAreaProfesor.setEditable(false);
+		textAreaProfesor.setBounds(511, 340, 198, 200);
+		textAreaProfesor.setLineWrap(true);
+		textAreaProfesor.setWrapStyleWord(true);
+		textAreaProfesor.setVisible(false);
+		getContentPane().add(textAreaProfesor);
+		
+		scrollProfesor = new JScrollPane(
+				textAreaProfesor,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollProfesor.setVisible(false);
+		scrollProfesor.setBounds(511, 340, 198, 200);
+		getContentPane().add(scrollProfesor);
 		
 
 	}
@@ -434,8 +449,10 @@ public class ConsultaUsuario extends JInternalFrame {
 		this.comboBoxClasesDictadas.setVisible(false);
 		this.lblClasesDictadas.setVisible(false);
 		this.btnConsultarDependsDictado.setVisible(false);
-		this.scrollPaneSocio.setVisible(false);
-		this.scrollPaneProf.setVisible(false);
+		this.textAreaProfesor.setVisible(false);
+		this.textAreaSocio.setVisible(false);
+		this.scrollProfesor.setVisible(false);
+		this.scrollSocio.setVisible(false);
 	}
 	
 	public boolean inicializarComboBoxClasesDictadas() {
@@ -455,7 +472,9 @@ public class ConsultaUsuario extends JInternalFrame {
 	}
 	
 	public void clearPane() {
-		this.scrollPaneSocio.setVisible(false);
-		this.scrollPaneProf.setVisible(false);
+		this.textAreaSocio.setVisible(false);
+		this.textAreaProfesor.setVisible(false);
+		this.scrollProfesor.setVisible(false);
+		this.scrollSocio.setVisible(false);
 	}
 }

@@ -32,6 +32,8 @@ import javax.swing.JComboBox;
 
 import utilidad.Dating;
 import com.toedter.calendar.JDateChooser;
+import javax.swing.event.InternalFrameAdapter;
+import javax.swing.event.InternalFrameEvent;
 
 public class AltaUsuario extends JInternalFrame {
 
@@ -50,6 +52,7 @@ public class AltaUsuario extends JInternalFrame {
 	private JRadioButton rdbtnProfesor;
 	private JDateChooser dateChooser;
 	private JComboBox<String> comboBoxInstitucionDeportiva;
+	private JButton btnNewButton;
 	private IControlador iCon;
 
 	/**
@@ -69,6 +72,12 @@ public class AltaUsuario extends JInternalFrame {
 	}
 
 	public AltaUsuario(IControlador iCon) throws ParseException {
+		addInternalFrameListener(new InternalFrameAdapter() {
+			@Override
+			public void internalFrameClosing(InternalFrameEvent e) {
+				limpiarFormulario();
+			}
+		});
 		this.iCon = iCon;
 		setIconifiable(true);
 		setMaximizable(true);
@@ -157,7 +166,7 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldURL.setBounds(309, 454, 198, 34);
 		getContentPane().add(textFieldURL);
 		
-		JButton btnNewButton = new JButton("Aceptar");
+		btnNewButton = new JButton("Aceptar");
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -189,10 +198,35 @@ public class AltaUsuario extends JInternalFrame {
 		lblNewLabelTipo.setBounds(42, 274, 259, 34);
 		getContentPane().add(lblNewLabelTipo);
 		
+		rdbtnProfesor = new JRadioButton("Profesor");
+		rdbtnProfesor.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 15));
+		rdbtnProfesor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rdbtnSocio.setSelected(false);
+				if(profesoresThere()) {
+					btnNewButton.setEnabled(true);
+					rdbtnProfesor.setSelected(true);
+					comboBoxInstitucionDeportiva.setEnabled(true);
+					textFieldDescripcion.setEnabled(true);
+					textFieldBiografia.setEnabled(true);
+					textFieldURL.setEnabled(true);
+				}else {
+					btnNewButton.setEnabled(false);
+					rdbtnProfesor.setSelected(true);
+					comboBoxInstitucionDeportiva.setEnabled(false);
+					textFieldDescripcion.setEnabled(false);
+					textFieldBiografia.setEnabled(false);
+					textFieldURL.setEnabled(false);
+				}
+			}
+		});
+		
 		rdbtnSocio = new JRadioButton("Socio");
+		rdbtnSocio.setSelected(true);
 		rdbtnSocio.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 15));
 		rdbtnSocio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				btnNewButton.setEnabled(true);
 				rdbtnSocio.setSelected(true);
 				rdbtnProfesor.setSelected(false);
 				comboBoxInstitucionDeportiva.setEnabled(false);
@@ -201,22 +235,8 @@ public class AltaUsuario extends JInternalFrame {
 				textFieldURL.setEnabled(false);
 			}
 		});
-		
-		rdbtnProfesor = new JRadioButton("Profesor");
-		rdbtnProfesor.setFont(new Font("Dialog", Font.BOLD | Font.ITALIC, 15));
-		rdbtnProfesor.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				rdbtnSocio.setSelected(false);
-				rdbtnProfesor.setSelected(true);
-				comboBoxInstitucionDeportiva.setEnabled(true);
-				textFieldDescripcion.setEnabled(true);
-				textFieldBiografia.setEnabled(true);
-				textFieldURL.setEnabled(true);
-			}
-		});
-		rdbtnProfesor.setSelected(true);
-		panel.add(rdbtnProfesor);
 		panel.add(rdbtnSocio);
+		panel.add(rdbtnProfesor);
 		
 		comboBoxInstitucionDeportiva = new JComboBox<String>();
 		comboBoxInstitucionDeportiva.setBounds(309, 319, 198, 34);
@@ -320,5 +340,24 @@ public class AltaUsuario extends JInternalFrame {
 		textFieldNickname.setText("");
 		textFieldBiografia.setText("");
 		textFieldURL.setText("");
+		rdbtnProfesor.setSelected(false);
+		rdbtnSocio.setSelected(true);
 	}
+	
+	public boolean profesoresThere() {
+		ArrayList<String> profesores = iCon.listarProfesoresFront();
+		if(profesores.size() > 0 ) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public void inicializar() {
+		comboBoxInstitucionDeportiva.setEnabled(false);
+		textFieldDescripcion.setEnabled(false);
+		textFieldBiografia.setEnabled(false);
+		textFieldURL.setEnabled(false);
+	}
+	
 }

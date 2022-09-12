@@ -9,6 +9,7 @@ import utilidad.Dating;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 import java.awt.Font;
 import java.util.ArrayList;
@@ -26,7 +27,6 @@ import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtRegistro;
-import datatypes.DtSocio;
 import excepciones.RegistroRepetidoExcepcion;
 
 import java.awt.event.ActionListener;
@@ -36,9 +36,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.awt.event.ItemEvent;
-import javax.swing.JTextPane;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
+import javax.swing.JTextArea;
 
 public class RegistroAClase extends JInternalFrame {
 
@@ -51,10 +51,11 @@ public class RegistroAClase extends JInternalFrame {
 	private JComboBox<String> comboBoxActividadesAsociadas;
 	private JComboBox<String> comboBoxSocios;
 	private JComboBox<String> comboBoxClases;
-	private JTextPane textPaneInfoClase;
 	private JLabel lblInformacion;
 	private JDateChooser dateChooser;
 	private JButton btnVerClases;
+	private JTextArea textPaneInfoClase;
+	private JScrollPane scrollClase;
 
 	/**
 	 * Launch the application.
@@ -140,14 +141,6 @@ public class RegistroAClase extends JInternalFrame {
 		comboBoxSocios.setBounds(302, 222, 198, 34);
 		getContentPane().add(comboBoxSocios);
 		
-		
-		textPaneInfoClase = new JTextPane();
-		textPaneInfoClase.setFont(new Font("Dialog", Font.ITALIC, 15));
-		textPaneInfoClase.setEditable(false);
-		textPaneInfoClase.setBounds(547, 207, 198, 252);
-		textPaneInfoClase.setVisible(false);
-		getContentPane().add(textPaneInfoClase);
-		
 		btnVerClases = new JButton("Ver Informacion de Clase");
 		btnVerClases.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -222,6 +215,22 @@ public class RegistroAClase extends JInternalFrame {
 		lblInformacion.setBounds(589, 162, 114, 34);
 		lblInformacion.setVisible(false);
 		getContentPane().add(lblInformacion);
+		
+		textPaneInfoClase = new JTextArea();
+		textPaneInfoClase.setFont(new Font("Dialog", Font.ITALIC, 15));
+		textPaneInfoClase.setEditable(false);
+		textPaneInfoClase.setBounds(547, 207, 198, 252);
+		textPaneInfoClase.setLineWrap(true);
+		textPaneInfoClase.setWrapStyleWord(true);
+		getContentPane().add(textPaneInfoClase);
+		
+		scrollClase = new JScrollPane(
+				textPaneInfoClase,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollClase.setBounds(547, 207, 198, 252);
+		scrollClase.setVisible(false);
+		getContentPane().add(scrollClase);
 	}
 	
 	public boolean inicializarComboBoxInstituciones() {
@@ -252,15 +261,15 @@ public class RegistroAClase extends JInternalFrame {
 	protected void infoClaseWithSocios(ActionEvent arg0) {
 		lblInformacion.setVisible(true);
 		textPaneInfoClase.setVisible(true);
+		scrollClase.setVisible(true);
 		String claseSelected = comboBoxClases.getSelectedItem().toString();
 		DtClase dtC = iCon.getDatosClase(claseSelected);
-		DtSocio dtS = iCon.findSocio(comboBoxSocios.getSelectedItem().toString());
 		List <DtRegistro> registros = dtC.getRegistros();
 		String data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + 
 		dtC.getActividadDeportiva() + "\n" + "Profesor: " + dtC.getProfesor() +
 		"\n" + "Hora Inicio: " + dtC.getHoraInicio().toString()+ "\n\n" + "Registros: " + "\n";
 		for(DtRegistro x:registros) {
-			data = data + dtS.getNickname() + " - " + x.getFecha().toString() + "\n";
+			data = data + x.getSocio() + " - " + x.getFecha().toString() + "\n";
 		}
 		textPaneInfoClase.setText(data);
 	}
@@ -268,6 +277,7 @@ public class RegistroAClase extends JInternalFrame {
 	protected void infoClaseWithOutSocios(ActionEvent arg0) {
 		lblInformacion.setVisible(true);
 		textPaneInfoClase.setVisible(true);
+		scrollClase.setVisible(true);
 		String claseSelected = comboBoxClases.getSelectedItem().toString();
 		DtClase dtC = iCon.getDatosClase(claseSelected);
 		String data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + 
@@ -286,6 +296,7 @@ public class RegistroAClase extends JInternalFrame {
 		dateChooser.setDate(date);
 		textPaneInfoClase.setText(" ");
 		textPaneInfoClase.setVisible(false);
+		scrollClase.setVisible(false);
 		lblInformacion.setVisible(false);
 		setVisible(false);
 	}
@@ -294,6 +305,7 @@ public class RegistroAClase extends JInternalFrame {
 	public void limpiarTextPane(){
 		textPaneInfoClase.setText(" ");
 		textPaneInfoClase.setVisible(false);
+		scrollClase.setVisible(false);
 		lblInformacion.setVisible(false);
 	}
 	
