@@ -21,7 +21,6 @@ import logica.Socio;
 //import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtProfesor;
-import datatypes.DtRegistro;
 import datatypes.DtSocio;
 
 public interface IControlador {
@@ -43,7 +42,6 @@ public interface IControlador {
 	public boolean ModificarInstitucionDeportiva(String instDep, DtInstitucionDeportiva dtInstDepNew);
 	public InstitucionDeportiva getInstitucion(String nombre);
 	
-	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID); //auxiliar para alta dictado clase
 	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion;
 	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion;
 	public DtClase getDatosClase(String nomClase);
@@ -62,7 +60,6 @@ public interface IControlador {
 	public String[] listarSocios();
 	public Clase getClase(String nombre);
 	public Socio getSocio(String nombre);
-	public List<DtRegistro> getRegistrosSocio(String nombre);
 	public DtSocio findSocio(String name);
 	public DtProfesor findProfesor(String name);
 	public String[] listarActividades();

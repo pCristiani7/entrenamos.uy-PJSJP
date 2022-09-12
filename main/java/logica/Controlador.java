@@ -451,8 +451,7 @@ public class Controlador implements IControlador{
 	
 	public String[] listarProfesores() {
 		ArrayList<String> profesores;
-		ManejadorProfesor mP = ManejadorProfesor.getInstancia();
-		profesores = mP.obtenerProfesores();
+		profesores = mp.obtenerProfesores();
 		String[] profesores_ret = new String[profesores.size()];
         int i=0;
         for(String s:profesores) {
@@ -464,8 +463,7 @@ public class Controlador implements IControlador{
 	
 	public String[] listarSocios() {
 		ArrayList<String> socios;
-		ManejadorSocio mS = ManejadorSocio.getInstancia();
-		socios = mS.obtenerSocios();
+		socios = ms.obtenerSocios();
 		String[]socios_ret = new String[socios.size()];
         int i=0;
         for(String s:socios) {
@@ -477,11 +475,9 @@ public class Controlador implements IControlador{
 	
 	public String[] listarUsuarios(){
 		ArrayList<String> socios;
-		ManejadorSocio mS = ManejadorSocio.getInstancia();
-		socios = mS.obtenerSocios();
+		socios = ms.obtenerSocios();
 		ArrayList<String> profesores;
-		ManejadorProfesor mP = ManejadorProfesor.getInstancia();
-		profesores = mP.obtenerProfesores();
+		profesores = mp.obtenerProfesores();
 		String[] usuarios_ret = new String[profesores.size() + socios.size()];
 		int i = 0;
 		for(String s: socios) {
@@ -496,8 +492,7 @@ public class Controlador implements IControlador{
 	}
 	
 	public InstitucionDeportiva getInstitucion(String nombre){
-		ManejadorInstitucionDeportiva mInst = ManejadorInstitucionDeportiva.getInstancia();
-		InstitucionDeportiva instDep = mInst.buscarInstitucionDeportiva(nombre);
+		InstitucionDeportiva instDep = mid.buscarInstitucionDeportiva(nombre);
 		return instDep;
 	}
 	
@@ -516,8 +511,7 @@ public class Controlador implements IControlador{
 	}
 	
 	public ActividadDeportiva getAct(String nombre){
-		ManejadorActividadDeportiva mAct = ManejadorActividadDeportiva.getInstancia();
-		ActividadDeportiva actDep = mAct.buscarActividadDeportiva(nombre);
+		ActividadDeportiva actDep = mad.buscarActividadDeportiva(nombre);
 		return actDep;
 	}
 	
@@ -576,18 +570,6 @@ public class Controlador implements IControlador{
 	public ArrayList<String> listarSociosFront(){
 		ArrayList<String> aRetornar = ms.obtenerSocios();
 		return aRetornar;
-	}
-
-	@Override
-	public List<DtRegistro> getRegistrosSocio(String nombre) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<DtActividadDeportiva> listarActividades(DtInstitucionDeportiva dtID) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
