@@ -14,19 +14,20 @@ public abstract class Usuario {
 	private String apellido;
 	private String email;
 	private LocalDate fecha;
-	
+	private String password;
 	
 	public Usuario() {
 		super();
 	}
 
-	public Usuario(String nickname, String nombre, String apellido, String email, LocalDate fecha) {
+	public Usuario(String nickname, String nombre, String apellido, String email, LocalDate fecha, String password) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
 		this.fecha = fecha;
+		this.password = password;
 	}
 
 	public String getNickname() {
@@ -86,6 +87,16 @@ public abstract class Usuario {
 		return Objects.equals(apellido, other.apellido) && Objects.equals(email, other.email)
 				&& Objects.equals(fecha, other.fecha) && Objects.equals(nickname, other.nickname)
 				&& Objects.equals(nombre, other.nombre);
+	}
+
+	public String getPassword() {
+		return password;
+		
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+		
 	}
 	
 	

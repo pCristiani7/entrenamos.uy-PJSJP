@@ -28,9 +28,10 @@ public interface IControlador {
 	public boolean existeMail(String email);
 	public boolean existeNickname(String nickname);
 	
-	public void AltaUsuario(DtUsuario dtUser) throws UsuarioRepetidoExcepcion;
+	public void AltaUsuario(DtUsuario dtUser, String pass) throws UsuarioRepetidoExcepcion;
 	public DtUsuario ConsultaUsuario(String user);
 	public boolean ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew);
+	public boolean inicioSesion(String nickname, String pass);
 	
 	public void AltaActividadDeportiva(DtActividadDeportiva dtAD) throws ActividadDeportivaRepetidaExcepcion;
 	public DtActividadDeportiva ConsultaActividadDeportiva(String actDep);

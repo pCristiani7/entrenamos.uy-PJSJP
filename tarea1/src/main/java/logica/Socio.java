@@ -15,8 +15,8 @@ public class Socio extends Usuario {
 	@OneToMany(mappedBy="socio",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Registro> registros = new ArrayList<>();
 
-	public Socio(String nickname, String nombre, String apellido, String email, LocalDate fecha, List<Registro> registros) {
-		super(nickname, nombre, apellido, email, fecha);
+	public Socio(String nickname, String nombre, String apellido, String email, LocalDate fecha, String password, List<Registro> registros) {
+		super(nickname, nombre, apellido, email, fecha, password);
 		this.registros = registros;
 	}
 

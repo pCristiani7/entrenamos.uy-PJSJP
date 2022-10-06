@@ -45,21 +45,21 @@ public class Controlador implements IControlador{
 	
 	//-------------------Casos de uso Usuario-------------------
 	@Override
-	public void AltaUsuario(DtUsuario dtUser) throws UsuarioRepetidoExcepcion {
+	public void AltaUsuario(DtUsuario dtUser, String pass) throws UsuarioRepetidoExcepcion {
 		// TODO Auto-generated method stub
 		if(!existeMail(dtUser.getEmail()) && !existeNickname(dtUser.getNickname())) {
 			if(dtUser instanceof DtProfesor){
 				List<Clase> clases = new ArrayList<>();
 				DtProfesor dtProf = (DtProfesor) dtUser;
 				InstitucionDeportiva id = mid.buscarInstitucionDeportiva(dtProf.getInstitucionDeportiva());
-				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
+				Profesor prof = new Profesor(dtProf.getNickname(),dtProf.getNombre(),dtProf.getApellido(),dtProf.getEmail(),dtProf.getFechaNac(),pass,dtProf.getDescripcion(),dtProf.getBiografia(),dtProf.getSitioweb(),clases,id); 
 				mp.addProfesor(prof);
 				id.addProfesor(prof);
 				mid.modIntitucionDeportiva(id);
 			}else if(dtUser instanceof DtSocio){
 				List<Registro> registros = new ArrayList<>();
 				DtSocio dtSocio = (DtSocio) dtUser;
-				Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),registros);
+				Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),pass,registros);
 				ms.addSocio(socio);
 			}
 		} else {
@@ -115,6 +115,22 @@ public class Controlador implements IControlador{
 			return true;	
 		}
 		return false;
+	}
+	
+	public boolean inicioSesion(String nickname, String pass) {
+		boolean existe = false;
+		if(mp.existeNickname(nickname)){
+			Profesor p = mp.buscarProfesor(nickname);
+			if(p.getPassword() == pass) {
+				existe = true;
+			}
+		}else if(ms.existeNickname(nickname)) {
+			Socio s = ms.buscarSocio(nickname);
+			if(s.getPassword() == pass) {
+				existe = true;
+			}
+		}
+		return existe;
 	}
 	
 	//-------------------Casos de uso Institucion Deportiva------------------- 
