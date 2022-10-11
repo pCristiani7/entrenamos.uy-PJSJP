@@ -25,7 +25,13 @@
 
 
 		</div>
-	</div>	
+	</div>
+	
+	<div class="container">
+		<button onclick="location.href='http://localhost:8080/entrenamos.uy.web/AltaDictadoDeClase.jsp'">Alta dictado de clase</button>
+		<button onclick="location.href='http://localhost:8080/entrenamos.uy.web/RegistroDictadoDeClase.jsp'">Registro dictado de clase</button>
+		
+	</div>
 </body>
 
 </html>
