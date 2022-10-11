@@ -21,7 +21,6 @@
 				<p>Entrenamos UY</p>
 		</div>
 		
-		
   <div class="modal" id="modal">
     <div class="modal-header">
       <div class="title">About</div>
