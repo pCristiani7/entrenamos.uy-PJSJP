@@ -35,7 +35,7 @@
 			  <div class="mb-3">
 			    <label for="field9" class="form-label">URL</label>
 			    <input type="text" name="urlClase" class="form-control" id="inputField8">
-			  </div>
+			  </div>			    
 			  <button type="submit" class="btn btn-primary">Enviar</button>
 			</div>  
 		</form>

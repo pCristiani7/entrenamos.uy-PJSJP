@@ -48,6 +48,7 @@ public class AltaUsuario extends JInternalFrame {
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldBiografia;
 	private JTextField textFieldURL;
+	private JTextField textFieldPassword;
 	private JRadioButton rdbtnSocio;
 	private JRadioButton rdbtnProfesor;
 	private JDateChooser dateChooser;
@@ -163,8 +164,13 @@ public class AltaUsuario extends JInternalFrame {
 		
 		textFieldURL = new JTextField();
 		textFieldURL.setColumns(10);
-		textFieldURL.setBounds(309, 454, 198, 34);
+		textFieldURL.setBounds(309, 460, 198, 34);
 		getContentPane().add(textFieldURL);
+		
+		textFieldPassword = new JTextField();
+		textFieldPassword.setColumns(10);
+		textFieldPassword.setBounds(309, 504, 198, 34);
+		getContentPane().add(textFieldPassword);
 		
 		btnNewButton = new JButton("Aceptar");
 		btnNewButton.setFont(new Font("Dialog", Font.BOLD, 12));
@@ -267,6 +273,7 @@ public class AltaUsuario extends JInternalFrame {
 	}
 	
 	protected void altaUsuarioAceptarActionPerformed(ActionEvent arg0) {
+		String password = this.textFieldPassword.getText();
 		String nickname = this.textFieldNickname.getText();
         String nombre = this.textFieldNombre.getText();
         String apellido = this.textFieldApellido.getText();
@@ -282,7 +289,7 @@ public class AltaUsuario extends JInternalFrame {
 	        	if(checkFormulario()) {
 	        		DtSocio dtSocio = new DtSocio(nickname,nombre,apellido,email,fechaNac,dtRegistros);
 	        		try {
-		        		this.iCon.AltaUsuario(dtSocio);
+		        		this.iCon.AltaUsuario(dtSocio,password);
 		                JOptionPane.showMessageDialog(this, "El Socio se ha creado con éxito", "Alta Usuario",
 		                        JOptionPane.INFORMATION_MESSAGE);
 		                limpiarFormulario();
@@ -295,7 +302,7 @@ public class AltaUsuario extends JInternalFrame {
 	        	if(checkFormulario()) {
 		        	DtProfesor dtProf = new DtProfesor(nickname,nombre,apellido,email,fechaNac,descripcion,biografia,url,institucionDeportiva);
 		        	try {
-			        	this.iCon.AltaUsuario(dtProf);
+			        	this.iCon.AltaUsuario(dtProf,password);
 			        	JOptionPane.showMessageDialog(this, "El Profesor se ha creado con éxito", "Alta Usuario",
 			                    JOptionPane.INFORMATION_MESSAGE);
 			        	limpiarFormulario();

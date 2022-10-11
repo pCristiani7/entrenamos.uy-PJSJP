@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import excepciones.RegistroRepetidoExcepcion;
 import interfaces.Fabrica;
 import interfaces.IControlador;
-
+import datatypes.DtClase;
 
 @WebServlet("/RegistroDictadoClase")
 public class RegistroDictadoClase extends HttpServlet {
@@ -34,11 +34,12 @@ public class RegistroDictadoClase extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession sesion = request.getSession();
 		Object usuario = sesion.getAttribute("name");
-		String insDep = request.getParameter("instDep");
-		String activDep = request.getParameter("actDep");
-		String clase = request.getParameter("nomClase");
+		String insDep = request.getParameter("instDepReg");
+		String activDep = request.getParameter("actDepReg");
+		String clase = request.getParameter("nomClaseReg");
 		Fabrica fabrica = Fabrica.getInstance();
 		IControlador icon = fabrica.getIControlador();
+		
 		
 		try {
 			icon.RegistroDictadoClase(clase, usuario.toString(), LocalDate.now());
