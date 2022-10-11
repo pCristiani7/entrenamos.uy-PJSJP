@@ -1,31 +1,25 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>EntrenamosUy - Login</title>
-	<link rel="stylesheet" href="styleLogin.css">
+<meta charset="ISO-8859-1">
+<link rel="stylesheet" href="css/styleIndex.css">
+<title>Home - Entrenamos UY</title>
 </head>
-<body>
-	<div class="container">
-		<div class="card">
-			<h3>Iniciar Sesion</h3>
-			<div class="inputBox">
-				<input type="text" required="required">
-				<span>Nickname</span>
-			</div>
 
-			<div class="inputBox">
-				<input type="password" required="required">
-				<span>Password</span>
-			</div>
-
-			<button>Aceptar</button>
-
-
+	<body>
+		<header>
+			<img class="logo" src="images/logo.svg" alt="logo">	
+			<a class="cta" href="#"><button>About</button></a>
+			<a class="cta" href="login.jsp"><button>Login</button></a>
+		</header>
+		
+		<div class="text">
+				<p>Entrenamos UY</p>
 		</div>
-	</div>	
-</body>
-
+        
+	</body>
+	
+	
 </html>
