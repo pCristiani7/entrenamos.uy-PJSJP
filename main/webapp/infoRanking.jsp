@@ -14,10 +14,7 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous" />
-</head>
+	href="css/styleConsultas.css">
 <body>
 
 	<%
@@ -25,9 +22,9 @@
 		if (mostrar.equals("actividades")) {
 			List<DtActividadDeportiva> actividades = (List<DtActividadDeportiva>) request.getAttribute("dtacts");
 	%>
-	<h1>
+	<h2>
 		Actividades Deportivas
-		</h1>
+		</h2>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -58,9 +55,9 @@
 		} else if (mostrar.equals("clases")) {
 			List<DtClase> dtc = (List<DtClase>) request.getAttribute("dtclases");
 	%>
-	<h1>
+	<h2>
 		Clases
-		</h1>
+		</h2>
 	<table class="table table-striped">
 		<thead>
 			<tr>
