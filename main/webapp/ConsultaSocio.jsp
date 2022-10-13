@@ -8,7 +8,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="tableStyle.css">
+<link rel="stylesheet" href="css/styleConsultas.css">
 </head>
 <body>
 	<div id="divCheckbox" style="display: none;">
@@ -21,16 +21,20 @@
 		ArrayList<DtRegistro> registros = (ArrayList<DtRegistro>) request.getAttribute("registros");
 	%>
 	</div>
-	<h1>Consulta Usuario</h1>
-	<h3>Nickname: <%=nickname%></h3>
-	<h3>nombre: <%=nombre%></h3>
-	<h3>apellido: <%=apellido%></h3>
-	<h3>email: <%=email%></h3>
-	<h3>fechaNac: <%=fechaNac%></h3>
+	<div class="container">
+        <div class="card">
+			<h2>Consulta Usuario</h2>
+			<h3>Nickname: <%=nickname%></h3>
+			<h3>nombre: <%=nombre%></h3>
+			<h3>apellido: <%=apellido%></h3>
+			<h3>email: <%=email%></h3>
+			<h3>fechaNac: <%=fechaNac%></h3>
+		</div>
+	</div>
 	
 	<!-- controlar si tiene registros antes de crear la tabla  -->
 	
-	<table class="table">
+	<table class="center">
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>

@@ -1,18 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Consulta de Actividad Deportiva</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Consulta Actividad Deportiva - Entrenamos UY</title>
+	<link rel="stylesheet" href="css/styleLogin.css">
 </head>
 <body>
-	<form action="ConsultaActividadDeportiva" method="post">
-		<div class="mb-3">
-		  <label for="exampleFormControlInput1" class="form-label">Actividad Deportiva:</label>
-		  <input type="text" class="form-control" id="inputActividadDeportiva" name="NomActDep">
+<form action="ConsultaActividadDeportiva" method="post">
+	<div class="container">
+		<div class="card">
+			<h3>Consulta<br>Actividad<br>Deportiva</h3>			
+			<div class="inputBox">
+				<input type="text" name="ActDep" required="required">
+				<span>Actividad Deportiva</span>
+			</div>			
+			<button>Aceptar</button>
 		</div>
-		<button type="submit" class="btn btn-primary">Confirmar</button>
-	</form>
+	</div>	
+</form>
 </body>
+
 </html>

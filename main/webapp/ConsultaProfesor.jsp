@@ -6,6 +6,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Consulta Usuario</title>
+<link rel="stylesheet" href="css/styleConsultas.css">
 </head>
 <body>
 	<div id="divCheckbox" style="display: none;">
@@ -21,15 +22,19 @@
 		String instDep = (String)request.getAttribute("instDep");
 	%>
 	</div>
-	<h1>Consulta Usuario</h1>
-	<h3>Nickname: <%=nickname%></h3>
-	<h3>nombre: <%=nombre%></h3>
-	<h3>apellido: <%=apellido%></h3>
-	<h3>email: <%=email%></h3>
-	<h3>fechaNac: <%=fechaNac%></h3>
-	<h3>descripcion: <%=descripcion%></h3>
-	<h3>biografia: <%=biografia%></h3>
-	<h3>sitioweb: <%=sitioweb%></h3>
-	<h3>instDep: <%=instDep%></h3>
+	<div class="container">
+        <div class="card">
+			<h2>Consulta Usuario</h2>
+			<h3>Nickname: <%=nickname%></h3>
+			<h3>nombre: <%=nombre%></h3>
+			<h3>apellido: <%=apellido%></h3>
+			<h3>email: <%=email%></h3>
+			<h3>fechaNac: <%=fechaNac%></h3>
+			<h3>descripcion: <%=descripcion%></h3>
+			<h3>biografia: <%=biografia%></h3>
+			<h3>sitioweb: <%=sitioweb%></h3>
+			<h3>instDep: <%=instDep%></h3>
+		</div>
+	</div>
 </body>
 </html>

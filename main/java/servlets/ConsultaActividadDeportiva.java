@@ -62,7 +62,7 @@ public class ConsultaActividadDeportiva extends HttpServlet {
 			request.setAttribute("duracion", duracion);
 			request.setAttribute("costo", costo);
 			request.setAttribute("fecha", fecha);
-			request.setAttribute("clases", clases);
+			request.setAttribute("listClases", clases);
 			request.setAttribute("InstitucionDeportiva", InstitucionDeportiva);
 		}else{
 			//mensaje de error
