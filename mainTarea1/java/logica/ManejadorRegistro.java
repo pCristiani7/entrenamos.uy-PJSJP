@@ -1,5 +1,6 @@
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,16 @@ public class ManejadorRegistro {
 		em.persist(reg);
 		
 		em.getTransaction().commit();
+	}
+	
+	public void BorrarRegistro(Registro r){
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Clase c = r.getClase();
+		Socio s = r.getSocio();
+		LocalDate d = r.getFecha();
+		
+		Query query = em.createQuery("DELETE FROM Registro WHERE clase='"+c+"' and socio='"+s+"' and fecha='"+d+"' ");
 	}
 	
 	public List<Registro> getRegistros(){
