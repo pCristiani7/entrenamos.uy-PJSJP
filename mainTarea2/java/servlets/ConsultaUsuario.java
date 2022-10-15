@@ -2,13 +2,13 @@ package servlets;
 
 import java.io.IOException;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
@@ -55,9 +55,7 @@ public class ConsultaUsuario extends HttpServlet {
 		request.setAttribute("email", dtUser.getEmail());
 		request.setAttribute("fechaNac", dtUser.getFechaNac());
 		RequestDispatcher rd;
-		if(dtUser == null) {
-			//Mensaje de error
-		}else if(dtUser instanceof DtProfesor) {
+		 if(dtUser instanceof DtProfesor) {
 			DtProfesor dtProf = (DtProfesor) dtUser;
 			request.setAttribute("descripcion", dtProf.getDescripcion());
 			request.setAttribute("biografia", dtProf.getBiografia());

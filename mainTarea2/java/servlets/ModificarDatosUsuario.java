@@ -1,14 +1,14 @@
-	package servlets;
+package servlets;
 
 import java.io.IOException;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import datatypes.DtUsuario;
 import interfaces.Fabrica;
@@ -66,7 +66,7 @@ public class ModificarDatosUsuario extends HttpServlet {
 			fNacUsuarioConv = dtUser.getFechaNac();
 			}
 		
-	
+		
 		if(dtUser instanceof DtProfesor) {
 			DtProfesor dtProf = (DtProfesor) dtUser;
 			String descProf = request.getParameter("descProf");
@@ -81,20 +81,40 @@ public class ModificarDatosUsuario extends HttpServlet {
 			if (swProf == null) {
 				swProf = dtProf.getSitioweb();
 			}
-			DtProfesor dtProfNew = new DtProfesor(nickname, nomUsuario, apeUsuario, emailUsuario, fNacUsuarioConv, descProf, bioProf, swProf, dtProf.getInstitucionDeportiva(),);
+			DtProfesor dtProfNew = new DtProfesor(nickname, nomUsuario, apeUsuario, emailUsuario, fNacUsuarioConv, descProf, bioProf, swProf, null);
 			dtProfNew = (DtProfesor) dtUserNew;
+		
+		
 		
 		}else if(dtUser instanceof DtSocio) {
 			DtSocio dtSoc = (DtSocio) dtUser;
 			DtSocio dtSocioNew = (DtSocio) dtUserNew;
 		}
-			
-		//el ID del usuario es recibido de la sesion creada por el caso de uso Inicio de Sesion
+		
+		
 		RequestDispatcher rd;
 		
 			icon.ModificarDatosUsuario(dtUser, dtUserNew);
-			rd= request.getRequestDispatcher("/ModificarDatosUsuarioPt2.jsp");
-		
+			request.setAttribute("nickname", nickname);
+			request.setAttribute("nombre", dtUser.getNombre());
+			request.setAttribute("apellido", dtUser.getApellido());
+			request.setAttribute("email", dtUser.getEmail());
+			request.setAttribute("fechaNac", dtUser.getFechaNac());
+			if(dtUser instanceof DtProfesor) {
+				DtProfesor dtProf = (DtProfesor) dtUser;
+				request.setAttribute("descripcion", dtProf.getDescripcion());
+				request.setAttribute("biografia", dtProf.getBiografia());
+				request.setAttribute("sitioweb", dtProf.getSitioweb());
+				request.setAttribute("instDep", dtProf.getInstitucionDeportiva());
+				rd = request.getRequestDispatcher("/ConsultaProfesor.jsp");
+				rd.forward(request, response);
+			}else if(dtUser instanceof DtSocio) {
+				DtSocio dtSoc = (DtSocio) dtUser;
+				request.setAttribute("registros", dtSoc.getDtRegistros());
+				rd = request.getRequestDispatcher("/ConsultaSocio.jsp");
+				rd.forward(request, response);
+			}
+			
 		doGet(request, response);
 	}
 }

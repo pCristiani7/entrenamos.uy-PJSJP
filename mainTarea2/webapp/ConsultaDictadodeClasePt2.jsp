@@ -12,33 +12,29 @@
 <title>Consulta Dictado de Clase</title>
 </head>
 <body>
+ 							<!--Caso de uso Conulta Dictado de Clase (Juan) -->
  <%
- 		//Datos recibidos para la impresion del dtClase
-        String nameClase = (String)request.getAttribute("nombreClase");
-        String url = (String)request.getAttribute("urlClase");
-        String actividadDeportiva = (String)request.getAttribute("actDepClase");
-        String profesor = (String)request.getAttribute("profClase");
-        LocalDate fecha = (LocalDate)request.getAttribute("fechaClase");
-        LocalTime horaInicio = (LocalTime)request.getAttribute("horarioClase");
-        LocalDate fechaReg = (LocalDate)request.getAttribute("fechaRegClase");
-        List <DtRegistro> registrosClase = (List<DtRegistro>) request.getAttribute("registrosClase");
+ 		String origen = (String)request.getAttribute("origenConsulta");
+        if(origen.equals("consultaDictadodeClase")){
+ 		String nombreClase = (String)request.getAttribute("nomClase");
+        String urlClase = (String)request.getAttribute("url");
+        String actividadDeportivaClase = (String)request.getAttribute("actividadDeportiva");
+        String profesorClase = (String)request.getAttribute("profesor");
+        LocalDate fechaClase = (LocalDate)request.getAttribute("fecha");
+        LocalTime horaInicioClase = (LocalTime)request.getAttribute("horario");
+        LocalDate fechaRegClase = (LocalDate)request.getAttribute("fechaReg");
+        List <DtRegistro> registrosClase = (List<DtRegistro>) request.getAttribute("registros");
+        %>
         
-        //Datos recibidos para el Registro Dictado de Clase
-        String institDep = (String)request.getAttribute("institRegistro");
-		String actividadDep = (String)request.getAttribute("activRegistro");
-		String nombreClaseReg = (String)request.getAttribute("claseRegistro");
-		String elOrigen = (String)request.getAttribute("origen");
-    %>
-
-   <div class="container">
+        <div class="container">
         <div class="card">
-			<h3>Nombre: <%=nameClase%></h3>
-		    <h3>URL: <%=url%></h3>
-		    <h3>Actividad deportiva: <%=actividadDeportiva%></h3>
-		    <h3>Profesor: <%=profesor%></h3>
-		    <h3>Fecha: <%=fecha%></h3>
-		    <h3>Hora de inicio: <%=horaInicio%></h3>
-		    <h3>Fecha de registro: <%=fechaReg%></h3>		    
+			<h3>Nombre: <%=nombreClase%></h3>
+		    <h3>URL: <%=urlClase%></h3>
+		    <h3>Actividad deportiva: <%=actividadDeportivaClase%></h3>
+		    <h3>Profesor: <%=profesorClase%></h3>
+		    <h3>Fecha: <%=fechaClase%></h3>
+		    <h3>Hora de inicio: <%=horaInicioClase%></h3>
+		    <h3>Fecha de registro: <%=fechaRegClase%></h3>		    
 		</div>
 	</div>
 	<table class="table">
@@ -65,14 +61,68 @@
 	    %>
   	  </tbody>
 	</table>
+        
+        		<!--Caso de uso Registro Dictado de Clase (Santi)  -->
+        
+        <% }else if(origen.equals("registroDictadodeClase")){
+ 		
+        //Datos recibidos para el Registro Dictado de Clase
+        String nombreClase = (String)request.getAttribute("nomClase");
+        String urlClase = (String)request.getAttribute("url");
+        String actividadDeportivaClase = (String)request.getAttribute("actividadDeportiva");
+        String profesorClase = (String)request.getAttribute("profesor");
+        LocalDate fechaClase = (LocalDate)request.getAttribute("fecha");
+        LocalTime horaInicioClase = (LocalTime)request.getAttribute("horario");
+        LocalDate fechaRegClase = (LocalDate)request.getAttribute("fechaReg");
+        List <DtRegistro> registrosClase = (List<DtRegistro>) request.getAttribute("registros");
+        String institDep = (String)request.getAttribute("institRegistro");
+		String actividadDep = (String)request.getAttribute("activRegistro");
+		String nombreClaseReg = (String)request.getAttribute("claseRegistro");
+		%>
+		<div class="container">
+        <div class="card">
+			<h3>Nombre: <%=nombreClase%></h3>
+		    <h3>URL: <%=urlClase%></h3>
+		    <h3>Actividad deportiva: <%=actividadDeportivaClase%></h3>
+		    <h3>Profesor: <%=profesorClase%></h3>
+		    <h3>Fecha: <%=fechaClase%></h3>
+		    <h3>Hora de inicio: <%=horaInicioClase%></h3>
+		    <h3>Fecha de registro: <%=fechaRegClase%></h3>		    
+		</div>
+	</div>
+	<table class="table">
+	  <thead>
+	    <tr>
+			<th scope="col">#</th>    
+	      <th scope="col">Clase</th>
+	      <th scope="col">Fecha</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <%
+	    int i=1;
+	    for (DtRegistro dtR : registrosClase){
+	    %>
+	    	<tr>
+	    		<th scope="row"><%=i%></th>
+	      		<td><%=dtR.getSocio()%></td>
+	      		<td><%=dtR.getFecha()%></td>
+	    	</tr>
+	    	<%
+	    	i++;
+	    }
+	    %>
+  	  </tbody>
+	</table>
+					<!--Revisar nombre de las variables para seguir con RegistroDictadoDeClase.java(servlet)  -->
+        <form action="RegistroDictadoClase" method="post">
+		<input type="hidden" name="instDepReg" class="form-control" value="<%=institDep%>">
+		<input type="hidden" name="actDepReg" class="form-control" value="<%=actividadDep%>">
+		<input type="hidden" name="nombreClaseReg" class="form-control" value="<%=nombreClaseReg%>">	
+		<button type="submit" class="btn btn-primary">Registrarse</button>
+	</form>
+ 	}
+ 	%>	
 
-	<%if(elOrigen=="regDictadoClase"){ %>
-		<form action="RegistroDictadoClase" method="post">
-			<input type="hidden" name="instDepReg" class="form-control" value="<%=institDep%>">
-			<input type="hidden" name="actDepReg" class="form-control" value="<%=actividadDep%>">
-			<input type="hidden" name="nombreClaseReg" class="form-control" value="<%=nombreClaseReg%>">	
-			<button type="submit" class="btn btn-primary">Registrarse</button>
-		</form>
-	<% } %>
 </body>
 </html>

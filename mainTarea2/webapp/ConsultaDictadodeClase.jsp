@@ -14,17 +14,15 @@
 		<div class="card">
 			<h3>Consulta dictado<br>de clase</h3>
 			
-			<input type="hidden" name="origin" value="">
-
 			<div class="inputBox">
-				<input type="text" name="nameClase" required="required">
+				<input type="text" name="nomClase" required="required">
 				<span>Clase</span>
 			</div>
 		
-			<button onclick="procesar('consulta')">Aceptar</button>
+			<button class="btn btn-primary" type="submit">Aceptar</button>
 		</div>
 	</div>	
 </form>
-	<input type="hidden" name="origen" class="form-control" id="origenConsulta" value="ConsultaDictadodeClase">
+	<input type="hidden" name="origenConsulta" class="form-control" id="origenConsulta" value="consultaDictadodeClase">
 </body>
 </html>

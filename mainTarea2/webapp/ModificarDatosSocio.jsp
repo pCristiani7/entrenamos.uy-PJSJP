@@ -5,41 +5,30 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Modificar Datos del Socio</title>
+<link rel="stylesheet" href="css/styleLogin.css">
 </head>
 <body>
 <form action="ModificarDatosUsuario" method="post">
-  <div class="mb-3 row">
-    <label for="inputNombre" class="col-sm-2 col-form-label">Nombre nuevo</label>
-    <div class="col-sm-10">
-      <input type="text" 
-      class="form-control"
-       id="inputNombre"
-       name= "nomUsuario">
-    	</div>
-    </div>
-   
-   <label for="inputApellido" class="col-sm-2 col-form-label">Apellido nuevo</label>
-    <div class="col-sm-10">
-      <input type="text" 
-      class="form-control"
-       id="inputApellido"
-       name= "apeUsuario">
-    	</div>
-   
-   
-   <label for="inputfNac">Fecha de Nacimiento Nueva</label>
-    <div class="col-sm-10">
-      <input type="datetime-local" 
-       id="inputFechaNac"
-       placeholder="aaaa-mm-dd"
-       name= "fNacUsuario">
-    	</div>
-   
-   
-    <div>
-   	<button class="btn btn-primary" type="submit">Enviar datos a modificar</button>
-    </div>
- </form>
+			<div class="container">
+				<div class="card">
+					<h3>Modificar datos<br>del Socio</h3>
+					
+					<div class="inputBox">
+						<input type="text" name="nomUsuario" required="required">
+						<span>Nombre del Socio</span>
+					</div>
+					<div class="inputBox">
+						<input type="text" name="apeUsuario" required="required">
+						<span>Apellido del Socio</span>
+					</div>
+					<div class="inputBox">
+					    <label>Fecha de Nacimiento nueva</label>
+					    <input type="date" name="fNacUsuario">
+					  </div>
+					<button type="submit">Enviar</button>
+				</div>
+			</div>	
+		</form>
  
 
 </body>
