@@ -14,11 +14,11 @@
 					<h3>Modificar datos<br>del profesor</h3>
 					
 					<div class="inputBox">
-						<input type="text" name="nomUsuario" required="required">
+						<input type="text" name="nomUsuario">
 						<span>Nombre del Profesor</span>
 					</div>
 					<div class="inputBox">
-						<input type="text" name="apeUsuario" required="required">
+						<input type="text" name="apeUsuario" >
 						<span>Apellido del Profesor</span>
 					</div>
 					<div class="inputBox">
@@ -26,15 +26,15 @@
 					    <input type="date" name="fNacUsuario">
 					  </div>
 					 <div class="inputBox">
-						<input type="text" name="descProf" required="required">
+						<input type="text" name="descProf" >
 						<span>Descripcion</span>
 					</div>
 					<div class="inputBox">
-						<input type="text" name="bioProf" required="required">
+						<input type="text" name="bioProf" >
 						<span>Biografia</span>
 					</div>
 					<div class="inputBox">
-						<input type="text" name="swProf" required="required">
+						<input type="text" name="swProf" >
 						<span>Sitio Web</span>
 					</div>
 					

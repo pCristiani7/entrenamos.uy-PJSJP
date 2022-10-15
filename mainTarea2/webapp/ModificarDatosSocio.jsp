@@ -14,11 +14,11 @@
 					<h3>Modificar datos<br>del Socio</h3>
 					
 					<div class="inputBox">
-						<input type="text" name="nomUsuario" required="required">
+						<input type="text" name="nomUsuario" >
 						<span>Nombre del Socio</span>
 					</div>
 					<div class="inputBox">
-						<input type="text" name="apeUsuario" required="required">
+						<input type="text" name="apeUsuario" >
 						<span>Apellido del Socio</span>
 					</div>
 					<div class="inputBox">
