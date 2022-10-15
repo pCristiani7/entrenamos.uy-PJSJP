@@ -1,0 +1,155 @@
+@charset "ISO-8859-1";
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:500');
+
+*{
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	background-color: #e3e3e3;
+}
+
+li, a, button{
+	font-family: "Montserrat", sans-serif;
+	font-weight: 500;
+	font-size: 16px;
+	color: #000;
+	text-decoration: none;
+}
+
+h1{
+	font-family: "Montserrat", sans-serif;
+	font-weight: 500;
+	font-size: 82px;
+	color: rgb(0, 0, 0);
+	text-decoration: none; 	
+}
+
+p{
+    text-align: center;
+	font-family: "Montserrat", sans-serif;
+	font-weight: 500;
+	font-size: 60px;
+	color: rgb(0, 0, 0);
+	text-decoration: none;
+	position:absolute;
+	left: 35%;
+	top: 50%;
+}
+
+header{
+	display: flex;
+	justify-content: end-flex;
+	align-items: center;
+	padding: 10px 10%;
+}
+
+.logo{
+	cursor: pointer;
+	height: 75px;
+	width: 100px;
+	margin-right: auto;
+}
+
+.nav__links{
+	list-style: none;
+}
+
+.nav__links li{
+	display: inline-block;
+	padding: 0px 20px;
+}
+
+.nav__links li a{
+	transition: all 0.3s ease 0s;
+}
+
+.nav__links li a:hover{
+	color: #0088a9;
+}
+
+button{
+	margin-left: 20px;
+	height: 45px;
+	width: 100px;
+	border-radius: 5px;
+	border: 2px solid #000;
+	cursor: pointer;
+	background-color: transparent;
+	transition: 0.5s;
+	text-transform: uppercase;
+	font-size: 10px;
+	letter-spacing: 2px;
+}
+
+button:hover{
+	background-color: #000;
+	color: white;
+}
+
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border: 2px solid black;
+  border-radius: 10px;
+  z-index: 10;
+  background-color: #e3e3e3;
+  height: 450px;
+  width: 720px;
+  max-width: 80%;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-header {
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid black;
+  border-radius: 19px 19px 0px 0px !important;
+}
+
+.modal-header .title {
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.modal-header .close-button {
+  margin-right: -35px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 35px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
