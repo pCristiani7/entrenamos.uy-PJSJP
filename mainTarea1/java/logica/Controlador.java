@@ -295,15 +295,10 @@ public class Controlador implements IControlador{
 		}
 	}
 	
-	public void EliminarRegistro(DtRegistro dtReg) {
-		Socio s = ms.buscarSocio(dtReg.getSocio());
-		//int d = dtReg.getFecha();
-		List<Registro> regSocio = mr.getRegistrosSocio(s);
-		for(Registro r: regSocio) {
-			if(r.getClase().getNombre().equals(dtReg.getClase())) {
-				mr.BorrarRegistro(r);;
-			}
-		}
+	public void EliminarRegistro(String clase, String socio) {
+		Socio s = ms.buscarSocio(socio);
+		Clase c = mc.buscarClase(clase);
+		mr.BorrarRegistro(c,s);
 	}
 	
 	public DtClase getDatosClase(String nomClase){

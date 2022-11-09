@@ -101,6 +101,10 @@ public class Clase {
 	public void addRegistro(Registro r) {
 		this.registros.add(r);
 	}
+	
+	public void borrarRegistro(Registro r) {
+		this.registros.remove(r);
+	}
 
 	@Override
 	public int hashCode() {

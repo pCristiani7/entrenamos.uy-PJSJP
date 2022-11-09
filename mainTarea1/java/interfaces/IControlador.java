@@ -30,7 +30,7 @@ public interface IControlador {
 	public boolean existeNickname(String nickname);
 	
 	
-	public void EliminarRegistro(DtRegistro dtReg);
+	public void EliminarRegistro(String clase, String socio);
 	public void AltaUsuario(DtUsuario dtUser, String pass) throws UsuarioRepetidoExcepcion;
 	public DtUsuario ConsultaUsuario(String user);
 	public boolean ModificarDatosUsuario(DtUsuario dtUser, DtUsuario dtUserNew);
