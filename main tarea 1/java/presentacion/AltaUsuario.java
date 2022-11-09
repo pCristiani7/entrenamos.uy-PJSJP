@@ -29,6 +29,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JComboBox;
+
+import utilidad.Dating;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
@@ -276,7 +278,7 @@ public class AltaUsuario extends JInternalFrame {
         String nombre = this.textFieldNombre.getText();
         String apellido = this.textFieldApellido.getText();
         String email = this.textFieldEmail.getText();
-        Date fechaNac = dateChooser.getDate();
+        LocalDate fechaNac = Dating.toLocalDate(dateChooser.getDate());
         String institucionDeportiva = (String) this.comboBoxInstitucionDeportiva.getSelectedItem();
         String descripcion = this.textFieldDescripcion.getText();
         String biografia = this.textFieldBiografia.getText();

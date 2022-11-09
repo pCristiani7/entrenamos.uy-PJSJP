@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
+import utilidad.Dating;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -308,22 +309,23 @@ public class AltaDictadoDeClase extends JInternalFrame {
 		setVisible(false);
 	}
 	
-	@SuppressWarnings("deprecation")
 	protected void altaClaseAceptarActionPerformed(ActionEvent arg0) throws ParseException {
 		String actividad = comboBoxActividadesAsociadas.getSelectedItem().toString();
     	String nombre = textFieldNombre.getText();
     	String url = textFieldURL.getText();
-    	Date currentFecha = new Date();
+    	LocalDate currentFecha = LocalDate.now();
     	String profesor = comboBoxProfesores.getSelectedItem().toString();
 		if (checkFormulario()) {
     		try {
-    	    	Date fechaClase = dateChooser.getDate();
+    	    	LocalDate fechaClase = Dating.toLocalDate(dateChooser.getDate());
     	    	int hora = Integer.parseInt(textFieldHora.getText());
     	    	int minuto = Integer.parseInt(textFieldMinuto.getText());
-    	    	fechaClase.setHours(hora);
-    	    	fechaClase.setMinutes(minuto);
+    			LocalTime lT = LocalTime.of(hora,minuto);
+    			//ActividadDeportiva actDep = iCon.getAct(actividad);
+    			//List<DtRegistro> registros = new ArrayList<>();
+    			//List<DtClase> clases = new ArrayList<>();
     			DtActividadDeportiva dtActDep = iCon.ConsultaActividadDeportiva(actividad);
-    			DtClase dtClase = new DtClase(nombre,url,actividad,fechaClase,currentFecha,profesor);
+    			DtClase dtClase = new DtClase(nombre,url,actividad,fechaClase,currentFecha,lT,profesor);
     			iCon.AltaDictadoClase(dtActDep, dtClase);
     			JOptionPane.showMessageDialog(this, "La Clase se ha creado con �xito!", "Alta Dictado de Clase",
 	                    JOptionPane.INFORMATION_MESSAGE);

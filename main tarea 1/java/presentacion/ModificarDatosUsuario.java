@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
+import utilidad.Dating;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -313,7 +314,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 			String nombre = this.textFieldNombre.getText();
 			String apellido = this.textFieldApellido.getText();
 			String mail = dtSOld.getEmail();
-			Date fechaNac = dateChooser.getDate();
+			LocalDate fechaNac = Dating.toLocalDate(dateChooser.getDate());
 			DtSocio dtSNew = new DtSocio(nickname,nombre,apellido,mail,fechaNac,dtSOld.getProfileImage());
 			if(iCon.ModificarDatosUsuario(dtSOld, dtSNew)) {
 				JOptionPane.showMessageDialog(this, "Usuario modificado con �xito!", "Modificar Usuario",
@@ -328,7 +329,7 @@ public class ModificarDatosUsuario extends JInternalFrame {
 			String nombre = this.textFieldNombre.getText();
 			String apellido = this.textFieldApellido.getText();
 			String mail = dtPOld.getEmail();
-			Date fechaNac = dateChooser.getDate();
+			LocalDate fechaNac = Dating.toLocalDate(dateChooser.getDate());
 			String descripcion = this.textFieldDescripcion.getText();
 			String biografia = this.textFieldBiografia.getText();
 			String url = this.textFieldURL.getText();

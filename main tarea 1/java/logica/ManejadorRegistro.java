@@ -1,5 +1,6 @@
 package logica;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +30,21 @@ public class ManejadorRegistro {
 		em.getTransaction().commit();
 	}
 	
-	public void BorrarRegistro(Registro r){
+	public void BorrarRegistro(Clase c, Socio s){
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
-		em.getTransaction().begin();
-        em.remove(r);
-        em.getTransaction().commit();
+		List<Registro> listReg = s.getRegistros();
+		for(Registro r: listReg) {
+			if(r.getClase().getNombre().equals(c.getNombre())) {
+				s.borrarRegistro(r);
+				c.borrarRegistro(r);
+				em.getTransaction().begin();
+				em.persist(s);
+				em.persist(c);
+		        em.remove(r);
+		        em.getTransaction().commit();
+			}
+		}
 	}
 	
 	public List<Registro> getRegistros(){

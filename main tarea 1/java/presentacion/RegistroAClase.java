@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JInternalFrame;
 
 import interfaces.IControlador;
+import utilidad.Dating;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,6 +34,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.awt.event.ItemEvent;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
@@ -265,7 +267,7 @@ public class RegistroAClase extends JInternalFrame {
 		List <DtRegistro> registros = iCon.getRegistrosClase(dtC.getNombre());
 		String data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + 
 		dtC.getActividadDeportiva() + "\n" + "Profesor: " + dtC.getProfesor() +
-		"\n" + "Hora Inicio: " + /*dtC.getHoraInicio().toString()+ */"\n\n" + "Registros: " + "\n";
+		"\n" + "Hora Inicio: " + dtC.getHoraInicio().toString()+ "\n\n" + "Registros: " + "\n";
 		for(DtRegistro x:registros) {
 			data = data + x.getSocio() + " - " + x.getFecha().toString() + "\n";
 		}
@@ -280,7 +282,7 @@ public class RegistroAClase extends JInternalFrame {
 		DtClase dtC = iCon.getDatosClase(claseSelected);
 		String data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + 
 		dtC.getActividadDeportiva() + "\n" + "Profesor: " + dtC.getProfesor() +
-		"\n" + "Hora Inicio: "/* + dtC.getHoraInicio().toString()*/;
+		"\n" + "Hora Inicio: " + dtC.getHoraInicio().toString();
 		textPaneInfoClase.setText(data);
 	}
 	
@@ -308,7 +310,7 @@ public class RegistroAClase extends JInternalFrame {
 	}
 	
 	protected void registroAClaseAceptarActionPerformed(ActionEvent arg0) throws ParseException {
-		Date fechaClase = dateChooser.getDate();
+		LocalDate fechaClase = Dating.toLocalDate(dateChooser.getDate());
 		String clase = comboBoxClases.getSelectedItem().toString();
 		String socio = comboBoxSocios.getSelectedItem().toString();
 		try {

@@ -3,7 +3,6 @@ package presentacion;
 import java.awt.EventQueue;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JInternalFrame;
@@ -90,7 +89,7 @@ public class RankingClases extends JInternalFrame {
 		String data = "";
 		for(DtClase a: dtClases) {
 			String nombre = a.getNombre();
-			Date fecha = a.getFecha();
+			LocalDate fecha = a.getFecha();
 			String url = a.getUrl();
 			DtClase aux = iCon.getDatosClase(a.getNombre());
 			int cantInscriptos = iCon.getRegistrosClase(aux.getNombre()).size();

@@ -1,6 +1,6 @@
 package datatypes;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +14,15 @@ public class DtSocio extends DtUsuario {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private Date fechaNac;
+	private LocalDate fechaNac;
 	private byte[] profileImage;
+	//private List<DtRegistro> dtRegistros = new ArrayList<>();
 
 	public DtSocio() {
 		super();		
 	}
 
-	public DtSocio(String nickname, String nombre, String apellido, String email, Date fechaNac, byte[] profileImage) {
+	public DtSocio(String nickname, String nombre, String apellido, String email, LocalDate fechaNac,/* List<DtRegistro> dtRegistros,*/ byte[] profileImage) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -29,6 +30,7 @@ public class DtSocio extends DtUsuario {
 		this.email = email;
 		this.fechaNac = fechaNac;
 		this.profileImage = profileImage;
+		//this.dtRegistros = dtRegistros;
 	}
 
 	public String getNickname() {
@@ -47,12 +49,16 @@ public class DtSocio extends DtUsuario {
 		return email;
 	}
 
-	public Date getFechaNac() {
+	public LocalDate getFechaNac() {
 		return fechaNac;
 	}
 	
 	public byte[] getProfileImage() {
 		return profileImage;
 	}
-
+	
+	/*public List<DtRegistro> getDtRegistros() {
+		return dtRegistros;
+	}*/
+	
 }

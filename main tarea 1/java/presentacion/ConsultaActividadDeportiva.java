@@ -356,7 +356,6 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 		this.textFieldFecha.setVisible(true);
 	}
 	
-	@SuppressWarnings("deprecation")
 	protected void consultarClase(ActionEvent arg0) {
 		String clase = this.comboBoxClases.getSelectedItem().toString();
 		DtClase dtC = iCon.getDatosClase(clase);
@@ -365,7 +364,7 @@ public class ConsultaActividadDeportiva extends JInternalFrame {
 				"URL: " + dtC.getUrl() + "\n" +
 				"Profesor: " + dtC.getProfesor() + "\n" +
 				"Fecha: " + dtC.getFecha().toString() + "\n" +
-				"Hora Inicio: " + dtC.getFecha().getHours();
+				"Hora Inicio: " + dtC.getHoraInicio();
 		textPaneInfoClase.setText(data_x);
 		textPaneInfoClase.setVisible(true);
 	}
