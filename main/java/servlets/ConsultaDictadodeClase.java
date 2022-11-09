@@ -1,18 +1,18 @@
 package servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import datatypes.DtClase;
 import datatypes.DtRegistro;
@@ -65,9 +65,9 @@ public class ConsultaDictadodeClase extends HttpServlet {
 			String url = dtClase.getUrl();
 			String actividadDeportiva = dtClase.getActividadDeportiva();
 			String profesor =  dtClase.getProfesor();
-			LocalDate fecha =  dtClase.getFecha();
+			Date fecha =  dtClase.getFecha();
 			LocalTime horario = dtClase.getHoraInicio();
-			LocalDate fechaReg =  dtClase.getFechaReg();
+			Date fechaReg =  dtClase.getFechaReg();
 			List <DtRegistro> registros = icon.getRegistrosClase(nomClase);
 			
 			request.setAttribute("nomClase", nomClase);
@@ -88,9 +88,9 @@ public class ConsultaDictadodeClase extends HttpServlet {
 			String url = dtClase.getUrl();
 			String actividadDeportiva = dtClase.getActividadDeportiva();
 			String profesor =  dtClase.getProfesor();
-			LocalDate fecha =  dtClase.getFecha();
+			Date fecha =  dtClase.getFecha();
 			LocalTime horario = dtClase.getHoraInicio();
-			LocalDate fechaReg =  dtClase.getFechaReg();
+			Date fechaReg =  dtClase.getFechaReg();
 			List <DtRegistro> registros = icon.getRegistrosClase(nomClase);
 			
 			request.setAttribute("nomClase", nomClase);

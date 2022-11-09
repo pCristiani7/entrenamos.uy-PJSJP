@@ -1,18 +1,19 @@
 package servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logica.ManejadorClase;
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
@@ -63,8 +64,8 @@ public class AltaDictadoClase extends HttpServlet {
 			try {
 			String url = request.getParameter("urlClase");
 			String fecha = request.getParameter("fechaClase");
-			LocalDate date = LocalDate.parse(fecha);
-			LocalDate fechareg = LocalDate.now();
+			Date date = new SimpleDateFormat ("dd/MM/yyyy").parse(fecha);
+			Date fechareg = new Date();
 			String horario = request.getParameter("horarioClase");
 			LocalTime horarioClase = LocalTime.parse(horario);
 			List<DtRegistro> registros = new ArrayList<>();

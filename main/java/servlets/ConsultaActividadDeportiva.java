@@ -1,16 +1,16 @@
 	package servlets;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
@@ -55,7 +55,7 @@ public class ConsultaActividadDeportiva extends HttpServlet {
 			String descripcion = dtAct.getDescripcion();
 			int duracion = dtAct.getDuracion();
 			float costo = dtAct.getCosto();
-			LocalDate fecha = dtAct.getFecha();
+			Date fecha = dtAct.getFecha();
 			List<DtClase> clases = icon.getClasesActDep(nomActDep);
 			String InstitucionDeportiva = dtAct.getInstitucionDeportiva();
 			request.setAttribute("nombre", nomActDep);

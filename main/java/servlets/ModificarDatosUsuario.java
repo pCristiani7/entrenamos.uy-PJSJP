@@ -1,6 +1,7 @@
 	package servlets;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -15,7 +16,7 @@ import interfaces.Fabrica;
 import interfaces.IControlador;
 import datatypes.DtSocio;
 import datatypes.DtProfesor;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Base64;
 
 
@@ -54,7 +55,7 @@ public class ModificarDatosUsuario extends HttpServlet {
 		String nomUser = request.getParameter("nomUsuario");		
 		String apeUser = request.getParameter("apeUsuario");
 		String fNacUser = request.getParameter("fNacUsuario");
-		LocalDate fNacUsuarioConv = LocalDate.parse(fNacUser);
+		Date fNacUsuarioConv = new SimpleDateFormat ("dd/MM/yyyy").parse(fNacUser);
 		String image=request.getParameter("img");
 		byte[] foto;
 		
