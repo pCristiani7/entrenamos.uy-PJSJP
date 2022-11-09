@@ -234,7 +234,7 @@ public class ConsultaUsuario extends JInternalFrame {
 				DtClase dtC = iCon.getDatosClase(registroClase);
 				data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + dtC.getActividadDeportiva() + "\n"
 				+ "Profesor: "  + dtC.getProfesor() + "\n"  + "URL: " + dtC.getUrl() + "\n"  + "Fecha: " + dtC.getFecha().toString() + "\n"
-				+ "Hora Inicio: " + dtC.getHoraInicio().toString();			
+				/*+ "Hora Inicio: " + dtC.getHoraInicio().toString()*/;			
 				textAreaSocio.setText(data);
 				textAreaSocio.setVisible(true);
 				scrollSocio.setVisible(true);
@@ -293,8 +293,8 @@ public class ConsultaUsuario extends JInternalFrame {
 				DtClase dtC = iCon.getDatosClase(claseDictada);
 				data = "Nombre: " + dtC.getNombre() + "\n" + "Actividad: " + dtC.getActividadDeportiva()
 				+ "\n"  + "URL: " + dtC.getUrl() + "\n"  + "Fecha: " + dtC.getFecha().toString() + "\n"
-				+ "Hora Inicio: " + dtC.getHoraInicio().toString() +
-				"\n" + "Registros: " + "\n";
+				/*+ "Hora Inicio: " + dtC.getHoraInicio().toString() +
+				"\n" */+ "Registros: " + "\n";
 				
 				List<DtRegistro> dtR = iCon.getRegistrosClase(dtC.getNombre());
 				for(DtRegistro x:dtR) {

@@ -1,8 +1,7 @@
 package logica;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,23 +32,21 @@ public class Clase {
 	)
 	private Profesor profesor;
 	
-	private LocalDate   fecha;
-	private LocalTime horaInicio;
-	private LocalDate fechaReg;
+	private Date fecha;
+	private Date fechaReg;
 
 	public Clase() {
 		super();
 	}
 
-	public Clase(String nombre, String url, List<Registro> registros, ActividadDeportiva actividadDeportiva, LocalDate  fecha,
-			LocalTime horaInicio, LocalDate fechaReg, Profesor profesor) {
+	public Clase(String nombre, String url, List<Registro> registros, ActividadDeportiva actividadDeportiva, Date  fecha,
+				Date fechaReg, Profesor profesor) {
 		super();
 		this.nombre = nombre;
 		this.url = url;
 		this.registros = registros;
 		this.actividadDeportiva = actividadDeportiva;
 		this.fecha = fecha;
-		this.horaInicio = horaInicio;
 		this.fechaReg = fechaReg;
 		this.profesor = profesor;
 	}
@@ -66,22 +63,17 @@ public class Clase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public LocalDate  getFecha() {
+	public Date  getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate  fecha) {
+	public void setFecha(Date  fecha) {
 		this.fecha = fecha;
 	}
-	public LocalTime getHoraInicio() {
-		return horaInicio;
-	}
-	public void setHoraInicio(LocalTime horaInicio) {
-		this.horaInicio = horaInicio;
-	}
-	public LocalDate getFechaReg() {
+	
+	public Date getFechaReg() {
 		return fechaReg;
 	}
-	public void setFechaReg(LocalDate fechaReg) {
+	public void setFechaReg(Date fechaReg) {
 		this.fechaReg = fechaReg;
 	}
 	public List<Registro> getRegistros() {
@@ -109,14 +101,10 @@ public class Clase {
 	public void addRegistro(Registro r) {
 		this.registros.add(r);
 	}
-	
-	public void borrarRegistro(Registro r) {
-		this.registros.remove(r);
-	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(actividadDeportiva, fecha, fechaReg, horaInicio, nombre, profesor, registros, url);
+		return Objects.hash(actividadDeportiva, fecha, fechaReg, nombre, profesor, registros, url);
 	}
 
 	@Override
@@ -129,8 +117,8 @@ public class Clase {
 			return false;
 		Clase other = (Clase) obj;
 		return Objects.equals(actividadDeportiva, other.actividadDeportiva) && Objects.equals(fecha, other.fecha)
-				&& Objects.equals(fechaReg, other.fechaReg) && Objects.equals(horaInicio, other.horaInicio)
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(profesor, other.profesor)
+				&& Objects.equals(fechaReg, other.fechaReg)	&& Objects.equals(nombre, other.nombre)
+				&& Objects.equals(profesor, other.profesor)
 				&& Objects.equals(registros, other.registros) && Objects.equals(url, other.url);
 	}
 	

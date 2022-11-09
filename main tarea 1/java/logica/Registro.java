@@ -1,8 +1,7 @@
 package logica;
 
-import java.time.LocalDate;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -15,7 +14,7 @@ import persistencia.RegistroId;
 @IdClass(RegistroId.class)
 public class Registro {
 	
-	private LocalDate fecha;
+	private Date fecha;
 	@Id
 	@ManyToOne
 	@JoinColumn(
@@ -34,7 +33,7 @@ public class Registro {
 		super();
 	}
 
-public Registro(LocalDate fecha, Socio socio, Clase clase) {
+public Registro(Date fecha, Socio socio, Clase clase) {
 	super();
 	this.fecha = fecha;
 	this.socio = socio;
@@ -42,12 +41,12 @@ public Registro(LocalDate fecha, Socio socio, Clase clase) {
  }
 
 
-public LocalDate getFecha() {
+public Date getFecha() {
 	return fecha;
 }
 
 
-public void setFecha(LocalDate fecha) {
+public void setFecha(Date fecha) {
 	this.fecha = fecha;
 }
 

@@ -225,7 +225,7 @@ public class ConsultaDictadoClase extends JInternalFrame {
 		textPane.setText(data);
 		textFieldNombre.setText(dtC.getNombre());
 		textFieldProfesor.setText(dtC.getProfesor());
-		textFieldHoraInicio.setText(dtC.getHoraInicio().toString());
+		//textFieldHoraInicio.setText(dtC.getFecha().getHours().toString());
 		
 		this.lblNombre.setVisible(true);
 		this.lblProfesor.setVisible(true);

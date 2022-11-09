@@ -1,6 +1,6 @@
 package datatypes;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,7 +12,7 @@ public class DtProfesor extends DtUsuario {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private LocalDate fechaNac;
+	private Date fechaNac;
 	private byte[] profileImage;
 	private String descripcion;
 	private String biografia;
@@ -21,7 +21,7 @@ public class DtProfesor extends DtUsuario {
 	
 	
 	public DtProfesor(String nickname, String nombre, String apellido, 
-			String email, LocalDate fechaNac, String descripcion, String biografia, 
+			String email, Date fechaNac, String descripcion, String biografia, 
 			String sitioweb, String institucionDeportiva, byte[] profileImage) {
 		super();
 		this.nickname = nickname;
@@ -56,7 +56,7 @@ public class DtProfesor extends DtUsuario {
 		return email;
 	}
 
-	public LocalDate getFechaNac() {
+	public Date getFechaNac() {
 		return fechaNac;
 	}
 	
@@ -82,6 +82,5 @@ public class DtProfesor extends DtUsuario {
 	public String getSitioweb() {
 		return sitioweb;
 	}
-	
 	
 }

@@ -16,7 +16,6 @@ import interfaces.Fabrica;
 import interfaces.IControlador;
 import persistencia.Conexion;
 //import publicadores.ControladorPublish;
-import publicadores.ControladorPublish;
 
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -70,8 +69,8 @@ public class PrincipalPage {
 		Fabrica fab = Fabrica.getInstance();
 		IControlador iCon = fab.getIControlador();
 		
-		ControladorPublish cp = new ControladorPublish();
-		cp.publicar();
+		/*ControladorPublish cp = new ControladorPublish();
+		cp.publicar();*/
 		
 		Dimension desktopSize = frmEntrenamosUy.getSize();
 		Dimension jInternalFrameSize;

@@ -1,8 +1,8 @@
 package logica;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import datatypes.DtActividadDeportiva;
 import datatypes.DtInstitucionDeportiva;
@@ -62,15 +62,15 @@ public class Controlador implements IControlador{
 				mp.addProfesor(prof);
 				id.addProfesor(prof);
 				mid.modIntitucionDeportiva(id);
-			}else if(dtUser instanceof DtSocio){
-				DtSocio dtSocio = (DtSocio) dtUser;
-				if(!existeMail(dtSocio.getEmail()) && !existeNickname(dtSocio.getNickname())) {
-					List<Registro> registros = new ArrayList<>();
-					Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),pass,registros,dtSocio.getProfileImage());
-					ms.addSocio(socio);
-				}
 			}
-		} else {
+		}else if(dtUser instanceof DtSocio){
+			DtSocio dtSocio = (DtSocio) dtUser;
+			if(!existeMail(dtSocio.getEmail()) && !existeNickname(dtSocio.getNickname())) {
+				List<Registro> registros = new ArrayList<>();
+				Socio socio = new Socio(dtSocio.getNickname(),dtSocio.getNombre(),dtSocio.getApellido(),dtSocio.getEmail(),dtSocio.getFechaNac(),pass,registros,dtSocio.getProfileImage());
+				ms.addSocio(socio);
+			}
+		}else {
 			throw new UsuarioRepetidoExcepcion("Ya existe un usuario con esas credenciales!");
 		}
 	}
@@ -252,7 +252,7 @@ public class Controlador implements IControlador{
 					DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha(),r.getSocio().getNickname());
 					dtRegistros.add(dtReg);
 				}		
-				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNickname());
+				DtClase dtclase = new DtClase(c.getNombre(), c.getUrl(), c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getProfesor().getNickname());
 				listDtClase.add(dtclase);
 			}
 			DtActividadDeportiva dtAct = new DtActividadDeportiva(a.getNombre(),a.getDescripcion(),a.getDuracion(),a.getCosto(),a.getFecha(),a.getInstitucionDeportiva().getNombre());
@@ -266,7 +266,7 @@ public class Controlador implements IControlador{
 			List<Registro> registros = new ArrayList<>();
 			ActividadDeportiva AD = mad.buscarActividadDeportiva(c.getActividadDeportiva());
 			Profesor prof = mp.buscarProfesor(c.getProfesor());
-			Clase clase = new Clase(c.getNombre(), c.getUrl(), registros, AD, c.getFecha(), c.getHoraInicio(), c.getFechaReg(),prof);
+			Clase clase = new Clase(c.getNombre(), c.getUrl(), registros, AD, c.getFecha(), c.getFechaReg(),prof);
 			mc.addClase(clase);
 			AD.addClase(clase);
 			prof.addClase(clase);
@@ -275,7 +275,7 @@ public class Controlador implements IControlador{
 		}
 	}
 	
-	public void RegistroDictadoClase(String nomClase, String nomSocio, LocalDate fecha) throws RegistroRepetidoExcepcion{
+	public void RegistroDictadoClase(String nomClase, String nomSocio, Date fecha) throws RegistroRepetidoExcepcion{
 			Clase clase = mc.buscarClase(nomClase);
 			Socio socio = ms.buscarSocio(nomSocio);
 			List<Registro> registrosSocio = mr.getRegistrosSocio(socio);
@@ -295,13 +295,13 @@ public class Controlador implements IControlador{
 		}
 	}
 	
-	public void EliminarRegistro(String clase, String nickname) {
-		Socio s = ms.buscarSocio(nickname);
-		Clase c = mc.buscarClase(clase);
+	public void EliminarRegistro(DtRegistro dtReg) {
+		Socio s = ms.buscarSocio(dtReg.getSocio());
+		//int d = dtReg.getFecha();
 		List<Registro> regSocio = mr.getRegistrosSocio(s);
 		for(Registro r: regSocio) {
-			if(r.getClase().getNombre().equals(clase)) {
-				mr.BorrarRegistro(c, s);
+			if(r.getClase().getNombre().equals(dtReg.getClase())) {
+				mr.BorrarRegistro(r);;
 			}
 		}
 	}
@@ -314,7 +314,7 @@ public class Controlador implements IControlador{
 				DtRegistro dtReg = new DtRegistro(r.getClase().getNombre(),r.getFecha(),r.getSocio().getNickname());
 				listDtReg.add(dtReg);
 			}
-			DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(), /*listDtReg,*/ c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNickname());
+			DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(), /*listDtReg,*/ c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getProfesor().getNickname());
 			return dtClase;
 	}
 	
@@ -346,7 +346,7 @@ public class Controlador implements IControlador{
         } 
         for(Clase c: listClase) {
         	//List<DtRegistro> listDtReg = new ArrayList<>();
-        	DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(),c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getHoraInicio(),c.getProfesor().getNombre());
+        	DtClase dtClase = new DtClase(c.getNombre(),c.getUrl(),c.getActividadDeportiva().getNombre(),c.getFecha(),c.getFechaReg(),c.getProfesor().getNombre());
         	listDtClase.add(dtClase);
         }
         Collections.reverse(listDtClase);
@@ -631,7 +631,7 @@ public class Controlador implements IControlador{
 		List<Clase> clases = ad.getClases();
 		ArrayList<DtClase> dtc = new ArrayList<>();
 		for(Clase c: clases){
-			DtClase dtC = new DtClase(c.getNombre(), c.getUrl(), c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getHoraInicio(), c.getProfesor().getNombre());
+			DtClase dtC = new DtClase(c.getNombre(), c.getUrl(), c.getActividadDeportiva().getNombre(), c.getFecha(), c.getFechaReg(), c.getProfesor().getNombre());
 			dtc.add(dtC);
 		}
 		return dtc;

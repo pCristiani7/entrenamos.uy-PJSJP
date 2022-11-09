@@ -1,9 +1,6 @@
 package datatypes;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -11,26 +8,21 @@ import javax.xml.bind.annotation.XmlAccessorType;
 public class DtClase {
 	private String nombre;
 	private String url;
-	//private List<DtRegistro> registros = new ArrayList<>();
 	private String actividadDeportiva;
 	private String profesor;
-	private LocalDate fecha;
-	private LocalTime horaInicio;
-	private LocalDate fechaReg;
+	private Date fecha;
+	private Date fechaReg;
 
 	public DtClase() {
 		super();
 	}
 
-	public DtClase(String nombre, String url, /*List<DtRegistro> registros,*/ String actividadDeportiva, LocalDate fecha,
-			LocalDate fechaReg, LocalTime horaInicio, String profesor) {
+	public DtClase(String nombre, String url, String actividadDeportiva, Date fecha, Date fechaReg, String profesor) {
 		super();
 		this.nombre = nombre;
 		this.url = url;
-		//this.registros = registros;
 		this.actividadDeportiva = actividadDeportiva;
 		this.fecha = fecha;
-		this.horaInicio = horaInicio;
 		this.fechaReg = fechaReg;
 		this.profesor = profesor;
 	}
@@ -45,17 +37,12 @@ public class DtClase {
 	}
 	
 	
-	public LocalDate getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 	
 	
-	public LocalTime getHoraInicio() {
-		return horaInicio;
-	}
-	
-	
-	public LocalDate getFechaReg() {
+	public Date getFechaReg() {
 		return fechaReg;
 	}
 		
