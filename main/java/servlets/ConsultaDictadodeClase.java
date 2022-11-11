@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.Calendar;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,9 +65,9 @@ public class ConsultaDictadodeClase extends HttpServlet {
 			String url = dtClase.getUrl();
 			String actividadDeportiva = dtClase.getActividadDeportiva();
 			String profesor =  dtClase.getProfesor();
-			Date fecha =  dtClase.getFecha();
+			Calendar fecha =  dtClase.getFecha();
 			LocalTime horario = dtClase.getHoraInicio();
-			Date fechaReg =  dtClase.getFechaReg();
+			Calendar fechaReg =  dtClase.getFechaReg();
 			List <DtRegistro> registros = icon.getRegistrosClase(nomClase);
 			
 			request.setAttribute("nomClase", nomClase);
@@ -88,9 +88,9 @@ public class ConsultaDictadodeClase extends HttpServlet {
 			String url = dtClase.getUrl();
 			String actividadDeportiva = dtClase.getActividadDeportiva();
 			String profesor =  dtClase.getProfesor();
-			Date fecha =  dtClase.getFecha();
+			Calendar fecha =  dtClase.getFecha();
 			LocalTime horario = dtClase.getHoraInicio();
-			Date fechaReg =  dtClase.getFechaReg();
+			Calendar fechaReg =  dtClase.getFechaReg();
 			List <DtRegistro> registros = icon.getRegistrosClase(nomClase);
 			
 			request.setAttribute("nomClase", nomClase);

@@ -1,4 +1,4 @@
-<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@
 		String nombree = (String)request.getAttribute("nombre");
 		String apellidoo = (String)request.getAttribute("apellido");
 		String emaill = (String)request.getAttribute("email");
-		Date fechaNacc = (Date)request.getAttribute("fechaNac");
+		Calendar fechaNacc = (Calendar)request.getAttribute("fechaNac");
 		String descripcionn = (String)request.getAttribute("descripcion");
 		String biografiaa = (String)request.getAttribute("biografia");
 		String sitiowebb = (String)request.getAttribute("sitioweb");

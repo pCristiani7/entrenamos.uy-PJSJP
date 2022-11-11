@@ -1,7 +1,7 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.Calendar;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -37,9 +37,10 @@ public class RegistroDictadoClase extends HttpServlet {
 		String clase = request.getParameter("nomClase");
 		Fabrica fabrica = Fabrica.getInstance();
 		IControlador icon = fabrica.getIControlador();
-		Date date = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.getTime();
 		try {
-			icon.RegistroDictadoClase(clase, usuario, date);
+			icon.RegistroDictadoClase(clase, usuario, cal);
 			}catch(RegistroRepetidoExcepcion e){
 				throw new ServletException(e.getMessage());
 			}

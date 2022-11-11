@@ -1,6 +1,6 @@
 package datatypes;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +13,14 @@ public class DtActividadDeportiva {
 	private String descripcion;
 	private int duracion;
 	private float costo;
-	private Date fecha;
+	private Calendar fecha;
 	private String institucionDeportiva;
 	
 	public DtActividadDeportiva() {
 		super();
 	}
 	
-	public DtActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fecha, String institucionDeportiva) {
+	public DtActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Calendar fecha, String institucionDeportiva) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -49,7 +49,7 @@ public class DtActividadDeportiva {
 		return costo;
 	}
 
-	public Date getFecha() {
+	public Calendar getFecha() {
 		return fecha;
 	}
 

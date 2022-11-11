@@ -1,6 +1,6 @@
 <%@page import="datatypes.DtRegistro"%>
 <%@page import="java.util.List"%>
-<%@ page import = "java.util.Date"%>
+<%@ page import = "java.util.Calendar"%>
 <%@ page import = "java.time.LocalTime"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -35,9 +35,9 @@ String tipoUsuario = (String) sesion.getAttribute("tipoUsuario");
 		    String urlClase = (String) request.getAttribute("url");
 		    String actividadDeportivaClase = (String) request.getAttribute("actividadDeportiva");
 		    String profesorClase = (String) request.getAttribute("profesor");
-		    Date fechaClase = (Date) request.getAttribute("fecha");
+		    Calendar fechaClase = (Calendar) request.getAttribute("fecha");
 		    LocalTime horaInicioClase = (LocalTime) request.getAttribute("horario");
-		    Date fechaRegClase = (Date) request.getAttribute("fechaReg");
+		    Calendar fechaRegClase = (Calendar) request.getAttribute("fechaReg");
 		    List <DtRegistro> registrosClase = (List<DtRegistro>) request.getAttribute("registros");
 	 %>
 	        
@@ -88,9 +88,9 @@ String tipoUsuario = (String) sesion.getAttribute("tipoUsuario");
 	        String urlClase = (String) request.getAttribute("url");
 	        String actividadDeportivaClase = (String) request.getAttribute("actividadDeportiva");
 	        String profesorClase = (String) request.getAttribute("profesor");
-	        Date fechaClase = (Date) request.getAttribute("fecha");
+	        Calendar fechaClase = (Calendar) request.getAttribute("fecha");
 	        LocalTime horaInicioClase = (LocalTime) request.getAttribute("horario");
-	        Date fechaRegClase = (Date) request.getAttribute("fechaReg");
+	        Calendar fechaRegClase = (Calendar) request.getAttribute("fechaReg");
 	        List <DtRegistro> registrosClase = (List<DtRegistro>) request.getAttribute("registros");
         //Datos recibidos para el Registro Dictado de Clase
 

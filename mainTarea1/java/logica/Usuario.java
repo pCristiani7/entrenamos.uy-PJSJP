@@ -1,6 +1,6 @@
 package logica;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Objects;
 
 import javax.persistence.Id;
@@ -13,7 +13,7 @@ public abstract class Usuario {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private Date fecha;
+	private Calendar fecha;
 	private String password;
 	private byte[] profileImage;
 	
@@ -21,7 +21,7 @@ public abstract class Usuario {
 		super();
 	}
 
-	public Usuario(String nickname, String nombre, String apellido, String email, Date fecha, String password, byte[] profileImage) {
+	public Usuario(String nickname, String nombre, String apellido, String email, Calendar fecha, String password, byte[] profileImage) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -64,11 +64,11 @@ public abstract class Usuario {
 		this.email = email;
 	}
 
-	public Date getFecha() {
+	public Calendar getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(Calendar fecha) {
 		this.fecha = fecha;
 	}
 

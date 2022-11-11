@@ -1,7 +1,7 @@
 	package servlets;
 
 import java.io.IOException;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -55,7 +55,7 @@ public class ConsultaActividadDeportiva extends HttpServlet {
 			String descripcion = dtAct.getDescripcion();
 			int duracion = dtAct.getDuracion();
 			float costo = dtAct.getCosto();
-			Date fecha = dtAct.getFecha();
+			Calendar fecha = dtAct.getFecha();
 			List<DtClase> clases = icon.getClasesActDep(nomActDep);
 			String InstitucionDeportiva = dtAct.getInstitucionDeportiva();
 			request.setAttribute("nombre", nomActDep);

@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -64,12 +65,15 @@ public class AltaDictadoClase extends HttpServlet {
 			try {
 			String url = request.getParameter("urlClase");
 			String fecha = request.getParameter("fechaClase");
-			Date date = new SimpleDateFormat ("dd/MM/yyyy").parse(fecha);
-			Date fechareg = new Date();
+			Calendar cal = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			cal.setTime(sdf.parse(fecha));
+			Calendar cal2 = Calendar.getInstance();
+			Date fechareg = cal2.getTime();
 			String horario = request.getParameter("horarioClase");
 			LocalTime horarioClase = LocalTime.parse(horario);
 			List<DtRegistro> registros = new ArrayList<>();
-			DtClase clase = new DtClase(nombre, url, actAsoc, date, fechareg, horarioClase, dtProf.getNickname());
+			DtClase clase = new DtClase(nombre, url, actAsoc, cal, fechareg, horarioClase, dtProf.getNickname());
 			icon.AltaDictadoClase(actAso, clase);
 			}catch(ClaseRepetidaExcepcion e){
 				throw new ServletException(e.getMessage());

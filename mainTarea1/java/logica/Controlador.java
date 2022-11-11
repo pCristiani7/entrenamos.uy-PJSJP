@@ -2,7 +2,7 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 import datatypes.DtActividadDeportiva;
 import datatypes.DtInstitucionDeportiva;
@@ -275,7 +275,7 @@ public class Controlador implements IControlador{
 		}
 	}
 	
-	public void RegistroDictadoClase(String nomClase, String nomSocio, Date fecha) throws RegistroRepetidoExcepcion{
+	public void RegistroDictadoClase(String nomClase, String nomSocio, Calendar fecha) throws RegistroRepetidoExcepcion{
 			Clase clase = mc.buscarClase(nomClase);
 			Socio socio = ms.buscarSocio(nomSocio);
 			List<Registro> registrosSocio = mr.getRegistrosSocio(socio);

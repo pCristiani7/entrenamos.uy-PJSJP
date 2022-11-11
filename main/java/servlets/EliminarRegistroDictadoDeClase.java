@@ -2,7 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import datatypes.DtProfesor;

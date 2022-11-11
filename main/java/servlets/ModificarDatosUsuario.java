@@ -16,7 +16,7 @@ import interfaces.Fabrica;
 import interfaces.IControlador;
 import datatypes.DtSocio;
 import datatypes.DtProfesor;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.Base64;
 
 
@@ -55,7 +55,9 @@ public class ModificarDatosUsuario extends HttpServlet {
 		String nomUser = request.getParameter("nomUsuario");		
 		String apeUser = request.getParameter("apeUsuario");
 		String fNacUser = request.getParameter("fNacUsuario");
-		Date fNacUsuarioConv = new SimpleDateFormat ("dd/MM/yyyy").parse(fNacUser);
+		Calendar fNacUsuarioConv = Calendar.getInstance(); 
+		SimpleDateFormat sdf = new SimpleDateFormat ("dd/MM/yyyy");
+		fNacUsuarioConv.setTime(sdf.parse(fNacUser));
 		String image=request.getParameter("img");
 		byte[] foto;
 		

@@ -1,4 +1,4 @@
-<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="datatypes.DtRegistro"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -20,7 +20,7 @@
 		String nombre = (String)request.getAttribute("nombre");
 		String apellido = (String)request.getAttribute("apellido");
 		String emaill = (String)request.getAttribute("email");
-		Date fechaNac = (Date)request.getAttribute("fechaNac");
+		Calendar fechaNac = (Calendar)request.getAttribute("fechaNac");
 		List<DtRegistro> reg = (List<DtRegistro>) request.getAttribute("registros");
 		String img = (String)request.getAttribute("imagen");
 		

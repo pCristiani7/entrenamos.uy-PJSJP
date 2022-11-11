@@ -1,7 +1,7 @@
 package interfaces;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
@@ -47,7 +47,7 @@ public interface IControlador {
 	public InstitucionDeportiva getInstitucion(String nombre);
 	
 	public void AltaDictadoClase(DtActividadDeportiva dtAct, DtClase c) throws ClaseRepetidaExcepcion;
-	public void RegistroDictadoClase(String nomClase, String nomSocio, Date fecha) throws RegistroRepetidoExcepcion;
+	public void RegistroDictadoClase(String nomClase, String nomSocio, Calendar fecha) throws RegistroRepetidoExcepcion;
 	public DtClase getDatosClase(String nomClase);
 	public DtClase ConsultaDictadoClase(String nomClase);
 	public List<DtClase> RankingDictadosClases();

@@ -1,6 +1,6 @@
 package logica;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,7 +15,7 @@ public class Socio extends Usuario {
 	@OneToMany(mappedBy="socio",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Registro> registros = new ArrayList<>();
 
-	public Socio(String nickname, String nombre, String apellido, String email, Date fecha, String password, List<Registro> registros, byte[] profileImage) {
+	public Socio(String nickname, String nombre, String apellido, String email, Calendar fecha, String password, List<Registro> registros, byte[] profileImage) {
 		super(nickname, nombre, apellido, email, fecha, password, profileImage);
 		this.registros = registros;
 	}
