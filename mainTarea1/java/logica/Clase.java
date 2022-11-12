@@ -1,7 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -32,15 +32,15 @@ public class Clase {
 	)
 	private Profesor profesor;
 	
-	private Calendar fecha;
-	private Calendar fechaReg;
+	private Date fecha;
+	private Date fechaReg;
 
 	public Clase() {
 		super();
 	}
 
-	public Clase(String nombre, String url, List<Registro> registros, ActividadDeportiva actividadDeportiva, Calendar  fecha,
-				Calendar fechaReg, Profesor profesor) {
+	public Clase(String nombre, String url, List<Registro> registros, ActividadDeportiva actividadDeportiva, Date  fecha,
+				Date fechaReg, Profesor profesor) {
 		super();
 		this.nombre = nombre;
 		this.url = url;
@@ -63,17 +63,17 @@ public class Clase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Calendar  getFecha() {
+	public Date  getFecha() {
 		return fecha;
 	}
-	public void setFecha(Calendar  fecha) {
+	public void setFecha(Date  fecha) {
 		this.fecha = fecha;
 	}
 	
-	public Calendar getFechaReg() {
+	public Date getFechaReg() {
 		return fechaReg;
 	}
-	public void setFechaReg(Calendar fechaReg) {
+	public void setFechaReg(Date fechaReg) {
 		this.fechaReg = fechaReg;
 	}
 	public List<Registro> getRegistros() {

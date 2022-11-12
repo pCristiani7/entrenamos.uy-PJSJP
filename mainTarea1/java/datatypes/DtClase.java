@@ -1,6 +1,6 @@
 package datatypes;
 
-import java.util.Calendar;
+import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -10,14 +10,14 @@ public class DtClase {
 	private String url;
 	private String actividadDeportiva;
 	private String profesor;
-	private Calendar fecha;
-	private Calendar fechaReg;
+	private Date fecha;
+	private Date fechaReg;
 
 	public DtClase() {
 		super();
 	}
 
-	public DtClase(String nombre, String url, String actividadDeportiva, Calendar fecha, Calendar fechaReg, String profesor) {
+	public DtClase(String nombre, String url, String actividadDeportiva, Date fecha, Date fechaReg, String profesor) {
 		super();
 		this.nombre = nombre;
 		this.url = url;
@@ -37,12 +37,12 @@ public class DtClase {
 	}
 	
 	
-	public Calendar getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 	
 	
-	public Calendar getFechaReg() {
+	public Date getFechaReg() {
 		return fechaReg;
 	}
 		

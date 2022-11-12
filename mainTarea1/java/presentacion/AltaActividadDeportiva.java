@@ -10,15 +10,12 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 
 import datatypes.DtActividadDeportiva;
-import datatypes.DtClase;
 import excepciones.ActividadDeportivaRepetidaExcepcion;
 import javax.swing.JTextField;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;

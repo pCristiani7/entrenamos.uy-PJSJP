@@ -1,7 +1,7 @@
 package logica;
 
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -17,7 +17,7 @@ public class ActividadDeportiva {
 	private String descripcion;
 	private int duracion;
 	private float costo;
-	private Calendar fecha;
+	private Date fecha;
 	
 	@OneToMany(mappedBy="actividadDeportiva",cascade=CascadeType.ALL,orphanRemoval=true)
 	private List<Clase> clases = new ArrayList<>();
@@ -32,7 +32,7 @@ public class ActividadDeportiva {
 		super();
 	}
 	
-	public ActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Calendar fecha,
+	public ActividadDeportiva(String nombre, String descripcion, int duracion, float costo, Date fecha,
 			List<Clase> clases, InstitucionDeportiva institucionDeportiva) {
 		super();
 		this.nombre = nombre;
@@ -76,11 +76,11 @@ public class ActividadDeportiva {
 		this.costo = costo;
 	}
 
-	public Calendar getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Calendar fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
 

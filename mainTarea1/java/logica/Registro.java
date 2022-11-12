@@ -1,6 +1,6 @@
 package logica;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,7 +14,7 @@ import persistencia.RegistroId;
 @IdClass(RegistroId.class)
 public class Registro {
 	
-	private Calendar fecha;
+	private Date fecha;
 	@Id
 	@ManyToOne
 	@JoinColumn(
@@ -33,7 +33,7 @@ public class Registro {
 		super();
 	}
 
-public Registro(Calendar fecha, Socio socio, Clase clase) {
+public Registro(Date fecha, Socio socio, Clase clase) {
 	super();
 	this.fecha = fecha;
 	this.socio = socio;
@@ -41,12 +41,12 @@ public Registro(Calendar fecha, Socio socio, Clase clase) {
  }
 
 
-public Calendar getFecha() {
+public Date getFecha() {
 	return fecha;
 }
 
 
-public void setFecha(Calendar fecha) {
+public void setFecha(Date fecha) {
 	this.fecha = fecha;
 }
 

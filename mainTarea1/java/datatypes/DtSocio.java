@@ -1,9 +1,6 @@
 package datatypes;
 
-import java.util.Calendar;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Date;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
@@ -14,14 +11,14 @@ public class DtSocio extends DtUsuario {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private Calendar fechaNac;
+	private Date fechaNac;
 	private byte[] profileImage;
 
 	public DtSocio() {
 		super();		
 	}
 
-	public DtSocio(String nickname, String nombre, String apellido, String email, Calendar fechaNac, byte[] profileImage) {
+	public DtSocio(String nickname, String nombre, String apellido, String email, Date fechaNac, byte[] profileImage) {
 		super();
 		this.nickname = nickname;
 		this.nombre = nombre;
@@ -47,7 +44,7 @@ public class DtSocio extends DtUsuario {
 		return email;
 	}
 
-	public Calendar getFechaNac() {
+	public Date getFechaNac() {
 		return fechaNac;
 	}
 	
