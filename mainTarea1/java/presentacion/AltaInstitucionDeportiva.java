@@ -12,15 +12,12 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-import datatypes.DtActividadDeportiva;
 import datatypes.DtInstitucionDeportiva;
-import datatypes.DtProfesor;
 import excepciones.InstitucionDeportivaRepetidaExcepcion;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.awt.event.ActionEvent;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;

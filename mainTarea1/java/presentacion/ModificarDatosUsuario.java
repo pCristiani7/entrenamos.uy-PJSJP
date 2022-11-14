@@ -12,9 +12,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
-import java.util.List;
 
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
@@ -24,7 +22,6 @@ import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
 
 import datatypes.DtProfesor;
-import datatypes.DtRegistro;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import java.awt.event.ActionListener;

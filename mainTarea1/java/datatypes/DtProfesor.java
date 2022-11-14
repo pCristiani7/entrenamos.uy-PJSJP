@@ -1,6 +1,6 @@
 package datatypes;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,7 +12,7 @@ public class DtProfesor extends DtUsuario {
 	private String nombre;
 	private String apellido;
 	private String email;
-	private Calendar fechaNac;
+	private Date fechaNac;
 	private byte[] profileImage;
 	private String descripcion;
 	private String biografia;
@@ -21,7 +21,7 @@ public class DtProfesor extends DtUsuario {
 	
 	
 	public DtProfesor(String nickname, String nombre, String apellido, 
-			String email, Calendar fechaNac, String descripcion, String biografia, 
+			String email, Date fechaNac, String descripcion, String biografia, 
 			String sitioweb, String institucionDeportiva, byte[] profileImage) {
 		super();
 		this.nickname = nickname;
@@ -56,7 +56,7 @@ public class DtProfesor extends DtUsuario {
 		return email;
 	}
 
-	public Calendar getFechaNac() {
+	public Date getFechaNac() {
 		return fechaNac;
 	}
 	

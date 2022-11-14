@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -23,7 +22,6 @@ import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtProfesor;
-import datatypes.DtRegistro;
 import excepciones.ClaseRepetidaExcepcion;
 
 import javax.swing.DefaultComboBoxModel;
@@ -34,8 +32,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 import java.awt.event.ActionEvent;
 
 public class AltaDictadoDeClase extends JInternalFrame {
